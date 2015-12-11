@@ -1,17 +1,24 @@
 var request = require('request');
 var noble = require('noble');
+var request = require('request-json');
+var client = request.createClient('http://localhost:3000/');
 
+// Variables to help us increase accuracy
 var RSSI_THRESHOLD    = -90;
 var EXIT_GRACE_PERIOD = 2000; // milliseconds
 
-console.log('beginning scan...');
-
 var inRange = [];
+
+// Currently hard-coded list of dogs and their device IDs
+var dogs = {
+  '405ecc6487f44812a3b9718474eb5c83': 'watson',
+  'bf978ce4d9734185a4c58d40a50365b6': 'barkley'
+}
 
 noble.on('stateChange', function(state) {
   if (state === 'poweredOn') {
     console.log('scanning...');
-    noble.startScanning([], false);
+    noble.startScanning([], true);
   }
   else {
     noble.stopScanning();
@@ -28,11 +35,12 @@ noble.on('discover', function(peripheral) {
 
   if (entered) {
     // The dog has entered the device's radius...mark as 'entered'
-    // This might need to become a server thing
     inRange[id] = {
       peripheral: peripheral
     };
-    console.log(peripheral.uuid);
+
+    // Update the API with the information as well
+    updateAPI(id);
   }
 
   inRange[id].lastSeen = Date.now();
@@ -47,3 +55,19 @@ setInterval(function() {
     }
   }
 }, EXIT_GRACE_PERIOD / 2);
+
+function updateAPI(deviceID) {
+
+  payload = {
+    event: {
+      dog: dogs[deviceID],
+      inOffice: true
+    }
+  }
+
+  if (deviceID in dogs) {
+    client.post('event/', payload, function(err, res, body) {
+        return console.log(res.statusCode);
+    });
+  }
+}
