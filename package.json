@@ -4,7 +4,7 @@
   "description": "ISL dog-tracking api",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "author": "Julian Gindi",
   "license": "MIT",
