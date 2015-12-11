@@ -1,8 +1,10 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
+
+var redisURL = process.env.REDIS_URL;
 var redis = require("redis"),
-    client = redis.createClient();
+    client = redis.createClient(redisURL);
 
 app.use(bodyParser.json());
 
