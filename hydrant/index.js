@@ -1,7 +1,9 @@
 var request = require('request');
 var noble = require('noble');
 var request = require('request-json');
-var client = request.createClient('http://localhost:3000/');
+
+var apiURL = process.env.APIURL;
+var client = request.createClient(apiURL);
 
 // Variables to help us increase accuracy
 var RSSI_THRESHOLD    = -90;
