@@ -23,6 +23,7 @@ noble.on('stateChange', function(state) {
     noble.startScanning([], true);
   }
   else {
+    console.log("Error...not connected or cannot connect");
     noble.stopScanning();
   }
 });
