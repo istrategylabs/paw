@@ -1,0 +1,16 @@
+{
+  "name": "paw-api",
+  "version": "1.0.0",
+  "description": "ISL dog-tracking api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Julian Gindi",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "1.14.1",
+    "express": "4.13.3",
+    "redis": "2.4.2"
+  }
+}
