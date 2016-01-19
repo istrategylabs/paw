@@ -1,42 +1,24 @@
-/* global gapi */
-
 var Backbone = require('backbone');
-var app = require('./app');
+// var app = require('./app');
 var LoginView = require('./views/LoginView');
 
 var AppRouter = Backbone.Router.extend({
   routes: {
-    '*path': 'index'
+    '': 'index',
+    'dashboard': 'dashboard'
   },
 
-  execute: function(callback, args, name) {
-    var self = this;
-    app.session.checkAuth({
-      success: function() {
-        console.log('sign in user');
-        // Backbone.$('#paw-app').html(self.currentView.render().$el);
-      },
-      error: function() {
-        console.log('sign out user');
-        self.navigate('/', { trigger: true, replace: true });
-      }
-    });
-
-    if (callback) {
-      callback.apply(this, args);
-    }
+  initialize: function() {
+    this.headerView = new LoginView({});
+    Backbone.$('#paw-app #header').html(this.headerView.render().$el);
   },
 
   index: function() {
     console.log('hit index');
-    var loginView = new LoginView({});
-    Backbone.$('#paw-app').html(loginView.render().$el);
+  },
 
-    // TODO can this be moved to a better place?
-    if (!app.session.get('logged')) {
-      // render the signin button
-      gapi.signin2.render('g-signin2');
-    }
+  dashboard: function() {
+    console.log('hit dashboard');
   }
 });
 

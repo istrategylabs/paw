@@ -1,3 +1,5 @@
+/* global gapi */
+
 var fs = require('fs');
 var _ = require('underscore');
 var Backbone = require('backbone');
@@ -7,7 +9,13 @@ var LoggedTemplate = fs.readFileSync(__dirname + '/LoggedTemplate.html', 'utf8')
 
 var LoginView = Backbone.View.extend({
   initialize: function() {
+    this.render = _.bind(this.render, this);
     app.session.on('change:logged', this.render);
+  },
+
+  events: {
+    'click #auth2-signin': 'handleLogin',
+    'click #auth2-signout': 'handleLogout'
   },
 
   render: function() {
@@ -19,12 +27,21 @@ var LoginView = Backbone.View.extend({
       this.template = _.template(LoginTemplate);
     }
 
-    console.log(this);
     this.$el.html(this.template({
-      user: app.session.user.toJSON()
+      user: JSON.stringify(app.session.user.toJSON())
     }));
 
     return this;
+  },
+
+  handleLogin: function() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signIn();
+  },
+
+  handleLogout: function() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut();
   }
 });
 
