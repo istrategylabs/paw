@@ -16,21 +16,41 @@ var SessionModel = Backbone.Model.extend({
 
   loginSessionUser: function(googleUser) {
     var profile = googleUser.getBasicProfile();
+
+    // Get attributes from user's gmail account and assign to
+    // the current user in this session.
     this.updateSessionUser({
       id: googleUser.getAuthResponse().id_token,
       name: profile.getName(),
       email: profile.getEmail(),
       image: profile.getImageUrl()
     });
+
+    // Set the SessionModel's values and show that a user is
+    // now logged in.
     this.set({ userId: this.user.get('id'), logged: true });
   },
 
   logoutSessionUser: function() {
+
+    // Clear and resets GoogleUser attributes to UserModel
+    // default values.
     this.updateSessionUser(this.user.defaults);
+
+    // Reset the SessionModel's values to defaults and show 
+    // that a user is now logged out.
     this.set({ userId: this.user.get('id'), logged: false });
   },
 
   updateSessionUser: function(userData) {
+
+    // A user model is passed into this function.
+    //
+    // Select the model's default properties (_.pick its default
+    //  _.keys) and set them using the values passed in from userData.
+    //
+    // In this instance, we are picking and updating id, name, 
+    // email, and image.
     this.user.set(_.pick(userData, _.keys(this.user.defaults)));
   },
 
@@ -43,9 +63,14 @@ var SessionModel = Backbone.Model.extend({
 
     console.log('auth2 is signed in: ', auth2.isSignedIn.get());
 
+    // If a User is signed in and their gmail matches a @isl.co gmail,
+    // log in this user.
     if (userSignedIn && profile.getEmail().match(/^.*@isl.co$/g)) {
       this.loginSessionUser(googleUser);
       if ('success' in callback) {
+
+        // If user is successfully signed in, call back the 
+        // auth2SignInChanged()'s success function (in client.js)
         callback.success();
       }
     } else {

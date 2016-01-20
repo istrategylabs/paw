@@ -9,7 +9,15 @@ var app = require('./app');
 
 
 function auth2SignInChanged() {
+
+  // auth2SignInChanged() is a function from Google's 
+  // authentication API. If a sign in change occurs, auth2 notes 
+  // that change and calls this function.
+
+  //When auth2SignInChanged() is called, we then call the checkAuth() function in the SessionModel.
   app.session.checkAuth({
+
+    //success:/error: - called back from Session Model if a user is (un)successfully signed in
     success: function() {
       console.log('auth changed: user signed in, start at dashboard');
       app.router.navigate('dashboard', { trigger: true, replace: true });
@@ -41,9 +49,11 @@ global.onGAPILoadCallback = function() {
         Backbone.history.start();
         console.log('started router');
         console.log('listening for auth changes');
+
         // auth2.isSignedIn.listen(auth2SignInChanged);
-        // FIXME this fires twice due to sign in and user change both happening,
-        // only listen for user change for now to update all
+        // FIXME this fires twice due to sign in and user change 
+        // both happening, only listen for user change for now 
+        // to update all.
         auth2.currentUser.listen(auth2SignInChanged);
       }
     });
