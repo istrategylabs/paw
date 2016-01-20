@@ -18,7 +18,7 @@ var SessionModel = Backbone.Model.extend({
     var profile = googleUser.getBasicProfile();
 
     // Get attributes from user's gmail account and assign to
-    // the current user in this session.
+    // the current user in this session. 
     this.updateSessionUser({
       id: googleUser.getAuthResponse().id_token,
       name: profile.getName(),
