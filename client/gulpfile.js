@@ -76,7 +76,7 @@ gulp.task('sass', () => {
 
 gulp.task('nunjucks', () => {
   nunjucksRender.nunjucks.configure(['./src/templates/'], { watch: false });
-  return gulp.src(['./src/templates/**/*.html', './src/js/**/*.html', '!**/_*'])
+  return gulp.src(['./src/templates/**/*.html', '!**/_*'])
     .pipe(nunjucksRender())
     .pipe(gulp.dest('./public/'));
 });
