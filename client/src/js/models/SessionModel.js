@@ -44,9 +44,10 @@ var SessionModel = Backbone.Model.extend({
 
   updateSessionUser: function(userData) {
 
-    // A user model is passed into this function.
+    // Data received from the authentication to be saved in the user model 
+    // is passed into this function.
     //
-    // Select the model's default properties (_.pick its default
+    // Select the data's default properties (_.pick its default
     //  _.keys) and set them using the values passed in from userData.
     //
     // In this instance, we are picking and updating id, name, 
@@ -69,8 +70,7 @@ var SessionModel = Backbone.Model.extend({
       this.loginSessionUser(googleUser);
       if ('success' in callback) {
 
-        // If user is successfully signed in, call back the 
-        // auth2SignInChanged()'s success function (in client.js)
+        // If user is successfully signed in, call back a success function
         callback.success();
       }
     } else {
