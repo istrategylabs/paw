@@ -5,19 +5,20 @@ var app = express();
 app.set('port', (process.env.PORT || 3000));
 
 var redisURL = process.env.REDIS_URL;
-var redis = require("redis"),
-    client = redis.createClient(redisURL);
+var redis = require('redis');
+var client = redis.createClient(redisURL);
 
 app.use(bodyParser.json());
+app.use(express.static('client/public'));
 
-app.get('/', function (req, res) {
-  res.send('Welcome to PAW!');
-});
+// app.get('/', function (req, res) {
+//   res.send('Welcome to PAW!');
+// });
 
 app.get('/dogs', function (req, res) {
-   client.keys('*', function (err, keys) {
-     res.json({dogs: keys});
-   });
+  client.keys('*', function (err, keys) {
+    res.json({dogs: keys});
+  });
 });
 
 app.post('/event', function (req, res) {
@@ -35,8 +36,8 @@ app.post('/event', function (req, res) {
 });
 
 // Redis-specific code and configuration
-client.on("error", function (err) {
-    console.log("Error " + err);
+client.on('error', function (err) {
+  console.log('Error ' + err);
 });
 
 // Starting the express server
