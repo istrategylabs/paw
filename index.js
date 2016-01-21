@@ -1,15 +1,14 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var app = express();
-
-app.set('port', (process.env.PORT || 3000));
+var redis = require('redis');
 
 var redisURL = process.env.REDIS_URL;
-var redis = require('redis');
 var client = redis.createClient(redisURL);
 
+var app = express();
+app.set('port', (process.env.PORT || 3000));
 app.use(bodyParser.json());
-app.use(express.static('client/public'));
+app.use(express.static('public'));
 
 // app.get('/', function (req, res) {
 //   res.send('Welcome to PAW!');

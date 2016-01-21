@@ -2,5 +2,7 @@
   "name": "Puppies At Work",
   "description": "API jnd client application for the PAW experiment.",
   "image": "heroku/nodejs",
-  "addons": [ "heroku-redis" ]
+  "addons": [
+    "heroku-redis"
+  ]
 }
