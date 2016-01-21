@@ -88,8 +88,9 @@ gulp.task('extras', () => {
 
 gulp.task('start', ['nunjucks', 'sass', 'extras', 'watchify'], () => {
   browserSync.init({
-    server: 'public',
-    files: './public/**/*'
+    proxy: 'localhost:' + (process.env.PORT ? process.env.PORT : 3000),
+    files: './public/**/*',
+    serveStatic: ['./public']
   });
 
   gulp.watch('./client/src/scss/**/*.scss', ['sass']);

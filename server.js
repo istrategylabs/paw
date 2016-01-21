@@ -10,17 +10,32 @@ app.set('port', (process.env.PORT || 3000));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
-// app.get('/', function (req, res) {
-//   res.send('Welcome to PAW!');
-// });
+app.get('/api/dog/:id', function(req, res) {
+  res.json({ status: 200, dog: { id: req.params.id }});
+});
 
-app.get('/dogs', function (req, res) {
-  client.keys('*', function (err, keys) {
-    res.json({dogs: keys});
+app.put('/api/dog/:id', function(req, res) {
+  res.json({ status: 204 });
+});
+
+app.post('/api/dog', function(req, res) {
+  res.json({ status: 201, dog: { }});
+});
+
+app.get('/api/dogs', function(req, res) {
+  // client.keys('*', function(err, keys) {
+  //   res.json({ dogs: keys });
+  // });
+  res.json({
+    status: 200,
+    dogs: [
+      { id: 1, name: 'watson' },
+      { id: 2, name: 'maggie' }
+    ]
   });
 });
 
-app.post('/event', function (req, res) {
+app.post('/api/event', function(req, res) {
   var dogName = req.body.event.dog;
   var status = req.body.event.inOffice;
   console.log('Request: ', req.body.event);
@@ -35,12 +50,12 @@ app.post('/event', function (req, res) {
 });
 
 // Redis-specific code and configuration
-client.on('error', function (err) {
+client.on('error', function(err) {
   console.log('Error ' + err);
 });
 
 // Starting the express server
-var server = app.listen(app.get('port'), function () {
+var server = app.listen(app.get('port'), function() {
   var host = server.address().address;
   var port = server.address().port;
 
