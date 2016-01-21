@@ -1,3 +1,4 @@
+var env = process.env.NODE_ENV || 'development';
 var express = require('express');
 var bodyParser = require('body-parser');
 var redis = require('redis');
@@ -9,6 +10,17 @@ var app = express();
 app.set('port', (process.env.PORT || 3000));
 app.use(bodyParser.json());
 app.use(express.static('public'));
+
+var forceSsl = function (req, res, next) {
+  if (req.headers['x-forwarded-proto'] !== 'https') {
+    return res.redirect(['https://', req.get('Host'), req.url].join(''));
+  }
+  return next();
+};
+
+if (env === 'production') {
+  app.use(forceSsl);
+}
 
 app.get('/api/dog/:id', function(req, res) {
   res.json({ id: req.params.id });
