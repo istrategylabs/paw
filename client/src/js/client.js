@@ -6,12 +6,12 @@ Backbone.$ = jQuery;
 var AppRouter = require('./router');
 var SessionModel = require('./models/SessionModel');
 var app = require('./app');
+var initialized = false;
 
 
 function auth2SignInChanged() {
-
-  // auth2SignInChanged() is a function from Google's 
-  // authentication API. If a sign in change occurs, auth2 notes 
+  // auth2SignInChanged() is a function from Google's
+  // authentication API. If a sign in change occurs, auth2 notes
   // that change and calls this function.
 
   //When auth2SignInChanged() is called, we then call the checkAuth() function in the SessionModel.
@@ -29,7 +29,14 @@ function auth2SignInChanged() {
   });
 }
 
+global.clientInit = function() {
+  if (window.gapi && !initialized) {
+    global.onGAPILoadCallback();
+  }
+};
+
 global.onGAPILoadCallback = function() {
+  initialized = true;
   console.log('Google API platform.js loaded');
 
   gapi.load('auth2', function() {
@@ -51,8 +58,8 @@ global.onGAPILoadCallback = function() {
         console.log('listening for auth changes');
 
         // auth2.isSignedIn.listen(auth2SignInChanged);
-        // FIXME this fires twice due to sign in and user change 
-        // both happening, only listen for user change for now 
+        // FIXME this fires twice due to sign in and user change
+        // both happening, only listen for user change for now
         // to update all.
         auth2.currentUser.listen(auth2SignInChanged);
       }
