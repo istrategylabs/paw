@@ -28,7 +28,7 @@ function bundle(options) {
   options = options || {};
   const bundlerOpts = { entry: true, debug: true };
   let bundler = browserify(
-    './src/js/client.js', bundlerOpts
+    './client/src/js/client.js', bundlerOpts
     )
     .transform('babelify', { presets: ['es2015'] })
     .transform('brfs');
@@ -66,7 +66,7 @@ gulp.task('watchify', () => {
 });
 
 gulp.task('sass', () => {
-  return gulp.src('./src/scss/**/*.scss')
+  return gulp.src('./client/src/scss/**/*.scss')
     .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
     .pipe(postcss([autoprefixer]))
@@ -75,26 +75,27 @@ gulp.task('sass', () => {
 });
 
 gulp.task('nunjucks', () => {
-  nunjucksRender.nunjucks.configure(['./src/templates/'], { watch: false });
-  return gulp.src(['./src/templates/**/*.html', '!**/_*'])
+  nunjucksRender.nunjucks.configure(['./client/src/templates/'], { watch: false });
+  return gulp.src(['./client/src/templates/**/*.html', '!**/_*'])
     .pipe(nunjucksRender())
     .pipe(gulp.dest('./public/'));
 });
 
 gulp.task('extras', () => {
-  return gulp.src('./src/**/*.{txt,json,xml,jpeg,jpg,png,gif,svg}')
+  return gulp.src('./client/src/**/*.{txt,json,xml,jpeg,jpg,png,gif,svg}')
     .pipe(gulp.dest('./public/'));
 });
 
 gulp.task('start', ['nunjucks', 'sass', 'extras', 'watchify'], () => {
   browserSync.init({
-    server: 'public',
-    files: './public/**/*'
+    proxy: 'localhost:' + (process.env.PORT ? process.env.PORT : 3000),
+    files: './public/**/*',
+    serveStatic: ['./public']
   });
 
-  gulp.watch('./src/scss/**/*.scss', ['sass']);
-  gulp.watch('./src/**/*.html', ['nunjucks']);
-  gulp.watch('./src/**/*.{txt,json,xml,jpeg,jpg,png,gif,svg}', ['extras']);
+  gulp.watch('./client/src/scss/**/*.scss', ['sass']);
+  gulp.watch('./client/src/**/*.html', ['nunjucks']);
+  gulp.watch('./client/src/**/*.{txt,json,xml,jpeg,jpg,png,gif,svg}', ['extras']);
 });
 
 gulp.task('rev', ['default', 'banner'], () => {

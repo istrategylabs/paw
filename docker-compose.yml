@@ -1,10 +1,26 @@
 web:
   build: .
+  command: 'bash -c ''node server.js'''
+  working_dir: /app/user
+  environment:
+    PORT: 8080
+    REDIS_URL: 'redis://herokuRedis:6379'
   ports:
-   - "3000:3000"
-  volumes:
-   - .:/code
+    - '8080:8080'
   links:
-   - redis
-redis:
+    - herokuRedis
+shell:
+  build: .
+  command: bash
+  working_dir: /app/user
+  environment:
+    PORT: 8080
+    REDIS_URL: 'redis://herokuRedis:6379'
+  ports:
+    - '8080:8080'
+  links:
+    - herokuRedis
+  volumes:
+    - '.:/app/user'
+herokuRedis:
   image: redis
