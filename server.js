@@ -21,8 +21,8 @@ app.get('/dogs', function (req, res) {
 });
 
 app.post('/event', function (req, res) {
-  dogName = req.body.event.dog;
-  status = req.body.event.inOffice;
+  var dogName = req.body.event.dog;
+  var status = req.body.event.inOffice;
   console.log('Request: ', req.body.event);
 
   // Set key in redis store
