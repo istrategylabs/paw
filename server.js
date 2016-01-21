@@ -11,7 +11,7 @@ app.set('port', (process.env.PORT || 3000));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
-var forceSsl = function (req, res, next) {
+var forceSSL = function (req, res, next) {
   if (req.headers['x-forwarded-proto'] !== 'https') {
     return res.redirect(['https://', req.get('Host'), req.url].join(''));
   }
@@ -19,7 +19,7 @@ var forceSsl = function (req, res, next) {
 };
 
 if (env === 'production') {
-  app.use(forceSsl);
+  app.use(forceSSL);
 }
 
 app.get('/api/dog/:id', function(req, res) {
