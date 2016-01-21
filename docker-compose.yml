@@ -1,6 +1,6 @@
 web:
   build: .
-  command: 'bash -c ''node index.js'''
+  command: 'bash -c ''node server.js'''
   working_dir: /app/user
   environment:
     PORT: 8080

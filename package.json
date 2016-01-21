@@ -2,9 +2,9 @@
   "name": "paw-api",
   "version": "1.0.0",
   "description": "ISL dog-tracking api",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node index.js & gulp build-dev",
+    "start": "node server.js & gulp build-dev",
     "postinstall": "gulp build"
   },
   "author": "Julian Gindi",
@@ -13,11 +13,13 @@
   "dependencies": {
     "body-parser": "1.14.1",
     "express": "4.13.3",
-    "redis": "2.4.2",
+    "redis": "2.4.2"
+  },
+  "devDependencies": {
     "autoprefixer": "6.1.0",
     "babel-preset-es2015": "6.1.4",
     "babelify": "7.2.0",
-    "backbone": "^1.2.3",
+    "backbone": "1.2.3",
     "brfs": "1.4.2",
     "browser-sync": "2.10.0",
     "browserify": "12.0.1",
