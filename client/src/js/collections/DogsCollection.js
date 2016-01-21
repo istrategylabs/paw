@@ -13,7 +13,10 @@ var Dogs = Backbone.Collection.extend({
   model: Dog,
   url: '/api/dogs',
   initialize: function() {
-    this.fetch();
+    this.fetch()
+    .done(function(data) {
+      console.log(data);
+    });
   }
 });
 

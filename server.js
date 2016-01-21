@@ -11,28 +11,25 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 
 app.get('/api/dog/:id', function(req, res) {
-  res.json({ status: 200, dog: { id: req.params.id }});
+  res.json({ id: req.params.id });
 });
 
 app.put('/api/dog/:id', function(req, res) {
-  res.json({ status: 204 });
+  res.json({ id: req.params.id });
 });
 
 app.post('/api/dog', function(req, res) {
-  res.json({ status: 201, dog: { }});
+  res.json({ id: 0 });
 });
 
 app.get('/api/dogs', function(req, res) {
   // client.keys('*', function(err, keys) {
   //   res.json({ dogs: keys });
   // });
-  res.json({
-    status: 200,
-    dogs: [
-      { id: 1, name: 'watson' },
-      { id: 2, name: 'maggie' }
-    ]
-  });
+  res.json([
+    { id: 1, name: 'watson' },
+    { id: 2, name: 'maggie' }
+  ]);
 });
 
 app.post('/api/event', function(req, res) {

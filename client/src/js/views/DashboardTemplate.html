@@ -1,6 +1,8 @@
 <div id="dashboard">
     <h1>Welcome to the dashboard, <%= name %></h1>
     <% _.each(dogs, function(dog) { %>
-    <p><%= dog %></p>
+    <p>
+        <%= dog.name %>
+    </p>
     <% }); %>
 </div>

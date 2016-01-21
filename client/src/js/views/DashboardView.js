@@ -9,7 +9,9 @@ var DashboardView = Backbone.View.extend({
   template: _.template(DashboardTemplate),
 
   initialize: function() {
+    this.render = _.bind(this.render, this);
     this.dogs = new Dogs();
+    this.dogs.on('add', this.render);
   },
 
   render: function() {
