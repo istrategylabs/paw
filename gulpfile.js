@@ -1,5 +1,6 @@
 'use strict';
 
+const path           = require('path');
 const gulp           = require('gulp');
 const gutil          = require('gulp-util');
 const del            = require('del');
@@ -68,7 +69,9 @@ gulp.task('watchify', () => {
 gulp.task('sass', () => {
   return gulp.src('./client/src/scss/**/*.scss')
     .pipe(sourcemaps.init())
-    .pipe(sass().on('error', sass.logError))
+    .pipe(sass({
+      includePaths: [path.join(path.dirname(require.resolve('foundation-sites')), '../scss')]
+    }).on('error', sass.logError))
     .pipe(postcss([autoprefixer]))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('./public/css/'));
