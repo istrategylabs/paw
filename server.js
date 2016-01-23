@@ -3,7 +3,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var redis = require('redis');
 var request = require('request');
-var pick = require('lodash/pick');
+var find = require('lodash/find');
 
 var redisURL = process.env.REDIS_URL;
 var client = redis.createClient(redisURL);
@@ -73,7 +73,6 @@ request.get({
     if (dog.display_id) {
       client.sadd('dogs', dog.display_id);
       client.set('dog:' + dog.display_id, JSON.stringify(dog));
-      // client.sadd('dogs:in_office', dog.display_id);
     }
   });
 });
@@ -99,9 +98,9 @@ app.get('/api/dog/:display_id', function(req, res) {
             d = JSON.parse(body);
           } else {
             // read dog from fixture
-            d = require('./fixtures/dogs_detail.json');
+            d = require('./fixtures/dog.json');
             // TODO pick dog from known fixtures
-            d = pick(d, { display_id: req.params.display_id});
+            d = find(d, { display_id: req.params.display_id});
           }
 
           client.set('dog:' + d.display_id, JSON.stringify(d));
@@ -111,6 +110,8 @@ app.get('/api/dog/:display_id', function(req, res) {
       } else {
         res.send(dog);
       }
+    } else {
+      res.status(404);
     }
   });
 });
@@ -136,7 +137,7 @@ app.get('/api/dogs', function(req, res) {
         return {
           display_id: d.display_id,
           name: d.name,
-          in_office: false
+          checked_in: false
         };
       }));
     });

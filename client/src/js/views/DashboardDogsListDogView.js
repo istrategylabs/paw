@@ -6,15 +6,22 @@ var DashboardDogsListDogViewTemplate = fs.readFileSync(__dirname + '/DashboardDo
 var DashboardDogsListDogView = Backbone.View.extend({
   template: _.template(DashboardDogsListDogViewTemplate),
 
+  events: {
+    'change [name="checked_in"]': 'handleInOfficeChange'
+  },
+
   initialize: function() {
     this.render();
   },
 
   render: function() {
-    console.log(this.model.toJSON());
-    // this.$el.html(this.template(this.model));
-    this.$el.html('asdfasfasdfs')
+    this.$el.html(this.template(this.model.attributes));
     return this;
+  },
+
+  handleInOfficeChange: function(e) {
+    this.model.set('checked_in', e.target.checked);
+    this.render();
   }
 });
 

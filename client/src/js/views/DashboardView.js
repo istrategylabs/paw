@@ -2,6 +2,7 @@ var fs = require('fs');
 var _ = require('underscore');
 var Backbone = require('backbone');
 var app = require('../app');
+var DogsCollection = require('../collections/DogsCollection');
 var DashboardTemplate = fs.readFileSync(__dirname + '/DashboardTemplate.html', 'utf8');
 var DashboardDogsListView = require('../views/DashboardDogsListView');
 
@@ -10,11 +11,12 @@ var DashboardView = Backbone.View.extend({
 
   initialize: function() {
     this.render();
-    console.log(this.$('ul'));
-    this.$('ul').html((new DashboardDogsListView()).el);
-    // new DashboardDogsListView({
-    //   el: this.$('ul')
-    // });
+    this.collection = new DogsCollection();
+
+    new DashboardDogsListView({
+      el: this.$('ul'),
+      collection: this.collection
+    });
   },
 
   render: function() {

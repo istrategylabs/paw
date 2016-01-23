@@ -2,10 +2,11 @@ var Backbone = require('backbone');
 
 var Dog = Backbone.Model.extend({
   defaults: {
-    id: 0,
+    display_id: 0,
     name: '',
-    in_office: false
+    checked_in: false
   },
+  idAttribute: 'display_id',
   url: '/api/dog'
 });
 
