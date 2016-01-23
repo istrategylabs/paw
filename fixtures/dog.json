@@ -1,0 +1,27 @@
+{
+    "display_id": "39pABg",
+    "owner": "taylor",
+    "owner_link": "https://isl-api-staging.herokuapp.com/api/v2/employees/taylor/",
+    "backup_owner": null,
+    "backup_owner_link": null,
+    "animal": "dog",
+    "name": "Watson",
+    "slug": "watson",
+    "avatar": "https://isl-api.s3.amazonaws.com:443/pet/watson/tumblr_npn0en9vZ51qgk46eo1_1280_nALwXzu.jpg",
+    "avatar_width": 1280,
+    "avatar_height": 1206,
+    "birthday": null,
+    "short_description": "",
+    "description": "",
+    "food_restrictions": "",
+    "likes": "",
+    "dislikes": "",
+    "veterinarian_name": "",
+    "veterinarian_phone_number": "",
+    "btle_devices": [
+        {
+            "device_id": "gallium-po-dedicate-pietism",
+            "notes": ""
+        }
+    ]
+}
