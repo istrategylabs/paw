@@ -4,7 +4,7 @@
             <h1>Welcome to the dashboard, <%= name %></h1>
             <% _.each(dogs, function(dog) { %>
             <p>
-                <%= dog.name %>
+                <a href="/api/dog/<%= dog.display_id %>"><%= dog.name %></a>
             </p>
             <% }); %>
         </div>
