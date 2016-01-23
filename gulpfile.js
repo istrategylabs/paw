@@ -31,6 +31,12 @@ function bundle(options) {
   let bundler = browserify(
     './client/src/js/client.js', bundlerOpts
     )
+    .transform('aliasify', {
+      global: true,
+      aliases: {
+        'underscore': 'lodash'
+      }
+    })
     .transform('babelify', { presets: ['es2015'] })
     .transform('brfs');
 

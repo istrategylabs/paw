@@ -2,21 +2,18 @@ var Backbone = require('backbone');
 
 var Dog = Backbone.Model.extend({
   defaults: {
-    display_id: 0,
+    id: 0,
     name: '',
-    inOffice: false
+    in_office: false
   },
-  url: '/api//dog'
+  url: '/api/dog'
 });
 
 var Dogs = Backbone.Collection.extend({
   model: Dog,
   url: '/api/dogs',
   initialize: function() {
-    this.fetch()
-    .done(function(data) {
-      console.log(data);
-    });
+    this.fetch();
   }
 });
 
