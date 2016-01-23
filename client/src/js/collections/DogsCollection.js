@@ -4,19 +4,17 @@ var Dog = Backbone.Model.extend({
   defaults: {
     display_id: 0,
     name: '',
-    inOffice: false
+    checked_in: false
   },
-  url: '/api//dog'
+  idAttribute: 'display_id',
+  url: '/api/dog'
 });
 
 var Dogs = Backbone.Collection.extend({
   model: Dog,
   url: '/api/dogs',
   initialize: function() {
-    this.fetch()
-    .done(function(data) {
-      console.log(data);
-    });
+    this.fetch();
   }
 });
 

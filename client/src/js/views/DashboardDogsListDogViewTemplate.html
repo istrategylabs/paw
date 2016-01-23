@@ -1,0 +1,20 @@
+<div>
+    <p>
+        <a href="/api/dog/<%= display_id %>"><%= name %></a>
+    </p>
+    <label>
+        <input type="checkbox" name="checked_in" <%= checked_in ? 'checked' : '' %> />
+        Checked In
+    </label>
+    <% if (checked_in) { %>
+    <label>
+        <input type="radio" name="status" checked> In Office
+    </label>
+    <label>
+        <input type="radio" name="status"> On a walk
+    </label>
+    <label>
+        <input type="radio" name="status"> Missing
+    </label>
+    <% } %>
+</div>

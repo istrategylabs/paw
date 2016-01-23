@@ -18,7 +18,7 @@ var SessionModel = Backbone.Model.extend({
     var profile = googleUser.getBasicProfile();
 
     // Get attributes from user's gmail account and assign to
-    // the current user in this session. 
+    // the current user in this session.
     this.updateSessionUser({
       id: googleUser.getAuthResponse().id_token,
       name: profile.getName(),
@@ -37,20 +37,20 @@ var SessionModel = Backbone.Model.extend({
     // default values.
     this.updateSessionUser(this.user.defaults);
 
-    // Reset the SessionModel's values to defaults and show 
+    // Reset the SessionModel's values to defaults and show
     // that a user is now logged out.
     this.set({ userId: this.user.get('id'), logged: false });
   },
 
   updateSessionUser: function(userData) {
 
-    // Data received from the authentication to be saved in the user model 
+    // Data received from the authentication to be saved in the user model
     // is passed into this function.
     //
     // Select the data's default properties (_.pick its default
     //  _.keys) and set them using the values passed in from userData.
     //
-    // In this instance, we are picking and updating id, name, 
+    // In this instance, we are picking and updating id, name,
     // email, and image.
     this.user.set(_.pick(userData, _.keys(this.user.defaults)));
   },

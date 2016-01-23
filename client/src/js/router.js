@@ -11,16 +11,12 @@ var AppRouter = Backbone.Router.extend({
   },
 
   initialize: function() {
-    this.headerView = new LoginView({});
-    Backbone.$('#paw-app #header').html(this.headerView.render().$el);
+    this.headerView = new LoginView({
+      el: '#paw-app #header'
+    });
   },
 
   execute: function(callback, args, name) {
-    if (this.currentView) {
-      this.currentView.remove();
-      this.currentView.unbind();
-    }
-
     if (name !== 'index' && !app.session.get('logged')) {
       // authorization needed
       console.log('requested route change to ' + name + ' but not authed, force to index');
@@ -35,14 +31,16 @@ var AppRouter = Backbone.Router.extend({
 
   index: function() {
     console.log('hit index');
-    this.currentView = new IndexView({});
-    Backbone.$('#paw-app #main').html(this.currentView.render().$el);
+    new IndexView({
+      el: '#paw-app #main'
+    });
   },
 
   dashboard: function() {
     console.log('hit dashboard');
-    this.currentView = new DashboardView({});
-    Backbone.$('#paw-app #main').html(this.currentView.render().$el);
+    new DashboardView({
+      el: '#paw-app #main'
+    });
   }
 });
 

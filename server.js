@@ -3,6 +3,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var redis = require('redis');
 var request = require('request');
+var find = require('lodash/find');
 
 var redisURL = process.env.REDIS_URL;
 var client = redis.createClient(redisURL);
@@ -31,8 +32,22 @@ if (env === 'production') {
 //          push display_id's onto list
 //          set display_id to dog list response
 //
-// on get: request detail dog
-//         set detail dog response to display_id if we know about the dog
+// on get: if we know about the dog
+//           havent seen detail dog yet?
+//             request detail dog
+//           set detail dog response to display_id
+//
+// on post:
+//
+// on put:
+//
+//
+// States:
+// checked in
+//   in office
+//   out of office
+//   missing
+// checked out
 
 
 // load data into redis from isl api
@@ -56,7 +71,6 @@ request.get({
   // set dog to redis key
   dogs.forEach(function(dog) {
     if (dog.display_id) {
-      console.log('adding', dog);
       client.sadd('dogs', dog.display_id);
       client.set('dog:' + dog.display_id, JSON.stringify(dog));
     }
@@ -85,6 +99,8 @@ app.get('/api/dog/:display_id', function(req, res) {
           } else {
             // read dog from fixture
             d = require('./fixtures/dog.json');
+            // TODO pick dog from known fixtures
+            d = find(d, { display_id: req.params.display_id});
           }
 
           client.set('dog:' + d.display_id, JSON.stringify(d));
@@ -94,6 +110,8 @@ app.get('/api/dog/:display_id', function(req, res) {
       } else {
         res.send(dog);
       }
+    } else {
+      res.status(404);
     }
   });
 });
@@ -108,17 +126,19 @@ app.get('/api/dog/:display_id', function(req, res) {
 
 app.get('/api/dogs', function(req, res) {
   client.smembers('dogs', function(err, dogs) {
-    console.log('dogs listing:', dogs);
-
     var multi = client.multi();
     dogs.forEach(function(dog_display_id) {
       multi.get('dog:' + dog_display_id);
     });
 
     multi.exec(function(err, replies) {
-      console.log(replies);
       res.send(replies.map(function(dog) {
-        return JSON.parse(dog);
+        var d = JSON.parse(dog);
+        return {
+          display_id: d.display_id,
+          name: d.name,
+          checked_in: false
+        };
       }));
     });
   });
@@ -127,7 +147,6 @@ app.get('/api/dogs', function(req, res) {
 app.post('/api/event', function(req, res) {
   var dogName = req.body.event.dog;
   var status = req.body.event.inOffice;
-  console.log('Request: ', req.body.event);
 
   // Set key in redis store
   client.set(dogName, status);

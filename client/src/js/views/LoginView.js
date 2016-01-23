@@ -10,6 +10,7 @@ var LoggedTemplate = fs.readFileSync(__dirname + '/LoggedTemplate.html', 'utf8')
 var LoginView = Backbone.View.extend({
   initialize: function() {
     this.render = _.bind(this.render, this);
+    this.render();
     app.session.on('change:logged', this.render);
   },
 
