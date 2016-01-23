@@ -1,0 +1,20 @@
+[
+    {
+        "display_id": null,
+        "owner": "taylor",
+        "owner_link": "https://isl-api-staging.herokuapp.com/api/v2/employees/taylor/",
+        "animal": "dog",
+        "name": "Watson",
+        "slug": "watson",
+        "pet_link": "https://isl-api-staging.herokuapp.com/api/v2/pets/watson/"
+    },
+    {
+        "display_id": null,
+        "owner": "ali",
+        "owner_link": "https://isl-api-staging.herokuapp.com/api/v2/employees/ali/",
+        "animal": "dog",
+        "name": "Maggie",
+        "slug": "maggie",
+        "pet_link": "https://isl-api-staging.herokuapp.com/api/v2/pets/maggie/"
+    }
+]
