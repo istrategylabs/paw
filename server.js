@@ -78,7 +78,7 @@ request.get({
 });
 
 
-app.get('/api/dog/:display_id', function(req, res) {
+app.get('/api/dogs/:display_id', function(req, res) {
   // TODO check client.sismember for dog first
   client.get('dog:' + req.params.display_id, function(err, reply) {
     if (!err && reply) {
@@ -105,10 +105,20 @@ app.get('/api/dog/:display_id', function(req, res) {
 
           client.set('dog:' + d.display_id, JSON.stringify(d));
           dog = d;
-          res.send(dog);
+          res.send({
+            display_id: dog.display_id,
+            name: dog.name,
+            checked_in: false,
+            avatar: dog.avatar
+          });
         });
       } else {
-        res.send(dog);
+        res.send({
+          display_id: dog.display_id,
+          name: dog.name,
+          checked_in: false,
+          avatar: dog.avatar
+        });
       }
     } else {
       res.status(404);

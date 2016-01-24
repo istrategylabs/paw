@@ -10,13 +10,13 @@ var AppRouter = Backbone.Router.extend({
     'dashboard': 'dashboard'
   },
 
-  initialize: function() {
-    this.headerView = new LoginView({
-      el: '#paw-app #header'
-    });
-  },
-
   execute: function(callback, args, name) {
+    if (!this.headerView) {
+      this.headerView = new LoginView({
+        el: '#paw-app #header'
+      });
+    }
+
     if (name !== 'index' && !app.session.get('logged')) {
       // authorization needed
       console.log('requested route change to ' + name + ' but not authed, force to index');
