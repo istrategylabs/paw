@@ -13,7 +13,7 @@ var IndexView = Backbone.View.extend({
     this.collection = new DogsCollection();
 
     new IndexDogListView({
-      el: this.$('.doglist'),
+      el: this.$('.dogs__list'),
       collection: this.collection
     });
   },

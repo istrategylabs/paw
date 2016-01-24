@@ -90,6 +90,9 @@ global.onGAPILoadCallback = function() {
           success: auth2UserChangeListener,
           error: auth2SignInChangeListener,
           complete: function() {
+            if (app.session.get('logged')) {
+              app.router.navigate('dashboard', { trigger: true, replace: true });
+            }
             Backbone.history.start();
           }
         });

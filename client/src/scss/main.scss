@@ -68,6 +68,14 @@ em {
     text-decoration: underline;
 }
 
+.logo {
+    color: $primary-color;
+    /* font-family: 'Lato'; */
+    font-size: 62px;
+    text-transform: lowercase;
+}
+
+
 .header {
     background: $secondary-color;
     padding-top: 45px;
@@ -75,14 +83,10 @@ em {
 
 .header.is-logged {
     background: $primary-color;
-}
 
-
-.logo {
-    color: $primary-color;
-    /* font-family: 'Lato'; */
-    font-size: 62px;
-    text-transform: lowercase;
+    .header__logo {
+        color: $white;
+    }
 }
 
 
@@ -131,7 +135,7 @@ em {
 }
 
 .map {
-    
+
 }
 
 .map__heading {
@@ -142,8 +146,19 @@ em {
     background: $secondary-color;
 }
 
-.dog {
+.dogs__list {
+}
 
+.dog {
+    background: $white;
+    border-bottom: 3px solid rgba(mix($secondary-color, $black), 0.15);
+    padding: 80px 70px 85px;
+}
+
+.dog__avatar {
+    border-radius: 50%;
+    height: 185px;
+    width: 185px;
 }
 
 .dog__name {
@@ -151,8 +166,6 @@ em {
 }
 
 .dog__text {
-    font-size: 1.875rem;
-    line-height: 1;
 }
 
 .dog__meta {
@@ -160,6 +173,19 @@ em {
     font-style: italic;
 }
 
+.dog--dashboard {
+    .dog__avatar {
+        height: 45px;
+        width: 45px;
+    }
+}
+
+
 .contact {
     background: $primary-color;
+}
+
+.contact__heading,
+.contact__text {
+    color: $white;
 }

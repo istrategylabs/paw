@@ -108,16 +108,18 @@ app.get('/api/dogs/:display_id', function(req, res) {
           res.send({
             display_id: dog.display_id,
             name: dog.name,
-            checked_in: false,
-            avatar: dog.avatar
+            owner: dog.owner,
+            avatar: dog.avatar,
+            checked_in: false
           });
         });
       } else {
         res.send({
           display_id: dog.display_id,
           name: dog.name,
-          checked_in: false,
-          avatar: dog.avatar
+          owner: dog.owner,
+          avatar: dog.avatar,
+          checked_in: false
         });
       }
     } else {
@@ -147,6 +149,7 @@ app.get('/api/dogs', function(req, res) {
         return {
           display_id: d.display_id,
           name: d.name,
+          owner: d.owner,
           checked_in: false
         };
       }));

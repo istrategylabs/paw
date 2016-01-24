@@ -7,7 +7,16 @@ var DashboardDogsListView = Backbone.View.extend({
     this.render = _.bind(this.render, this);
     this.renderDog = _.bind(this.renderDog, this);
     this.render();
-    this.collection.on('add', this.render);
+
+    var self = this;
+    this.collection.on('change', this.render);
+    this.collection.on('add', function(dog) {
+      if (!dog.avatar || !dog.owner) {
+        dog.fetch({
+          success: self.render
+        });
+      }
+    });
   },
 
   render: function() {

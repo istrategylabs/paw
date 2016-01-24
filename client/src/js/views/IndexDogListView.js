@@ -9,13 +9,17 @@ var IndexDogListView = Backbone.View.extend({
   initialize: function() {
     this.render = _.bind(this.render, this);
     this.collection.on('update', this.render);
-    this.collection.each(function(dog) {
-      dog.fetch();
+    var self = this;
+    this.collection.on('add', function(dog) {
+      if (!dog.avatar) {
+        dog.fetch({
+          success: self.render
+        });
+      }
     });
   },
 
   render: function() {
-    console.log('render dog list')
     this.$el.html(this.template({
       dogs: this.collection.models.map(function(dog) {
         return dog.attributes;
