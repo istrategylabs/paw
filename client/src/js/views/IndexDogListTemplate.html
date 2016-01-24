@@ -1,0 +1,15 @@
+<% _.each(dogs, function(dog) { %>
+<div class="columns large-4">
+    <div class="dog">
+        <img class="dog__avatar" src="<%= dog.avatar ? dog.avatar : '/img/dog_stock.jpg' %>">
+        <h3 class="dog__name"><%= dog.name %></h3>
+        <p class="dog__text">
+            Lorem ipsum dolor sit amet, consectetur adipisicing
+            elit, sed do eiusmod tempor incididunt ut labore.
+        </p>
+        <p class="dog__meta">
+            68 Checkins since Oct 15th, 2016
+        </p>
+    </div>
+</div>
+<% }); %>

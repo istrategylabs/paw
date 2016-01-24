@@ -7,7 +7,7 @@ var DashboardDogsListDogView = Backbone.View.extend({
   template: _.template(DashboardDogsListDogViewTemplate),
 
   events: {
-    'change [name="checked_in"]': 'handleInOfficeChange'
+    'change [name="checked_in"]': 'handleCheckedInChange'
   },
 
   initialize: function() {
@@ -15,11 +15,12 @@ var DashboardDogsListDogView = Backbone.View.extend({
   },
 
   render: function() {
+    console.log(this.model.attributes);
     this.$el.html(this.template(this.model.attributes));
     return this;
   },
 
-  handleInOfficeChange: function(e) {
+  handleCheckedInChange: function(e) {
     this.model.set('checked_in', e.target.checked);
     this.render();
   }

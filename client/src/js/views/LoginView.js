@@ -37,6 +37,7 @@ var LoginView = Backbone.View.extend({
 
   handleLogin: function() {
     var auth2 = gapi.auth2.getAuthInstance();
+    console.log('called login')
     auth2.signIn();
   },
 

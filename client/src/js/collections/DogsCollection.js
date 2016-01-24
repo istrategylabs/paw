@@ -4,10 +4,10 @@ var Dog = Backbone.Model.extend({
   defaults: {
     display_id: 0,
     name: '',
-    checked_in: false
+    checked_in: false,
+    avatar: ''
   },
-  idAttribute: 'display_id',
-  url: '/api/dog'
+  idAttribute: 'display_id'
 });
 
 var Dogs = Backbone.Collection.extend({

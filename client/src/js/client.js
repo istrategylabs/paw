@@ -3,10 +3,19 @@
 var Backbone = require('backbone');
 var jQuery = require('jquery');
 Backbone.$ = jQuery;
+var WebFont = require('webfontloader');
 var AppRouter = require('./router');
 var SessionModel = require('./models/SessionModel');
 var app = require('./app');
 var initialized = false;
+var authListener;
+
+
+WebFont.load({
+  typekit: {
+    id: 'nki8bkd'
+  }
+});
 
 
 function auth2SignInChanged() {
@@ -21,12 +30,36 @@ function auth2SignInChanged() {
     success: function() {
       console.log('auth changed: user signed in, start at dashboard');
       app.router.navigate('dashboard', { trigger: true, replace: true });
+      auth2UserChangeListener();
     },
     error: function() {
       console.log('auth changed: user signed out, force user to index');
       app.router.navigate('/', { trigger: true, replace: true });
     }
   });
+}
+
+function auth2UserChangeListener() {
+  if (authListener) {
+    authListener.remove();
+  }
+
+  var auth2 = gapi.auth2.getAuthInstance();
+  console.log('started router');
+  authListener = auth2.currentUser.listen(auth2SignInChanged);
+  console.log('listening for user changes');
+}
+
+function auth2SignInChangeListener() {
+  if (authListener) {
+    authListener.remove();
+  }
+
+  var auth2 = gapi.auth2.getAuthInstance();
+  app.router.navigate('/', { trigger: true, replace: true });
+  console.log('started router');
+  authListener = auth2.isSignedIn.listen(auth2SignInChanged);
+  console.log('listening for auth changes');
 }
 
 global.clientInit = function() {
@@ -45,24 +78,32 @@ global.onGAPILoadCallback = function() {
     app.session = new SessionModel({});
     app.router = new AppRouter();
 
-    var auth2 = gapi.auth2.init({
+    gapi.auth2.init({
       client_id: '205257899023-7td7rf43jc7hj6bs2evdib68m811c2e3.apps.googleusercontent.com',
       fetch_basic_profile: true
-    });
+    }).then(function() {
+      var auth2 = gapi.auth2.getAuthInstance();
 
-    app.session.checkAuth({
-      complete: function() {
-        console.log('completed auth check');
+      if (auth2.isSignedIn.get()) {
+        console.log('auth found, checking');
+        app.session.checkAuth({
+          success: auth2UserChangeListener,
+          error: auth2SignInChangeListener,
+          complete: function() {
+            if (app.session.get('logged')) {
+              app.router.navigate('dashboard', { trigger: true, replace: true });
+            }
+            Backbone.history.start();
+          }
+        });
+      } else {
+        console.log('no auth found');
+        auth2SignInChangeListener();
         Backbone.history.start();
-        console.log('started router');
-        console.log('listening for auth changes');
-
-        // auth2.isSignedIn.listen(auth2SignInChanged);
-        // FIXME this fires twice due to sign in and user change
-        // both happening, only listen for user change for now
-        // to update all.
-        auth2.currentUser.listen(auth2SignInChanged);
       }
+    }, function() {
+      console.log('failed to load auth, forcce user to index');
+      app.router.navigate('/', { trigger: true, replace: true });
     });
   });
 };

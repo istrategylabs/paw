@@ -1,6 +1,12 @@
-<div>
+<div class="dog dog--dashboard">
     <p>
+        <img class="dog__avatar" src="<%= avatar ? avatar : '/img/dog_stock.jpg' %>">
         <a href="/api/dog/<%= display_id %>"><%= name %></a>
+        <% if (owner) { %>
+        <p>
+            Owner: <%= owner %>
+        </p>
+        <% } %>
     </p>
     <label>
         <input type="checkbox" name="checked_in" <%= checked_in ? 'checked' : '' %> />
