@@ -68,6 +68,16 @@ em {
     text-decoration: underline;
 }
 
+.error {
+    background-color: $alert-color;
+    color: $white;
+}
+
+.error__text {
+    margin: 0;
+    padding: 1em;
+}
+
 .logo {
     color: $primary-color;
     /* font-family: 'Lato'; */

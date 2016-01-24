@@ -83,12 +83,19 @@ global.onGAPILoadCallback = function() {
       fetch_basic_profile: true
     }).then(function() {
       var auth2 = gapi.auth2.getAuthInstance();
+      var googleUserIsSignedIn = auth2.isSignedIn.get();
 
-      if (auth2.isSignedIn.get()) {
+      if (googleUserIsSignedIn) {
         console.log('auth found, checking');
         app.session.checkAuth({
           success: auth2UserChangeListener,
-          error: auth2SignInChangeListener,
+          error: function() {
+            if (googleUserIsSignedIn) {
+              auth2UserChangeListener();
+            } else {
+              auth2SignInChangeListener();
+            }
+          },
           complete: function() {
             if (app.session.get('logged')) {
               app.router.navigate('dashboard', { trigger: true, replace: true });

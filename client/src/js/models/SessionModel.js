@@ -58,16 +58,16 @@ var SessionModel = Backbone.Model.extend({
   checkAuth: function(callback) {
     callback = callback || {};
     var auth2 = gapi.auth2.getAuthInstance();
-    var userSignedIn = auth2.isSignedIn.get();
     var googleUser = auth2.currentUser.get();
+    var googleUserIsSignedIn = auth2.isSignedIn.get();
+    var googleAppsDomain = googleUser.getHostedDomain();
     var profile = googleUser.getBasicProfile();
 
     console.log('auth2 is signed in: ', auth2.isSignedIn.get());
 
     // If a User is signed in and their gmail matches a @isl.co gmail,
     // log in this user.
-    console.log();
-    if (userSignedIn && googleUser.getHostedDomain().match(/^isl.co/g)) {
+    if (googleUserIsSignedIn && googleAppsDomain && googleAppsDomain.match(/^isl.co/g)) {
       this.loginSessionUser(googleUser);
       if ('success' in callback) {
 
