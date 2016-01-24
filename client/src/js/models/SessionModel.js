@@ -67,7 +67,7 @@ var SessionModel = Backbone.Model.extend({
 
     // If a User is signed in and their gmail matches a @isl.co gmail,
     // log in this user.
-    if (googleUserIsSignedIn && googleAppsDomain && googleAppsDomain.match(/^isl.co/g)) {
+    if (googleUserIsSignedIn && googleAppsDomain && googleAppsDomain.match(/^isl.co$/g)) {
       this.loginSessionUser(googleUser);
       if ('success' in callback) {
 
