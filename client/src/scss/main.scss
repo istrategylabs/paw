@@ -39,6 +39,8 @@
 
 h2 {
     font-size: 1.875rem;
+    font-weight: 600;
+    margin-bottom: 45px;
 }
 
 em {
@@ -187,6 +189,16 @@ em {
 
 .video__pause {
     display: none;
+    padding-right: 40px;
+    padding-left: 65px;
+
+    &::before {
+        content: '\275A\275A';
+        display: block;
+        left: 34px;
+        top: 12px;
+        position: absolute;
+    }
 }
 
 .video__media {
@@ -233,13 +245,24 @@ em {
     padding-bottom: 95px;
 }
 
-.map {
+.feature__heading {
+    margin-bottom: 45px;
+}
 
+.feature__text {
+    font-weight: 300;
+    margin-bottom: 40px;
+}
+
+
+.map {
+    background: url(/img/wood.svg) no-repeat;
 }
 
 .map__heading {
     color: $primary-color;
 }
+
 
 .dogs {
     background: $secondary-color;
