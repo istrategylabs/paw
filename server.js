@@ -1,5 +1,6 @@
 var env = process.env.NODE_ENV || 'development';
 var express = require('express');
+var compression = require('compression')
 var bodyParser = require('body-parser');
 var redis = require('redis');
 var request = require('request');
@@ -11,6 +12,7 @@ client.flushall();
 
 var app = express();
 app.set('port', (process.env.PORT || 3000));
+app.use(compression({ level: 9 }));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
