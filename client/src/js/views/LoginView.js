@@ -37,8 +37,19 @@ var LoginView = Backbone.View.extend({
 
   handleLogin: function() {
     var auth2 = gapi.auth2.getAuthInstance();
-    console.log('called login')
-    auth2.signIn();
+    auth2.signIn().then(function() {
+      app.session.checkAuth({
+        success: function() {
+          // TODO welcome back message?
+          app.clearErrors();
+        },
+        error: function() {
+          // attempted login but was not allowed
+          app.error('You must be an ISL employee to login... (._.) ( l: ) ( .-. ) ( :l ) (._.)');
+          auth2.disconnect();
+        }
+      });
+    });
   },
 
   handleLogout: function() {
