@@ -7,12 +7,24 @@
                     dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                     tempor incididunt ut labore et dolore magna aliqua.
                 </p>
-                <a class="hero__button button" href="#watch">Watch Video</a>
+                <a class="jump-to-watch hero__button button" href="#watch">Watch Video</a>
             </div>
         </div>
     </section>
+    <div class="decoration">
+        <div class="row">
+            <div class="columns">
+                <object class="decoration__workspace float-right" type="image/svg+xml" data="/img/workspace.svg"></object>
+                <a class="jump-to-watch decoration__scroll icon icon--down" href="#watch">
+                    <span class="show-for-sr">Scroll Down</a>
+                </a>
+            </div>
+        </div>
+    </div>
     <section class="video" id="watch">
-        <a class="video__button button button--alt" href="https://vimeo.com/134892537" target="_blank">Watch Video</a>
+        <a class="video__play button button--alt" href="https://vimeo.com/134892537" data-media="https://player.vimeo.com/external/134892537.hd.mp4?s=10bfa368f8bffb4a4a09f6abec6c96e770aa2e02&profile_id=113" target="_blank">Watch Video</a>
+        <button class="video__pause button button--alt">Click to pawse</button>
+        <video class="video__media" src="" autoplay></video>
     </section>
     <section class="map feature">
         <div class="row align-center">

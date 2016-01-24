@@ -50,6 +50,7 @@ em {
 .button {
     border-width: 4px;
     color: $primary-color;
+    cursor: pointer;
     font-family: $header-font-family;
     font-size: 20px;
     font-weight: 600;
@@ -78,6 +79,19 @@ em {
     padding: 1em;
 }
 
+.icon {
+    display: inline-block;
+}
+
+.icon--down {
+    border: 5px solid $black;
+    border-right: 0;
+    border-top: 0;
+    height: 30px;
+    transform: rotate(-45deg);
+    width: 30px;
+}
+
 .logo {
     color: $primary-color;
     /* font-family: 'Lato'; */
@@ -88,11 +102,22 @@ em {
 
 .header {
     background: $secondary-color;
+    padding-bottom: 48px;
     padding-top: 45px;
+}
+
+.header__button {
+    margin-top: -7px;
+    padding-top: 0;
+}
+
+.header__button--last {
+    padding-right: 0;
 }
 
 .header.is-logged {
     background: $primary-color;
+    padding-bottom: 0;
 
     .header__logo {
         color: $white;
@@ -102,23 +127,43 @@ em {
 
 .hero {
     background: $secondary-color;
-    padding-bottom: 95px;
+    padding-bottom: 130px;
 }
 
 .hero__text {
     font-size: 22px;
     line-height: 1.81;
+    margin-bottom: 65px;
 }
 
-.hero__button {
+
+.decoration {
+    background: url(/img/wood.svg) $white;
+    border-top: 5px solid $black;
+    position: relative;
+    height: 190px;
+    overflow: visible;
+}
+
+.decoration__workspace {
+    max-width: 100%;
+    transform: translateY(-85%);
+}
+
+.decoration__scroll {
+    position: absolute;
+    left: 50%;
+    bottom: 50px;
+    transform: translateX(-50%) rotate(-45deg);
 }
 
 
 .video {
     background: url('/img/video_stock.jpg');
-    background-position: center;
+    background-position: top;
     background-size: cover;
-    height: 600px;
+    height: 700px;
+    overflow: hidden;
     position: relative;
 }
 
@@ -132,11 +177,55 @@ em {
     height: 100%;
 }
 
-.video__button {
+.video__play,
+.video__pause {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.video__pause {
+    display: none;
+}
+
+.video__media {
+    display: none;
+    position: relative;
+    width: 100%;
+    z-index: -1;
+}
+
+.video.is-playing {
+    cursor: pointer;
+
+    .video__play {
+        display: none;
+    }
+
+    &:hover .video__pause {
+        box-shadow: 2px 0 5px $black, inset 0 0 2px $black;
+        text-shadow: 2px 0 5px $black;
+        display: block;
+        z-index: 20;
+    }
+
+    .video__pause:hover {
+        border-color: $white;
+        color: $white;
+    }
+
+    .video__media {
+        background-size: cover;
+        top: 50%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        transform: translateX(-50%) translateY(-50%);
+        z-index: 10;
+    }
 }
 
 .feature {
