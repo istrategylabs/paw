@@ -1,0 +1,44 @@
+ul.dashboard__dog-list {
+    display: inline-block;
+    list-style: none;
+    margin: 0px;
+    max-width: 270px;
+}
+
+.dogs {
+    // background: $secondary-color;
+}
+
+.dogs__list {
+}
+
+.dog {
+    background: $griez;
+    border-bottom: 3px solid rgba(mix($secondary-color, $black), 0.15);
+    padding: 80px 70px 85px;
+}
+
+.dog__avatar {
+    border-radius: 50%;
+    height: 185px;
+    width: 185px;
+}
+
+.dog__name {
+    font-size: 2.375rem;
+}
+
+.dog__text {
+}
+
+.dog__meta {
+    font-size: 0.9375rem;
+    font-style: italic;
+}
+
+.dog--dashboard {
+    .dog__avatar {
+        height: 45px;
+        width: 45px;
+    }
+}
