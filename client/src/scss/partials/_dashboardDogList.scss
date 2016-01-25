@@ -6,5 +6,24 @@ ul.dashboard__dog-list {
 }
 
 .dog--dashboard {
-    background: $griez;
+    background: $porcelain;
+}
+
+.dogList-dog__avatar {
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+}
+
+.dogList-dog__name {
+    color: $scorpion;
+    font-family: $header-font-family;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.doglist-dog__owner {
+    font-family: $body-font-family;
+    font-size: rem-calc(11px);
+    font-style: italic;
 }

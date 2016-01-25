@@ -1,13 +1,15 @@
 <div class="dog dog--dashboard">
-    <p>
-        <img class="dog__avatar" src="<%= avatar ? avatar : '/img/dog_stock.jpg' %>">
-        <a href="/api/dog/<%= display_id %>"><%= name %></a>
-        <% if (owner) { %>
+    <div class="">
+        <img class="dogList-dog__avatar" src="<%= avatar ? avatar : '/img/dog_stock.jpg' %>">
         <p>
+            <a class="dogList-dog__name" href="/api/dog/<%= display_id %>"><%= name %></a>
+        </p>
+        <% if (owner) { %>
+        <p class="doglist-dog__owner">
             Owner: <%= owner %>
         </p>
         <% } %>
-    </p>
+    </div>
     <label>
         <input type="checkbox" name="checked_in" <%= checked_in ? 'checked' : '' %> />
         Checked In
