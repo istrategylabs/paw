@@ -1,0 +1,43 @@
+.header {
+    background: $secondary-color;
+    padding-bottom: 48px;
+    padding-top: 45px;
+}
+
+.header__button {
+    margin-top: -7px;
+    padding-top: 0;
+}
+
+.header__button--last {
+    padding-right: 0;
+}
+
+.header.is-logged {
+    background: $primary-color;
+    padding: rem-calc(0px);
+
+    .header__logo-container {
+        border-right: 1px solid darken($primary-color, 8%);
+        width: 270px;
+    }
+
+    a.header__logo {
+        display: block;
+        padding-left: rem-calc(43px);
+        transition: background .25s;
+        
+        &:hover {
+            background: darken($primary-color, 10%)
+        }
+    }
+
+    .logo__watson {
+        width: rem-calc(50px);
+    }
+
+    .logo__wordmark {
+        fill: $white;
+        width: rem-calc(100px);
+    }
+}

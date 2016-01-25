@@ -37,6 +37,19 @@
 /* @include foundation-tooltip; */
 /* @include foundation-top-bar; */
 
+html,body {
+    height: 100%;
+}
+
+#paw-app {
+    height: 100%;
+}
+#main {
+	height: 100%;
+}
+
+@import 'partials/base';
+@import 'partials/header';
 @import 'partials/marketing';
 @import 'partials/dashboardDogList';
 

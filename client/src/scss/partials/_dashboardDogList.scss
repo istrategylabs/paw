@@ -1,17 +1,47 @@
+$sidebar-borders: 1px solid $mercury;
+
+#dashboard {
+    display: flex;
+    height: 100%;
+}
+
+.dashboard__sidebar {
+    width: 270px;
+    background: $porcelain;
+    border-right: $sidebar-borders;
+    box-flex: 0;
+}
+
+.dashboard__canvas {
+    box-flex: 1;
+}
+
+.sidebar__currentDate {
+    border-bottom: $sidebar-borders;
+    font-family: $header-font-family;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: rem-calc(30px);
+    text-align: center;
+}
+
 ul.dashboard__dog-list {
-    display: inline-block;
     list-style: none;
     margin: 0px;
-    width: 270px;
+
+    li {
+        border-bottom: $sidebar-borders;
+        padding: rem-calc(25px) rem-calc(30px);
+    }
 }
 
 .dogList-dog {
     background: $porcelain;
-    padding: rem-calc(30px);
 }
 
 .dogList-dog__avatar-container {
     display: inline-block;
+    margin-right: rem-calc(15px);
     vertical-align: top;
 }
 
@@ -24,6 +54,9 @@ ul.dashboard__dog-list {
 .dogList-dog__info {
     display: inline-block;
     vertical-align: top;
+    p {
+        margin: 0;
+    }
 }
 
 .dogList-dog__name {

@@ -29,7 +29,8 @@ em {
 
 .button--link {
     border: 0;
-    text-decoration: underline;
+    font-size: 16px;
+    font-weight: normal;
 }
 
 .error {
@@ -63,29 +64,7 @@ em {
 }
 
 
-.header {
-    background: $secondary-color;
-    padding-bottom: 48px;
-    padding-top: 45px;
-}
 
-.header__button {
-    margin-top: -7px;
-    padding-top: 0;
-}
-
-.header__button--last {
-    padding-right: 0;
-}
-
-.header.is-logged {
-    background: $primary-color;
-    padding-bottom: 0;
-
-    .header__logo {
-        color: $white;
-    }
-}
 
 
 .hero {
