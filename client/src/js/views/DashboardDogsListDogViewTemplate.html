@@ -1,6 +1,8 @@
-<div class="dog dog--dashboard">
-    <div class="">
+<div class="dogList-dog">
+    <div class="dogList-dog__avatar-container">
         <img class="dogList-dog__avatar" src="<%= avatar ? avatar : '/img/dog_stock.jpg' %>">
+    </div>
+    <div class="dogList-dog__info">
         <p>
             <a class="dogList-dog__name" href="/api/dog/<%= display_id %>"><%= name %></a>
         </p>
@@ -9,20 +11,21 @@
             Owner: <%= owner %>
         </p>
         <% } %>
-    </div>
-    <label>
-        <input type="checkbox" name="checked_in" <%= checked_in ? 'checked' : '' %> />
-        Checked In
-    </label>
-    <% if (checked_in) { %>
-    <label>
-        <input type="radio" name="status" checked> In Office
-    </label>
-    <label>
-        <input type="radio" name="status"> On a walk
-    </label>
-    <label>
-        <input type="radio" name="status"> Missing
-    </label>
-    <% } %>
-</div>
+
+        <label>
+            <input type="checkbox" name="checked_in" <%= checked_in ? 'checked' : '' %> />
+            Checked In
+        </label>
+        <% if (checked_in) { %>
+        <label>
+            <input type="radio" name="status" checked> In Office
+        </label>
+        <label>
+            <input type="radio" name="status"> On a walk
+        </label>
+        <label>
+            <input type="radio" name="status"> Missing
+        </label>
+        <% } %>
+    </div> <!-- end .dogList-dog__info -->
+</div> <!-- end .dogList-dog -->
