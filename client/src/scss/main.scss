@@ -49,8 +49,10 @@ html,body {
 }
 
 
+// Import Mixins
+@import 'mixins/mixin-scrollbars';
 
-
+// Import Partials
 @import 'partials/base';
 @import 'partials/header';
 @import 'partials/marketing';
