@@ -16,7 +16,7 @@
             <input type="checkbox" name="checked_in" <%= checked_in ? 'checked' : '' %> />
             Checked In
         </label>
-        <% if (checked_in) { %>
+        <% if (!checked_in) { %>
         <label>
             <input type="radio" name="status" checked> In Office
         </label>

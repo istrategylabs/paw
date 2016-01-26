@@ -16,6 +16,9 @@
 .header.is-logged {
     background: $primary-color;
     padding: rem-calc(0px);
+    position: fixed;
+    width: 100%;
+    z-index: 10;
 
     .header__logo-container {
         border-right: 1px solid darken($primary-color, 8%);
