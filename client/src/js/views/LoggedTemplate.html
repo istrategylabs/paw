@@ -1,7 +1,17 @@
 <div class="header is-logged clearfix">
-    <div class="float-left">
-        <a class="header__logo logo" href="/#">Paw</a>
-        <a class="button button--link button--alt" href="#dashboard">Dashboard</a>
+    <div class="float-left header__logo-container">
+        <a class="header__logo logo link--svg" href="#dashboard">
+			<object class="logo__watson" type="image/svg+xml" data="/img/paw_watson.svg"></object>
+			<object class="logo__wordmark" type="image/svg+xml" data="/img/paw_wordmark--white.svg"></object>
+        </a>
     </div>
-    <button class="button button--link button--alt float-right" id="auth2-signout">Logout</button>
+    <div class="header__nav-container">
+        <div class="nav-links nav-links--left">
+            <a class="button button--link but button--alt" href="#dashboard">Dashboard</a>
+        </div>
+        <div class="nav-links nav-links--right">
+            <button class="button button--link button--alt float-right" id="auth2-signout">Logout</button>
+        </div>
+    </div>
+    
 </div>

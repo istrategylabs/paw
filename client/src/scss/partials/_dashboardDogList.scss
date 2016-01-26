@@ -1,0 +1,95 @@
+$sidebar-borders: 1px solid $mercury;
+
+$sidebar-width: 270px;
+
+#dashboard {
+    // display: flex;
+    height: 100%;
+}
+
+.dashboard__sidebar {
+    background: $porcelain;
+    border-right: $sidebar-borders;
+    bottom: 0;
+    display: inline-block;
+    overflow-y: scroll;
+    position: absolute;
+    top: 90px;
+    vertical-align: top;
+    width: $sidebar-width;
+    z-index: 0;
+
+    // @include scrollbars(.5em, red);
+
+}
+
+
+
+.dashboard__canvas {
+    // box-flex: 1;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.sidebar__currentDate {
+    background: $porcelain;
+    border-bottom: $sidebar-borders;
+    font-family: $header-font-family;
+    font-weight: bold;
+    letter-spacing: 1px;
+    min-height: rem-calc(65px);
+    padding: rem-calc(20px) rem-calc(30px);
+    position: fixed;
+    text-align: center;
+    width: $sidebar-width - 1;
+
+}
+
+.dashboard__dog-list {
+    list-style: none;
+    margin: 65px 0px 0px 0px;
+}
+
+.dog--dashboard {
+  background: none;
+  border-bottom: $sidebar-borders;
+  padding: rem-calc(15px) rem-calc(30px);
+
+  .dog__avatar-container {
+      display: inline-block;
+      margin-right: rem-calc(15px);
+      margin-top: rem-calc(10px);
+      vertical-align: top;
+  }
+
+  .dog__avatar {
+      border-radius: 50%;
+      height: 60px;
+      width: 60px;
+  }
+
+  .dog__info {
+      display: inline-block;
+      vertical-align: top;
+      p {
+          margin: 0;
+      }
+  }
+
+  .dog__name {
+      color: $scorpion;
+      font-family: $header-font-family;
+      font-size: rem-calc(16px);
+      font-weight: 600;
+      letter-spacing: 1px;
+  }
+
+  .dog__owner {
+      font-family: $body-font-family;
+      font-size: rem-calc(11px);
+      font-style: italic;
+  }
+} //end .dog--dashboard
+
+
+

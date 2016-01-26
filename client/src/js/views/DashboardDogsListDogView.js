@@ -7,7 +7,8 @@ var DashboardDogsListDogView = Backbone.View.extend({
   template: _.template(DashboardDogsListDogViewTemplate),
 
   events: {
-    'change [name="checked_in"]': 'handleCheckedInChange'
+    'change [name="checked_in"]': 'handleCheckedInChange',
+    'change [type="radio"]' : 'statusChange'
   },
 
   initialize: function() {
@@ -23,6 +24,10 @@ var DashboardDogsListDogView = Backbone.View.extend({
   handleCheckedInChange: function(e) {
     this.model.set('checked_in', e.target.checked);
     this.render();
+  },
+
+  statusChange: function(e) {
+    console.log('radio button has been changed');
   }
 });
 
