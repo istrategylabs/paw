@@ -1,6 +1,6 @@
 $sidebar-borders: 1px solid $mercury;
 
-$sidebarWidth: 270px;
+$sidebar-width: 270px;
 
 #dashboard {
     // display: flex;
@@ -16,7 +16,7 @@ $sidebarWidth: 270px;
     position: absolute;
     top: 90px;
     vertical-align: top;
-    width: $sidebarWidth;
+    width: $sidebar-width;
     z-index: 0;
 
     // @include scrollbars(.5em, red);
@@ -41,7 +41,7 @@ $sidebarWidth: 270px;
     padding: rem-calc(20px) rem-calc(30px);
     position: fixed;
     text-align: center;
-    width: $sidebarWidth - 1;
+    width: $sidebar-width - 1;
 
 }
 
