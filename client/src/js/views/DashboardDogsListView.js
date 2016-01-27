@@ -9,7 +9,12 @@ var DashboardDogsListView = Backbone.View.extend({
     this.render();
 
     var self = this;
-    this.collection.on('change', this.render);
+    this.collection.on('change', function() {
+      // This seems to do the trick; this might get expensive though
+      // lets say we ever have 3000 dogs
+      self.collection.sort();
+      self.render();
+    });
     this.collection.on('add', function(dog) {
       if (!dog.avatar || !dog.owner) {
         dog.fetch({
