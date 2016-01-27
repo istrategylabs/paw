@@ -18,7 +18,7 @@ app.use(express.static('public'));
 
 
 var forceSSL = function (req, res, next) {
-  console.log(req.headers)
+  // use req.headers.referrer !startsWith https
   if (req.headers['x-forwarded-proto'] !== 'https') {
     return res.redirect(['https://', req.get('Host'), req.url].join(''));
   }
