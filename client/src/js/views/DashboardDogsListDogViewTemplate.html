@@ -12,8 +12,8 @@
         </p>
         <% } %>
         <label>
-            <input type="checkbox" name="checked_in" <%= checked_in ? 'checked' : '' %> />
-            Checked In
+            <input class="hide" type="checkbox" name="checked_in" disabled <%= checked_in ? 'checked' : '' %> />
+            Checked <%= checked_in ? 'In' : 'Out' %>
         </label>
         <% if (checked_in) { %>
         <label>

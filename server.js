@@ -4,6 +4,7 @@ var compression = require('compression');
 var bodyParser = require('body-parser');
 var redis = require('redis');
 var request = require('request');
+var chunk = require('lodash/chunk');
 var find = require('lodash/find');
 
 var redisURL = process.env.REDIS_URL;
@@ -66,18 +67,43 @@ request.get({
   if (!error && response.statusCode == 200) {
     dogs = JSON.parse(body);
   } else {
-    // TODO test new api key
-    console.log(error, response.statusCode);
     // read dogs list from fixture
     dogs = require('./fixtures/dogs.json');
   }
 
   // set dogs to redis set
   // set dog to redis key
+  // set btle_device to redis set
+  // set dog:id to btle_device
   dogs.forEach(function(dog) {
-    if (dog.display_id) {
-      client.sadd('dogs', dog.display_id);
-      client.set('dog:' + dog.display_id, JSON.stringify(dog));
+    if (dog.display_id && dog.pet_link) {
+      // TODO move detail view to list view and remove this
+      // haven't requested dog detail view yet
+      request.get({
+        url: dog.pet_link,
+        headers: {
+          'Authorization': 'Token ' + token
+        }
+      }, function(error, response, body) {
+        var d;
+
+        if (!error && response.statusCode == 200) {
+          d = JSON.parse(body);
+        } else {
+          // read dog from fixture
+          d = require('./fixtures/dog.json');
+          d = find(d, { display_id: dog.display_id});
+        }
+
+        if (d.btle_devices.length > 0) {
+          dog = d;
+          var deviceId = dog.btle_devices[0].device_id;
+          client.sadd('dogs', dog.display_id);
+          console.log('sadd btle_devices ', deviceId);
+          client.set('dog:' + dog.display_id, JSON.stringify(d));
+          client.set('btle_device:' + deviceId + ':dog', dog.display_id);
+        }
+      });
     }
   });
 });
@@ -85,50 +111,22 @@ request.get({
 
 app.get('/api/dogs/:display_id', function(req, res) {
   // TODO check client.sismember for dog first
-  client.get('dog:' + req.params.display_id, function(err, reply) {
-    if (!err && reply) {
-      var dog = JSON.parse(reply);
+  client.get('dog:' + req.params.display_id, function(err, d) {
+    if (!err && d) {
+      var dog = JSON.parse(d);
 
-      if (dog.pet_link) {
-        // haven't requested dog detail view yet
-        request.get({
-          url: dog.pet_link,
-          headers: {
-            'Authorization': 'Token ' + token
-          }
-        }, function(error, response, body) {
-          var d;
-
-          if (!error && response.statusCode == 200) {
-            d = JSON.parse(body);
-          } else {
-            // read dog from fixture
-            d = require('./fixtures/dog.json');
-            // TODO pick dog from known fixtures
-            d = find(d, { display_id: req.params.display_id});
-          }
-
-          client.set('dog:' + d.display_id, JSON.stringify(d));
-          dog = d;
-          res.send({
-            display_id: dog.display_id,
-            name: dog.name,
-            owner: dog.owner,
-            avatar: dog.avatar,
-            checked_in: false
-          });
-        });
-      } else {
+      client.sismember('dogs:checked_in', dog.display_id, function(err, checkedIn) {
         res.send({
           display_id: dog.display_id,
           name: dog.name,
           owner: dog.owner,
           avatar: dog.avatar,
-          checked_in: false
+          device_id: dog.btle_devices[0].device_id,
+          checked_in: !!(checkedIn)
         });
-      }
+      });
     } else {
-      res.status(404);
+      res.status({ status: 404, textStatus: 'Not Found' });
     }
   });
 });
@@ -144,18 +142,24 @@ app.get('/api/dogs/:display_id', function(req, res) {
 app.get('/api/dogs', function(req, res) {
   client.smembers('dogs', function(err, dogs) {
     var multi = client.multi();
-    dogs.forEach(function(dog_display_id) {
-      multi.get('dog:' + dog_display_id);
+    dogs.forEach(function(dogId) {
+      multi.get('dog:' + dogId);
+      // FIXME why does sismember not find this when set by event
+      multi.sismember('dogs:checked_in', dogId);
     });
 
     multi.exec(function(err, replies) {
-      res.send(replies.map(function(dog) {
-        var d = JSON.parse(dog);
+      res.send(chunk(replies, 2).map(function(d) {
+        var dog = JSON.parse(d[0]);
+        var checkedIn = d[1];
+        console.log('sismember dogs:checked_in', dog.display_id, d[1]);
         return {
-          display_id: d.display_id,
-          name: d.name,
-          owner: d.owner,
-          checked_in: false
+          display_id: dog.display_id,
+          name: dog.name,
+          owner: dog.owner,
+          avatar: dog.avatar,
+          device_id: dog.btle_devices[0].device_id,
+          checked_in: !!(checkedIn)
         };
       }));
     });
@@ -163,17 +167,32 @@ app.get('/api/dogs', function(req, res) {
 });
 
 app.post('/api/event', function(req, res) {
-  console.log(req.body);
-  var dogName = req.body.event.dog;
-  var status = req.body.event.inOffice;
+  var deviceId = req.body.event.deviceId;
+  var hydrantId = req.body.event.hydrantId;
+  console.log('{ event: { deviceID: ' + deviceId + ', hydrantId: ' + hydrantId + ' } }');
 
-  // Set key in redis store
-  client.set(dogName, status);
+  client.get('btle_device:' + deviceId + ':dog', function(err, dogId) {
+    if (!err && dogId) {
+      // check dog in
+      client.sadd('dogs:checked_in', dogId);
 
-  // Set the key to expire after 5 minutes
-  client.expire(dogName, 60 * 5);
+      console.log('sadd dogs:checked_in', dogId);
 
-  res.json({ status: '200', textStatus: '200 OK' });
+      // Set key in redis store for last known hydrant
+      client.set('btle_device:' + deviceId, hydrantId);
+
+      // Set the key to expire after 5 minutes
+      client.expire('btle_device:' + deviceId, 60 * 5, function(err) {
+        if (!err) {
+          client.srem('dogs:checked_in', dogId);
+        }
+      });
+
+      res.json({ status: '200', textStatus: 'OK' });
+    } else {
+      res.json({ status: '404', textStatus: 'Not Found' });
+    }
+  });
 });
 
 // Redis-specific code and configuration
