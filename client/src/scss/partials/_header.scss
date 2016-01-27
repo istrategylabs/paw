@@ -17,9 +17,7 @@
     background: $primary-color;
     height: rem-calc(90px);
     padding: rem-calc(0px);
-    position: fixed;
     width: 100%;
-    z-index: 10;
 
     .header__logo-container {
         border-right: 1px solid darken($primary-color, 8%);
@@ -31,10 +29,15 @@
         display: block;
         padding-left: rem-calc(43px);
         transition: background .25s;
-        
+
         &:hover {
             background: darken($primary-color, 10%)
         }
+    }
+
+    .logo__watson,
+    .logo__wordmark {
+        pointer-events: none;
     }
 
     .logo__watson {

@@ -1,11 +1,5 @@
 $sidebar-borders: 1px solid $mercury;
-
 $sidebar-width: 270px;
-
-#dashboard {
-    // display: flex;
-    height: 100%;
-}
 
 .dashboard__sidebar {
     background: $porcelain;
@@ -20,15 +14,14 @@ $sidebar-width: 270px;
     z-index: 0;
 
     // @include scrollbars(.5em, red);
-
 }
-
-
 
 .dashboard__canvas {
     // box-flex: 1;
+    position: absolute;
     display: inline-block;
     vertical-align: top;
+    left: $sidebar-width;
 }
 
 .sidebar__currentDate {
@@ -42,7 +35,6 @@ $sidebar-width: 270px;
     position: fixed;
     text-align: center;
     width: $sidebar-width - 1;
-
 }
 
 .dashboard__dog-list {
@@ -89,7 +81,4 @@ $sidebar-width: 270px;
       font-size: rem-calc(11px);
       font-style: italic;
   }
-} //end .dog--dashboard
-
-
-
+}
