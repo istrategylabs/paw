@@ -1,6 +1,6 @@
 var env = process.env.NODE_ENV || 'development';
 var express = require('express');
-var compression = require('compression')
+var compression = require('compression');
 var bodyParser = require('body-parser');
 var redis = require('redis');
 var request = require('request');
@@ -55,7 +55,7 @@ if (env === 'production') {
 // load data into redis from isl api
 var token = process.env.ISL_API_TOKEN;
 request.get({
-  url: 'https://isl-api-staging.herokuapp.com/api/v2/pets/',
+  url: 'https://api.isl.co/api/v1/pets/',
   headers: {
     'Authorization': 'Token ' + token
   }
@@ -65,6 +65,8 @@ request.get({
   if (!error && response.statusCode == 200) {
     dogs = JSON.parse(body);
   } else {
+    // TODO test new api key
+    console.log(error, response.statusCode);
     // read dogs list from fixture
     dogs = require('./fixtures/dogs.json');
   }
@@ -160,6 +162,7 @@ app.get('/api/dogs', function(req, res) {
 });
 
 app.post('/api/event', function(req, res) {
+  console.log(req.body);
   var dogName = req.body.event.dog;
   var status = req.body.event.inOffice;
 
@@ -169,7 +172,7 @@ app.post('/api/event', function(req, res) {
   // Set the key to expire after 5 minutes
   client.expire(dogName, 60 * 5);
 
-  res.json({status: 'success'});
+  res.json({ status: '200', textStatus: '200 OK' });
 });
 
 // Redis-specific code and configuration
