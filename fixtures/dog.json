@@ -56,7 +56,7 @@
   {
     "display_id": "123123",
     "owner": "Alex",
-    "owner_link": "https://isl-api-staging.herokuapp.com/api/v2/employees/alex/",
+    "owner_link": "https://api.isl.co/api/v1/employees/alex/",
     "backup_owner": null,
     "backup_owner_link": null,
     "animal": "dog",
@@ -83,7 +83,7 @@
   {
     "display_id": "321321",
     "owner": "An",
-    "owner_link": "https://isl-api-staging.herokuapp.com/api/v2/employees/an/",
+    "owner_link": "https://api.isl.co/api/v1/employees/an/",
     "backup_owner": null,
     "backup_owner_link": null,
     "animal": "dog",
@@ -110,7 +110,7 @@
   {
     "display_id": "222333",
     "owner": "Mike",
-    "owner_link": "https://isl-api-staging.herokuapp.com/api/v2/employees/mike/",
+    "owner_link": "https://api.isl.co/api/v1/employees/mike/",
     "backup_owner": null,
     "backup_owner_link": null,
     "animal": "dog",
