@@ -35,6 +35,7 @@ $sidebar-width: 270px;
     position: fixed;
     text-align: center;
     width: $sidebar-width - 1;
+    z-index: 100;
 }
 
 .dashboard__dog-list {
