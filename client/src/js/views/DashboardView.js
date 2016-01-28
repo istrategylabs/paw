@@ -12,7 +12,7 @@ var DashboardView = Backbone.View.extend({
   initialize: function() {
     this.render();
     this.collection = new DogsCollection(null, {
-      comparator: 'checked_in'
+     
     });
 
     console.log('[DashboardView] About to print out dog');

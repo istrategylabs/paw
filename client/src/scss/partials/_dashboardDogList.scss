@@ -86,4 +86,9 @@ $sidebar-width: 270px;
 
 .dog--not-checked-in {
   opacity: .4;
+  transition: opacity .25s;
+
+  &:hover {
+    opacity: 1;
+  }
 }
