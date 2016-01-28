@@ -11,11 +11,23 @@ var Dog = Backbone.Model.extend({
 });
 
 var Dogs = Backbone.Collection.extend({
+
   model: Dog,
+
+  comparator: function(e) {
+    return [e.get('checked_in'), e.get('name')];
+  },
+
+  updateCollectionOrder: function() {
+    this.sort();
+  },
+
   url: '/api/dogs',
+
   initialize: function() {
     this.fetch();
   }
 });
+
 
 module.exports = Dogs;

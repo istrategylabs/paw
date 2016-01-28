@@ -35,6 +35,7 @@ $sidebar-width: 270px;
     position: fixed;
     text-align: center;
     width: $sidebar-width - 1;
+    z-index: 100;
 }
 
 .dashboard__dog-list {
@@ -45,7 +46,13 @@ $sidebar-width: 270px;
 .dog--dashboard {
   background: none;
   border-bottom: $sidebar-borders;
+  opacity: .4;
   padding: rem-calc(15px) rem-calc(30px);
+  transition: opacity .25s;
+
+  &:hover {
+    opacity: 1;
+  }
 
   .dog__avatar-container {
       display: inline-block;
@@ -81,4 +88,9 @@ $sidebar-width: 270px;
       font-size: rem-calc(11px);
       font-style: italic;
   }
+}
+
+.dog--checked-in {
+  opacity: 1;
+  transition: opacity .25s;
 }

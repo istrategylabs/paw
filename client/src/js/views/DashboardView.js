@@ -13,6 +13,11 @@ var DashboardView = Backbone.View.extend({
     this.render();
     this.collection = new DogsCollection();
 
+    console.log('[DashboardView] About to print out dog');
+    console.log(this.collection[0]);
+
+    // console.log('---', this.collection.pluck('model.display_id'));
+
     new DashboardDogsListView({
       el: this.$('ul'),
       collection: this.collection

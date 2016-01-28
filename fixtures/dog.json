@@ -52,5 +52,86 @@
         "notes": ""
       }
     ]
+  },
+  {
+    "display_id": "123123",
+    "owner": "Alex",
+    "owner_link": "https://isl-api-staging.herokuapp.com/api/v2/employees/alex/",
+    "backup_owner": null,
+    "backup_owner_link": null,
+    "animal": "dog",
+    "name": "Dug",
+    "slug": "dug",
+    "avatar": "",
+    "avatar_width": null,
+    "avatar_height": null,
+    "birthday": null,
+    "short_description": "",
+    "description": "",
+    "food_restrictions": "",
+    "likes": "",
+    "dislikes": "",
+    "veterinarian_name": "",
+    "veterinarian_phone_number": "",
+    "btle_devices": [
+      {
+        "device_id": "mine-sitj-amet-elit",
+        "notes": ""
+      }
+    ]
+  },
+  {
+    "display_id": "321321",
+    "owner": "An",
+    "owner_link": "https://isl-api-staging.herokuapp.com/api/v2/employees/an/",
+    "backup_owner": null,
+    "backup_owner_link": null,
+    "animal": "dog",
+    "name": "Barclay",
+    "slug": "barclay",
+    "avatar": "",
+    "avatar_width": null,
+    "avatar_height": null,
+    "birthday": null,
+    "short_description": "",
+    "description": "",
+    "food_restrictions": "",
+    "likes": "",
+    "dislikes": "",
+    "veterinarian_name": "",
+    "veterinarian_phone_number": "",
+    "btle_devices": [
+      {
+        "device_id": "jit-jon-mon-bom",
+        "notes": ""
+      }
+    ]
+  },
+  {
+    "display_id": "222333",
+    "owner": "Mike",
+    "owner_link": "https://isl-api-staging.herokuapp.com/api/v2/employees/mike/",
+    "backup_owner": null,
+    "backup_owner_link": null,
+    "animal": "dog",
+    "name": "Simon",
+    "slug": "simon",
+    "avatar": "",
+    "avatar_width": null,
+    "avatar_height": null,
+    "birthday": null,
+    "short_description": "",
+    "description": "",
+    "food_restrictions": "",
+    "likes": "",
+    "dislikes": "",
+    "veterinarian_name": "",
+    "veterinarian_phone_number": "",
+    "btle_devices": [
+      {
+        "device_id": "bob-who-whatsee-what",
+        "notes": ""
+      }
+    ]
   }
 ]
