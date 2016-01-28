@@ -11,9 +11,7 @@ var DashboardView = Backbone.View.extend({
 
   initialize: function() {
     this.render();
-    this.collection = new DogsCollection(null, {
-     
-    });
+    this.collection = new DogsCollection();
 
     console.log('[DashboardView] About to print out dog');
     console.log(this.collection[0]);

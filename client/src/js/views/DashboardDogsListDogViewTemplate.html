@@ -1,4 +1,4 @@
-<div class="dog dog--dashboard <% if (checked_in == false) { %> dog--not-checked-in <% } %>">
+<div class="dog dog--dashboard <% if (checked_in == true) { %> dog--checked-in <% } %>">
     <div class="dog__avatar-container">
         <img class="dog__avatar" src="<%= avatar ? avatar : '/img/dog_stock.jpg' %>">
     </div>

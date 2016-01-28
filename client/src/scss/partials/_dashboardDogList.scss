@@ -46,7 +46,13 @@ $sidebar-width: 270px;
 .dog--dashboard {
   background: none;
   border-bottom: $sidebar-borders;
+  opacity: .4;
   padding: rem-calc(15px) rem-calc(30px);
+  transition: opacity .25s;
+
+  &:hover {
+    opacity: 1;
+  }
 
   .dog__avatar-container {
       display: inline-block;
@@ -84,11 +90,7 @@ $sidebar-width: 270px;
   }
 }
 
-.dog--not-checked-in {
-  opacity: .4;
+.dog--checked-in {
+  opacity: 1;
   transition: opacity .25s;
-
-  &:hover {
-    opacity: 1;
-  }
 }
