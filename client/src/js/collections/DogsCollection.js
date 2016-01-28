@@ -5,8 +5,7 @@ var Dog = Backbone.Model.extend({
     display_id: 0,
     name: '',
     checked_in: false,
-    avatar: '',
-    class: ''
+    avatar: ''
   },
   idAttribute: 'display_id'
 });
