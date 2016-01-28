@@ -3,7 +3,7 @@ var noble = require('noble');
 var request = require('request-json');
 
 //var apiURL = process.env.APIURL;
-var LOCATION = 'kitchen'
+var LOCATION = process.env.ENVIRONMENT;
 var apiURL = 'http://requestb.in/11gduk11'
 var client = request.createClient(apiURL);
 
@@ -35,43 +35,20 @@ noble.on('discover', function(peripheral) {
   }
 
   var id = peripheral.address;
-  var entered = !inRange[id];
+  updateAPI(id);
 
-  if (entered) {
-    // The dog has entered the device's radius...mark as 'entered'
-    inRange[id] = {
-      peripheral: peripheral
-    };
-
-    // Update the API with the information as well
-    updateAPI(id);
-  }
-
-  inRange[id].lastSeen = Date.now();
 });
 
-// This is how we will tell if someone has exited
-setInterval(function() {
-  for (var id in inRange) {
-    if (inRange[id].lastSeen < (Date.now() - EXIT_GRACE_PERIOD)) {
-      var peripheral = inRange[id].peripheral;
-      delete inRange[id];
-    }
-  }
-}, EXIT_GRACE_PERIOD / 2);
 
 function updateAPI(deviceID) {
 
   payload = {
     event: {
-      dog: deviceID,
+      device: deviceID,
       location: LOCATION
     }
   }
 
-  if (deviceID == dogs[0]) {
-    console.log("THIS IS WORKING");
-  }
   if (dogs.indexOf(deviceID) > -1) {
     console.log("POSTING EVENT");
     //client.post('event/', payload, function(err, res, body) {
