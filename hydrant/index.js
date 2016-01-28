@@ -12,10 +12,10 @@ var EXIT_GRACE_PERIOD = 2000; // milliseconds
 var inRange = [];
 
 // Currently hard-coded list of dogs and their device IDs
-var dogs = {
-  '405ecc6487f44812a3b9718474eb5c83': 'watson',
-  'bf978ce4d9734185a4c58d40a50365b6': 'barkley'
-}
+var dogs = [
+  'd4461bc84c29',
+  '68d93c930931'
+]
 
 noble.on('stateChange', function(state) {
   if (state === 'poweredOn') {
