@@ -2,46 +2,46 @@
   {
     "display_id": "39pABg",
     "owner": "taylor",
-    "owner_link": "https://isl-api-staging.herokuapp.com/api/v2/employees/taylor/",
+    "owner_link": "https://api.isl.co/api/v1/employees/taylor/",
     "animal": "dog",
     "name": "Watson",
     "slug": "watson",
-    "pet_link": "https://isl-api-staging.herokuapp.com/api/v2/pets/watson/"
+    "pet_link": "https://api.isl.co/api/v1/pets/watson/"
   },
   {
     "display_id": "cbed3b",
     "owner": "ali",
-    "owner_link": "https://isl-api-staging.herokuapp.com/api/v2/employees/ali/",
+    "owner_link": "https://api.isl.co/api/v1/employees/ali/",
     "animal": "dog",
     "name": "Maggie",
     "slug": "maggie",
-    "pet_link": "https://isl-api-staging.herokuapp.com/api/v2/pets/maggie/"
+    "pet_link": "https://api.isl.co/api/v1/pets/maggie/"
   },
   {
     "display_id": "123123",
     "owner": "Alex",
-    "owner_link": "https://isl-api-staging.herokuapp.com/api/v2/employees/alex/",
+    "owner_link": "https://api.isl.co/api/v1/employees/alex/",
     "animal": "dog",
     "name": "Dug",
     "slug": "dug",
-    "pet_link": "https://isl-api-staging.herokuapp.com/api/v2/pets/maggie/"
+    "pet_link": "https://api.isl.co/api/v1/pets/maggie/"
   },
   {
     "display_id": "321321",
     "owner": "An",
-    "owner_link": "https://isl-api-staging.herokuapp.com/api/v2/employees/an/",
+    "owner_link": "https://api.isl.co/api/v1/employees/an/",
     "animal": "dog",
     "name": "Barclay",
     "slug": "barclay",
-    "pet_link": "https://isl-api-staging.herokuapp.com/api/v2/pets/maggie/"
+    "pet_link": "https://api.isl.co/api/v1/pets/maggie/"
   },
   {
     "display_id": "222333",
     "owner": "Mike",
-    "owner_link": "https://isl-api-staging.herokuapp.com/api/v2/employees/mike/",
+    "owner_link": "https://api.isl.co/api/v1/employees/mike/",
     "animal": "dog",
     "name": "Simon",
     "slug": "simon",
-    "pet_link": "https://isl-api-staging.herokuapp.com/api/v2/pets/maggie/"
+    "pet_link": "https://api.isl.co/api/v1/pets/maggie/"
   }
 ]

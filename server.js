@@ -4,11 +4,12 @@ var compression = require('compression');
 var bodyParser = require('body-parser');
 var redis = require('redis');
 var request = require('request');
+var chunk = require('lodash/chunk');
 var find = require('lodash/find');
 
 var redisURL = process.env.REDIS_URL;
 var client = redis.createClient(redisURL);
-client.flushall();
+// client.flushall();
 
 var app = express();
 app.set('port', (process.env.PORT || 3000));
@@ -52,6 +53,86 @@ if (env === 'production') {
 //   missing
 // checked out
 
+var CHECKIN_EXPIRATION_MS = 60 * 5;
+
+function getAllDogs(callback) {
+  client.smembers('dogs', function(err, dogs) {
+    var multi = client.multi();
+    dogs.forEach(function(dogId) {
+      multi.get('dog:' + dogId);
+      multi.get('dog:' + dogId + ':checked_in');
+    });
+
+    multi.exec(function(err, replies) {
+      var dogs = chunk(replies, 2).map(function(d) {
+        var dog = JSON.parse(d[0]);
+        var checkin = JSON.parse(d[1]);
+
+        return {
+          display_id: dog.display_id,
+          name: dog.name,
+          owner: dog.owner,
+          avatar: dog.avatar,
+          checked_in: checkin
+        };
+      });
+      callback(dogs);
+    });
+  });
+}
+
+function getDogById(dogId, callback) {
+  var multi = client.multi();
+  multi.get('dog:' + dogId);
+  multi.get('dog:' + dogId + ':checked_in');
+
+  multi.exec(function(err, d) {
+    var dog = JSON.parse(d[0]);
+    var checkin = JSON.parse(d[1]);
+
+    if (dog) {
+      callback({
+        display_id: dog.display_id,
+        name: dog.name,
+        owner: dog.owner,
+        avatar: dog.avatar,
+        checked_in: checkin
+      });
+    } else {
+      callback();
+    }
+  });
+}
+
+function checkinDeviceAtLocationTime(deviceId, location, time, callback) {
+  client.get('btle_device:' + deviceId + ':dog', function(err, dogId) {
+    if (!err && dogId) {
+      // check dog in at last seen hydrant at time
+      var newCheckin = { location: location, time: time };
+
+      // TODO check that time is newer than CHECKIN_EXPIRATION_MS in the past
+      // TODO check that time is newer than our last seen checkin
+      // client.get('dog:' + dogId + ':checked_in', function(err, checkin) {
+      //   if (!err && checkin) {
+      //
+      //   }
+      // })
+
+      client.set('dog:' + dogId + ':checked_in', JSON.stringify(newCheckin), function(err, reply) {
+        // set the key to expire after 5 minutes
+        if (!err && reply == 'OK') {
+          client.expire('dog:' + dogId + ':checked_in', CHECKIN_EXPIRATION_MS);
+          callback(true);
+        } else {
+          callback(false);
+        }
+      });
+    } else {
+      callback(false);
+    }
+  });
+}
+
 
 // load data into redis from isl api
 var token = process.env.ISL_API_TOKEN;
@@ -66,69 +147,53 @@ request.get({
   if (!error && response.statusCode == 200) {
     dogs = JSON.parse(body);
   } else {
-    // TODO test new api key
-    console.log(error, response.statusCode);
     // read dogs list from fixture
     dogs = require('./fixtures/dogs.json');
   }
 
   // set dogs to redis set
   // set dog to redis key
+  // set btle_device to redis set
+  // set dog:id to btle_device
   dogs.forEach(function(dog) {
-    if (dog.display_id) {
-      client.sadd('dogs', dog.display_id);
-      client.set('dog:' + dog.display_id, JSON.stringify(dog));
+    if (dog.display_id && dog.pet_link) {
+      // TODO move detail view to list view and remove this
+      // haven't requested dog detail view yet
+      request.get({
+        url: dog.pet_link,
+        headers: {
+          'Authorization': 'Token ' + token
+        }
+      }, function(error, response, body) {
+        var d;
+
+        if (!error && response.statusCode == 200) {
+          d = JSON.parse(body);
+        } else {
+          // read dog from fixture
+          d = require('./fixtures/dog.json');
+          d = find(d, { display_id: dog.display_id});
+        }
+
+        if (d.btle_devices.length > 0) {
+          dog = d;
+          var deviceId = dog.btle_devices[0].device_id;
+          client.sadd('dogs', dog.display_id);
+          client.set('dog:' + dog.display_id, JSON.stringify(d));
+          client.set('btle_device:' + deviceId + ':dog', dog.display_id);
+        }
+      });
     }
   });
 });
 
 
 app.get('/api/dogs/:display_id', function(req, res) {
-  // TODO check client.sismember for dog first
-  client.get('dog:' + req.params.display_id, function(err, reply) {
-    if (!err && reply) {
-      var dog = JSON.parse(reply);
-
-      if (dog.pet_link) {
-        // haven't requested dog detail view yet
-        request.get({
-          url: dog.pet_link,
-          headers: {
-            'Authorization': 'Token ' + token
-          }
-        }, function(error, response, body) {
-          var d;
-
-          if (!error && response.statusCode == 200) {
-            d = JSON.parse(body);
-          } else {
-            // read dog from fixture
-            d = require('./fixtures/dog.json');
-            // TODO pick dog from known fixtures
-            d = find(d, { display_id: req.params.display_id});
-          }
-
-          client.set('dog:' + d.display_id, JSON.stringify(d));
-          dog = d;
-          res.send({
-            display_id: dog.display_id,
-            name: dog.name,
-            owner: dog.owner,
-            avatar: dog.avatar,
-            checked_in: false
-          });
-        });
-      } else {
-        res.send({
-          display_id: dog.display_id,
-          name: dog.name,
-          owner: dog.owner,
-          avatar: dog.avatar,
-          checked_in: false
-        });
-      }
+  getDogById(req.params.display_id, function(dog) {
+    if (dog) {
+      res.json(dog);
     } else {
-      res.status(404);
+      res.status(404).json({ status: 404, textStatus: 'Not Found' });
     }
   });
 });
@@ -142,43 +207,33 @@ app.get('/api/dogs/:display_id', function(req, res) {
 // });
 
 app.get('/api/dogs', function(req, res) {
-  client.smembers('dogs', function(err, dogs) {
-    var multi = client.multi();
-    dogs.forEach(function(dog_display_id) {
-      multi.get('dog:' + dog_display_id);
-    });
-
-    multi.exec(function(err, replies) {
-      res.send(replies.map(function(dog) {
-        var d = JSON.parse(dog);
-        return {
-          display_id: d.display_id,
-          name: d.name,
-          owner: d.owner,
-          checked_in: false
-        };
-      }));
-    });
+  getAllDogs(function(dogs) {
+    if (dogs.length) {
+      res.json(dogs);
+    } else {
+      res.status(404).json({ status: 404, textStatus: 'Not Found' });
+    }
   });
 });
 
 app.post('/api/event', function(req, res) {
-  console.log(req.body);
-  var dogName = req.body.event.dog;
-  var status = req.body.event.inOffice;
+  var events = req.body.events;
+  events.forEach(function(event, index) {
+    var device = event.device;
+    var location = event.location;
+    var time = Date.now();
 
-  // Set key in redis store
-  client.set(dogName, status);
-
-  // Set the key to expire after 5 minutes
-  client.expire(dogName, 60 * 5);
-
-  res.json({ status: '200', textStatus: '200 OK' });
+    checkinDeviceAtLocationTime(device, location, time, function() {
+      if (index === events.length - 1) {
+        res.json({ status: 200, textStatus: 'OK' });
+      }
+    });
+  });
 });
 
 // Redis-specific code and configuration
 client.on('error', function(err) {
-  console.log('Error ' + err);
+  console.log('Error: ', err);
 });
 
 // Starting the express server
