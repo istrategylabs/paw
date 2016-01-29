@@ -13,3 +13,42 @@
 .workspace__steam--3 {
     @include moveAndFadeAnimation(15px, 2.5s, .4s);
 }
+
+
+
+/*
+ * COIN BOUNCE ANIMATION ***
+*/
+.animated { 
+    -webkit-animation-duration: 2s; 
+    animation-duration: 2s; 
+    -webkit-animation-fill-mode: both; 
+    animation-fill-mode: both; 
+    animation-iteration-count:infinite; 
+    -webkit-animation-iteration-count:infinite; 
+}
+
+
+/*
+ * Animation for webkit
+*/
+
+@-webkit-keyframes bounce { 
+    0%, 20%, 50%, 80%, 100% {-webkit-transform: translateY(0);} 
+    40% {-webkit-transform: translateY(-70px);} 
+    60% {-webkit-transform: translateY(-15px);} 
+} 
+  
+@keyframes bounce { 
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 
+    40% {transform: translateY(-40px);} 
+    60% {transform: translateY(-15px);} 
+} 
+  
+/*
+ * Adding the animation to our element
+*/
+.bounce { 
+    -webkit-animation-name: bounce; 
+    animation-name: bounce; 
+}
