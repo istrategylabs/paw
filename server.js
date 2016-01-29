@@ -224,7 +224,7 @@ app.post('/api/event', function(req, res) {
   events.forEach(function(event, index) {
     var device = event.device;
     var location = event.location;
-    var time = Date.now();
+    var time = event.time;
 
     checkinDeviceAtLocationTime(device, location, time, function() {
       if (index === events.length - 1) {
