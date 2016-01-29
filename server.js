@@ -143,13 +143,13 @@ app.get('/api/dogs', function(req, res) {
     dogs.forEach(function(dogId) {
       multi.get('dog:' + dogId);
       // FIXME why does sismember not find this when set by event
-      multi.sismember('dogs:checked_in', dogId);
+      multi.sismember('dogs:checked_in', JSON.stringify(dogId));
     });
 
     multi.exec(function(err, replies) {
       res.send(chunk(replies, 2).map(function(d) {
         var dog = JSON.parse(d[0]);
-        var checkedIn = JSON.parse(d[1]);
+        var checkedIn = d[1];
         return {
           display_id: dog.display_id,
           name: dog.name,
@@ -167,7 +167,6 @@ app.post('/api/event', function(req, res) {
   var event = req.body.event;
   var device = event.device;
   var location = event.location;
-  console.log(device, location);
 
   client.sadd('dogs:checked_in', '39pABg');
 

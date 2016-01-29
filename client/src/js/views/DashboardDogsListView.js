@@ -12,7 +12,7 @@ var DashboardDogsListView = Backbone.View.extend({
     this.collection.on('change', function() {
       // This seems to do the trick; this might get expensive though
       // lets say we ever have 3000 dogs
-      self.collection.updateCollectionOrder();
+      self.collection.sort();
       self.render();
     });
     this.collection.on('add', function(dog) {

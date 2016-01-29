@@ -14,12 +14,26 @@ var Dogs = Backbone.Collection.extend({
 
   model: Dog,
 
-  comparator: function(e) {
-    return [e.get('checked_in'), e.get('name')];
-  },
+  comparator: function(a, b) {
+    // sort by checked in
+    if (a.get('checked_in') && !b.get('checked_in')) {
+      return -1;
+    }
+    if (!a.get('checked_in') && b.get('checked_in')) {
+      return 1;
+    }
 
-  updateCollectionOrder: function() {
-    this.sort();
+    // sorty by name
+    var names = [a.get('name'), b.get('name')];
+    names.sort();
+    if (names[0] === a.get('name')) {
+      return -1;
+    }
+    if (names[0] === b.get('name')) {
+      return 1;
+    }
+
+    return 0;
   },
 
   url: '/api/dogs',
