@@ -9,7 +9,7 @@ var find = require('lodash/find');
 
 var redisURL = process.env.REDIS_URL;
 var client = redis.createClient(redisURL);
-// client.flushall();
+client.flushall();
 
 var app = express();
 app.set('port', (process.env.PORT || 3000));
