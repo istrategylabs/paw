@@ -9,7 +9,7 @@ var find = require('lodash/find');
 
 var redisURL = process.env.REDIS_URL;
 var client = redis.createClient(redisURL);
-client.flushall();
+// client.flushall();
 
 var app = express();
 app.set('port', (process.env.PORT || 3000));
@@ -99,7 +99,6 @@ request.get({
           dog = d;
           var deviceId = dog.btle_devices[0].device_id;
           client.sadd('dogs', dog.display_id);
-          console.log('sadd btle_devices ', deviceId);
           client.set('dog:' + dog.display_id, JSON.stringify(d));
           client.set('btle_device:' + deviceId + ':dog', dog.display_id);
         }
@@ -110,12 +109,11 @@ request.get({
 
 
 app.get('/api/dogs/:display_id', function(req, res) {
-  // TODO check client.sismember for dog first
   client.get('dog:' + req.params.display_id, function(err, d) {
     if (!err && d) {
       var dog = JSON.parse(d);
 
-      client.sismember('dogs:checked_in', dog.display_id, function(err, checkedIn) {
+      client.sismember('dogs:checked_in', JSON.stringify(dog.display_id), function(err, checkedIn) {
         res.send({
           display_id: dog.display_id,
           name: dog.name,
@@ -151,8 +149,7 @@ app.get('/api/dogs', function(req, res) {
     multi.exec(function(err, replies) {
       res.send(chunk(replies, 2).map(function(d) {
         var dog = JSON.parse(d[0]);
-        var checkedIn = d[1];
-        console.log('sismember dogs:checked_in', dog.display_id, d[1]);
+        var checkedIn = JSON.parse(d[1]);
         return {
           display_id: dog.display_id,
           name: dog.name,
@@ -167,28 +164,29 @@ app.get('/api/dogs', function(req, res) {
 });
 
 app.post('/api/event', function(req, res) {
-  var deviceId = req.body.event.deviceId;
-  var hydrantId = req.body.event.hydrantId;
-  console.log('{ event: { deviceID: ' + deviceId + ', hydrantId: ' + hydrantId + ' } }');
+  var event = req.body.event;
+  var device = event.device;
+  var location = event.location;
+  console.log(device, location);
 
-  client.get('btle_device:' + deviceId + ':dog', function(err, dogId) {
+  client.sadd('dogs:checked_in', '39pABg');
+
+  client.get('btle_device:' + device + ':dog', function(err, dogId) {
     if (!err && dogId) {
       // check dog in
-      client.sadd('dogs:checked_in', dogId);
-
-      console.log('sadd dogs:checked_in', dogId);
+      client.sadd('dogs:checked_in', JSON.stringify(dogId));
 
       // Set key in redis store for last known hydrant
-      client.set('btle_device:' + deviceId, hydrantId);
+      client.set('btle_device:' + device, location, function(err, reply) {
+        // Set the key to expire after 5 minutes
+        client.expire('btle_device:' + device, 60 * 5, function(err) {
+          if (!err) {
+            client.srem('dogs:checked_in', dogId);
+          }
+        });
 
-      // Set the key to expire after 5 minutes
-      client.expire('btle_device:' + deviceId, 60 * 5, function(err) {
-        if (!err) {
-          client.srem('dogs:checked_in', dogId);
-        }
+        res.json({ status: '200', textStatus: 'OK' });
       });
-
-      res.json({ status: '200', textStatus: 'OK' });
     } else {
       res.json({ status: '404', textStatus: 'Not Found' });
     }
@@ -197,7 +195,7 @@ app.post('/api/event', function(req, res) {
 
 // Redis-specific code and configuration
 client.on('error', function(err) {
-  console.log('Error ' + err);
+  console.log('Error: ', err);
 });
 
 // Starting the express server

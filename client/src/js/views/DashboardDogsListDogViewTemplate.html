@@ -1,10 +1,10 @@
-<div class="dog dog--dashboard <% if (checked_in == true) { %> dog--checked-in <% } %>">
+<div class="dog dog--dashboard<% if (checked_in == true) { %> dog--checked-in<% } %>">
     <div class="dog__avatar-container">
         <img class="dog__avatar" src="<%= avatar ? avatar : '/img/dog_stock.jpg' %>">
     </div>
     <div class="dog__info">
         <p>
-            <a class="dog__name" href="/api/dog/<%= display_id %>"><%= name %></a>
+            <a class="dog__name" href="/api/dogs/<%= display_id %>"><%= name %></a>
         </p>
         <% if (owner) { %>
         <p class="dog__owner">
@@ -12,18 +12,18 @@
         </p>
         <% } %>
         <label>
-            <input class="hide" type="checkbox" name="checked_in" disabled <%= checked_in ? 'checked' : '' %> />
+            <input class="hide" type="checkbox" name="checked_in" disabled<%= checked_in ? ' checked' : '' %>>
             Checked <%= checked_in ? 'In' : 'Out' %>
         </label>
         <% if (checked_in) { %>
         <label>
-            <input type="radio" name="status" checked> In Office
+            <input type="radio" name="status-<%= display_id %>"<%= checked_in ? ' checked' : '' %>> In Office
         </label>
         <label>
-            <input type="radio" name="status"> On a walk
+            <input type="radio" name="status-<%= display_id %>"> On a walk
         </label>
         <label>
-            <input type="radio" name="status"> Missing
+            <input type="radio" name="status-<%= display_id %>"> Missing
         </label>
         <% } %>
     </div> <!-- end .dog__info -->
