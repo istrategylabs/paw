@@ -3,7 +3,7 @@ var request = require('request-json');
 
 //var apiURL = process.env.APIURL;
 var LOCATION = 'kitchen';
-var apiURL = 'http://47b7979c.ngrok.com/api/event';
+var apiURL = 'http://47b7979c.ngrok.com';
 var client = request.createClient(apiURL);
 
 // Variables to help us increase accuracy
@@ -11,19 +11,20 @@ var RSSI_THRESHOLD    = -90;
 var EXIT_GRACE_PERIOD = 2000; // milliseconds
 var API_UPDATE_INTERVAL = 5000; // milliseconds
 
+// devices the hydrant has seen since last api update
 var seenDeviceIds = [];
+
+// events the devices has seen since the last api update
 var eventQueue = [];
 
-// Currently hard-coded list of dogs and their device IDs
-var listenDeviceIds = [
-  'c3:63:96:6d:58:99'
-];
+// list of device ids to listen for
+var listenDeviceIds = [];
 
 function updateAPI() {
   // send event queue to server
   console.log('POSTing sending events', eventQueue);
-  client.post(apiURL, { events: eventQueue }, function(err, res, body) {
-    console.log(res.statusCode);
+  client.post(apiURL + '/api/event', { events: eventQueue }, function(err, res, body) {
+    console.log(res.statusCode)
     eventQueue.length = 0;
     seenDeviceIds.length = 0;
   });
@@ -31,10 +32,14 @@ function updateAPI() {
 
 noble.on('stateChange', function(state) {
   if (state === 'poweredOn') {
-    console.log('scanning...');
-    noble.startScanning([], true);
+	client.get(apiURL + '/api/devices', function(err, res, devices) {
+      console.log(res.statusCode, devices);
+      listenDeviceIds = devices;
 
-    setInterval(updateAPI, API_UPDATE_INTERVAL);
+      console.log('scanning...');
+      noble.startScanning([], true);
+      setInterval(updateAPI, API_UPDATE_INTERVAL);
+    });
   } else {
     console.log("Error...not connected or cannot connect");
     noble.stopScanning();
@@ -50,11 +55,13 @@ noble.on('discover', function(peripheral) {
   if (listenDeviceIds.indexOf(deviceId) > -1 && seenDeviceIds.indexOf(deviceId) === -1) {
     // queue event to be sent if we recognize the device and have not queued an event yet
     seenDeviceIds.push(deviceId);
-    var eventPayload = {
+	var eventPayload = {
       device: deviceId,
       location: LOCATION,
       time: Date.now()
     };
-    eventQueue.push(eventPayload);
+    eventQueue.unshift(eventPayload);
+  } else if (listenDeviceIds.indexOf(deviceId) > -1 && seenDeviceIds.indexOf(deviceId) !== -1) {
+    console.log('already seen', deviceId);
   }
 });
