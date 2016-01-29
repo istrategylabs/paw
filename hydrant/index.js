@@ -8,7 +8,6 @@ var client = request.createClient(apiURL);
 
 // Variables to help us increase accuracy
 var RSSI_THRESHOLD    = -90;
-var EXIT_GRACE_PERIOD = 2000; // milliseconds
 var API_UPDATE_INTERVAL = 5000; // milliseconds
 
 // devices the hydrant has seen since last api update
@@ -23,8 +22,8 @@ var listenDeviceIds = [];
 function updateAPI() {
   // send event queue to server
   console.log('POSTing sending events', eventQueue);
-  client.post(apiURL + '/api/event', { events: eventQueue }, function(err, res, body) {
-    console.log(res.statusCode)
+  client.post(apiURL + '/api/event', { events: eventQueue }, function(err, res) {
+    console.log(res.statusCode);
     eventQueue.length = 0;
     seenDeviceIds.length = 0;
   });
@@ -32,7 +31,7 @@ function updateAPI() {
 
 noble.on('stateChange', function(state) {
   if (state === 'poweredOn') {
-	client.get(apiURL + '/api/devices', function(err, res, devices) {
+    client.get(apiURL + '/api/devices', function(err, res, devices) {
       console.log(res.statusCode, devices);
       listenDeviceIds = devices;
 
@@ -55,7 +54,7 @@ noble.on('discover', function(peripheral) {
   if (listenDeviceIds.indexOf(deviceId) > -1 && seenDeviceIds.indexOf(deviceId) === -1) {
     // queue event to be sent if we recognize the device and have not queued an event yet
     seenDeviceIds.push(deviceId);
-	var eventPayload = {
+    var eventPayload = {
       device: deviceId,
       location: LOCATION,
       time: Date.now()

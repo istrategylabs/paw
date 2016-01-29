@@ -104,10 +104,17 @@ function getDogById(dogId, callback) {
   });
 }
 
+function getAllDevices(callback) {
+  client.smembers('btle_devices', function(err, deviceIds) {
+    callback(deviceIds);
+  });
+}
+
 function storeDogInRedis(dog) {
   if (dog && dog.btle_devices && dog.btle_devices.length > 0) {
     var deviceId = dog.btle_devices[0].device_id;
     client.sadd('dogs', dog.display_id);
+    client.sadd('btle_devices', deviceId);
     client.set('dog:' + dog.display_id, JSON.stringify(dog));
     client.set('btle_device:' + deviceId + ':dog', dog.display_id);
   }
@@ -213,6 +220,16 @@ app.get('/api/dogs', function(req, res) {
   getAllDogs(function(dogs) {
     if (dogs.length) {
       res.json(dogs);
+    } else {
+      res.status(404).json({ status: 404, textStatus: 'Not Found' });
+    }
+  });
+});
+
+app.get('/api/devices', function(req, res) {
+  getAllDevices(function(devices) {
+    if (devices.length) {
+      res.json(devices);
     } else {
       res.status(404).json({ status: 404, textStatus: 'Not Found' });
     }
