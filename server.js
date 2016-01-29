@@ -53,6 +53,86 @@ if (env === 'production') {
 //   missing
 // checked out
 
+var CHECKIN_EXPIRATION_MS = 60 * 5;
+
+function getAllDogs(callback) {
+  client.smembers('dogs', function(err, dogs) {
+    var multi = client.multi();
+    dogs.forEach(function(dogId) {
+      multi.get('dog:' + dogId);
+      multi.get('dog:' + dogId + ':checked_in');
+    });
+
+    multi.exec(function(err, replies) {
+      var dogs = chunk(replies, 2).map(function(d) {
+        var dog = JSON.parse(d[0]);
+        var checkin = JSON.parse(d[1]);
+
+        return {
+          display_id: dog.display_id,
+          name: dog.name,
+          owner: dog.owner,
+          avatar: dog.avatar,
+          checked_in: checkin
+        };
+      });
+      callback(dogs);
+    });
+  });
+}
+
+function getDogById(dogId, callback) {
+  var multi = client.multi();
+  multi.get('dog:' + dogId);
+  multi.get('dog:' + dogId + ':checked_in');
+
+  multi.exec(function(err, d) {
+    var dog = JSON.parse(d[0]);
+    var checkin = JSON.parse(d[1]);
+
+    if (dog) {
+      callback({
+        display_id: dog.display_id,
+        name: dog.name,
+        owner: dog.owner,
+        avatar: dog.avatar,
+        checked_in: checkin
+      });
+    } else {
+      callback();
+    }
+  });
+}
+
+function checkinDeviceAtLocationTime(deviceId, location, time, callback) {
+  client.get('btle_device:' + deviceId + ':dog', function(err, dogId) {
+    if (!err && dogId) {
+      // check dog in at last seen hydrant at time
+      var newCheckin = { location: location, time: time };
+
+      // TODO check that time is newer than CHECKIN_EXPIRATION_MS in the past
+      // TODO check that time is newer than our last seen checkin
+      // client.get('dog:' + dogId + ':checked_in', function(err, checkin) {
+      //   if (!err && checkin) {
+      //
+      //   }
+      // })
+
+      client.set('dog:' + dogId + ':checked_in', JSON.stringify(newCheckin), function(err, reply) {
+        // set the key to expire after 5 minutes
+        if (!err && reply == 'OK') {
+          client.expire('dog:' + dogId + ':checked_in', CHECKIN_EXPIRATION_MS);
+          callback(true);
+        } else {
+          callback(false);
+        }
+      });
+    } else {
+      callback(false);
+    }
+  });
+}
+
 
 // load data into redis from isl api
 var token = process.env.ISL_API_TOKEN;
@@ -109,22 +189,11 @@ request.get({
 
 
 app.get('/api/dogs/:display_id', function(req, res) {
-  client.get('dog:' + req.params.display_id, function(err, d) {
-    if (!err && d) {
-      var dog = JSON.parse(d);
-
-      client.sismember('dogs:checked_in', JSON.stringify(dog.display_id), function(err, checkedIn) {
-        res.send({
-          display_id: dog.display_id,
-          name: dog.name,
-          owner: dog.owner,
-          avatar: dog.avatar,
-          device_id: dog.btle_devices[0].device_id,
-          checked_in: !!(checkedIn)
-        });
-      });
+  getDogById(req.params.display_id, function(dog) {
+    if (dog) {
+      res.json(dog);
     } else {
-      res.status({ status: 404, textStatus: 'Not Found' });
+      res.status(404).json({ status: 404, textStatus: 'Not Found' });
     }
   });
 });
@@ -138,57 +207,27 @@ app.get('/api/dogs/:display_id', function(req, res) {
 // });
 
 app.get('/api/dogs', function(req, res) {
-  client.smembers('dogs', function(err, dogs) {
-    var multi = client.multi();
-    dogs.forEach(function(dogId) {
-      multi.get('dog:' + dogId);
-      // FIXME why does sismember not find this when set by event
-      multi.sismember('dogs:checked_in', JSON.stringify(dogId));
-    });
-
-    multi.exec(function(err, replies) {
-      res.send(chunk(replies, 2).map(function(d) {
-        var dog = JSON.parse(d[0]);
-        var checkedIn = d[1];
-        return {
-          display_id: dog.display_id,
-          name: dog.name,
-          owner: dog.owner,
-          avatar: dog.avatar,
-          device_id: dog.btle_devices[0].device_id,
-          checked_in: !!(checkedIn)
-        };
-      }));
-    });
+  getAllDogs(function(dogs) {
+    if (dogs.length) {
+      res.json(dogs);
+    } else {
+      res.status(404).json({ status: 404, textStatus: 'Not Found' });
+    }
   });
 });
 
 app.post('/api/event', function(req, res) {
-  var event = req.body.event;
-  var device = event.device;
-  var location = event.location;
+  var events = req.body.events;
+  events.forEach(function(event, index) {
+    var device = event.device;
+    var location = event.location;
+    var time = Date.now();
 
-  client.sadd('dogs:checked_in', '39pABg');
-
-  client.get('btle_device:' + device + ':dog', function(err, dogId) {
-    if (!err && dogId) {
-      // check dog in
-      client.sadd('dogs:checked_in', JSON.stringify(dogId));
-
-      // Set key in redis store for last known hydrant
-      client.set('btle_device:' + device, location, function(err, reply) {
-        // Set the key to expire after 5 minutes
-        client.expire('btle_device:' + device, 60 * 5, function(err) {
-          if (!err) {
-            client.srem('dogs:checked_in', dogId);
-          }
-        });
-
-        res.json({ status: '200', textStatus: 'OK' });
-      });
-    } else {
-      res.json({ status: '404', textStatus: 'Not Found' });
-    }
+    checkinDeviceAtLocationTime(device, location, time, function() {
+      if (index === events.length - 1) {
+        res.json({ status: 200, textStatus: 'OK' });
+      }
+    });
   });
 });
 

@@ -5,6 +5,7 @@ var app = require('../app');
 var DogsCollection = require('../collections/DogsCollection');
 var DashboardTemplate = fs.readFileSync(__dirname + '/DashboardTemplate.html', 'utf8');
 var DashboardDogsListView = require('../views/DashboardDogsListView');
+var DashboardMapView = require('../views/DashboardMapView');
 
 var DashboardView = Backbone.View.extend({
   template: _.template(DashboardTemplate),
@@ -13,22 +14,22 @@ var DashboardView = Backbone.View.extend({
     this.render();
     this.collection = new DogsCollection();
 
-    console.log('[DashboardView] About to print out dog');
-    console.log(this.collection[0]);
-
-    // console.log('---', this.collection.pluck('model.display_id'));
-
     new DashboardDogsListView({
-      el: this.$('ul'),
+      el: this.$('.dashboard__dog-list'),
+      collection: this.collection
+    });
+
+    new DashboardMapView({
+      el: this.$('.dashboard__map'),
       collection: this.collection
     });
   },
 
   render: function() {
+    var now = new Date();
     this.$el.html(this.template({
-      name: app.session.user.get('name')
+      date: _.take(_.drop(now.toString().split(' ')), 3).join(' ')
     }));
-
     return this;
   }
 });

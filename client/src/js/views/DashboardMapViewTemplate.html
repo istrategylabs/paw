@@ -1,0 +1,10 @@
+<div>
+  <h1>Map of locations</h1>
+  <ul>
+    <% _.each(dogs, function(dog) { %>
+    <li>
+        <%= dog.name %> checked in with hydrant <%= dog.checked_in.location %> at <%= (new Date(dog.checked_in.time)).toString() %>
+    </li>
+    <% }) %>
+  </ul>
+</div>

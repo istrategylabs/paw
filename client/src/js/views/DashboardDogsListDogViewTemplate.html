@@ -1,4 +1,4 @@
-<div class="dog dog--dashboard<% if (checked_in == true) { %> dog--checked-in<% } %>">
+<div class="dog dog--dashboard<% if (checked_in) { %> dog--checked-in<% } %>">
     <div class="dog__avatar-container">
         <img class="dog__avatar" src="<%= avatar ? avatar : '/img/dog_stock.jpg' %>">
     </div>
@@ -8,7 +8,7 @@
         </p>
         <% if (owner) { %>
         <p class="dog__owner">
-            <%= owner %>
+            <%= _.startCase(owner) %>
         </p>
         <% } %>
         <label>
@@ -26,5 +26,5 @@
             <input type="radio" name="status-<%= display_id %>"> Missing
         </label>
         <% } %>
-    </div> <!-- end .dog__info -->
-</div> <!-- end .dog -->
+    </div>
+</div>

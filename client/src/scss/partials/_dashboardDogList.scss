@@ -16,7 +16,7 @@ $sidebar-width: 270px;
     // @include scrollbars(.5em, red);
 }
 
-.dashboard__canvas {
+.dashboard__map {
     // box-flex: 1;
     position: absolute;
     display: inline-block;
@@ -24,7 +24,7 @@ $sidebar-width: 270px;
     left: $sidebar-width;
 }
 
-.sidebar__currentDate {
+.dashboard__date {
     background: $porcelain;
     border-bottom: $sidebar-borders;
     font-family: $header-font-family;
