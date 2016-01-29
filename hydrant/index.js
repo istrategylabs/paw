@@ -23,7 +23,7 @@ function updateAPI() {
   // send event queue to server
   console.log('POSTing sending events', eventQueue);
   client.post(apiURL, { events: eventQueue }, function(err, res, body) {
-    console.log(res.statusCode)
+    console.log(res.statusCode);
     eventQueue.length = 0;
     seenDeviceIds.length = 0;
   });
@@ -34,7 +34,7 @@ noble.on('stateChange', function(state) {
     console.log('scanning...');
     noble.startScanning([], true);
 
-    setInterval(updateAPI, 10000);
+    setInterval(updateAPI, API_UPDATE_INTERVAL);
   } else {
     console.log("Error...not connected or cannot connect");
     noble.stopScanning();
@@ -50,11 +50,11 @@ noble.on('discover', function(peripheral) {
   if (listenDeviceIds.indexOf(deviceId) > -1 && seenDeviceIds.indexOf(deviceId) === -1) {
     // queue event to be sent if we recognize the device and have not queued an event yet
     seenDeviceIds.push(deviceId);
-	 var eventPayload = {
+    var eventPayload = {
       device: deviceId,
       location: LOCATION,
       time: Date.now()
     };
-    eventQueue.unshift(eventPayload);
+    eventQueue.push(eventPayload);
   }
 });
