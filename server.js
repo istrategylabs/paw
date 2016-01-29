@@ -9,7 +9,7 @@ var find = require('lodash/find');
 
 var redisURL = process.env.REDIS_URL;
 var client = redis.createClient(redisURL);
-// client.flushall();
+client.flushall();
 
 var app = express();
 app.set('port', (process.env.PORT || 3000));
@@ -104,6 +104,22 @@ function getDogById(dogId, callback) {
   });
 }
 
+function getAllDevices(callback) {
+  client.smembers('btle_devices', function(err, deviceIds) {
+    callback(deviceIds);
+  });
+}
+
+function storeDogInRedis(dog) {
+  if (dog && dog.btle_devices && dog.btle_devices.length > 0) {
+    var deviceId = dog.btle_devices[0].device_id;
+    client.sadd('dogs', dog.display_id);
+    client.sadd('btle_devices', deviceId);
+    client.set('dog:' + dog.display_id, JSON.stringify(dog));
+    client.set('btle_device:' + deviceId + ':dog', dog.display_id);
+  }
+}
+
 function checkinDeviceAtLocationTime(deviceId, location, time, callback) {
   client.get('btle_device:' + deviceId + ':dog', function(err, dogId) {
     if (!err && dogId) {
@@ -165,22 +181,16 @@ request.get({
           'Authorization': 'Token ' + token
         }
       }, function(error, response, body) {
-        var d;
+        var dog;
 
         if (!error && response.statusCode == 200) {
-          d = JSON.parse(body);
+          dog = JSON.parse(body);
+          storeDogInRedis(dog);
         } else {
           // read dog from fixture
-          d = require('./fixtures/dog.json');
-          d = find(d, { display_id: dog.display_id});
-        }
-
-        if (d.btle_devices.length > 0) {
-          dog = d;
-          var deviceId = dog.btle_devices[0].device_id;
-          client.sadd('dogs', dog.display_id);
-          client.set('dog:' + dog.display_id, JSON.stringify(d));
-          client.set('btle_device:' + deviceId + ':dog', dog.display_id);
+          dog = require('./fixtures/dog.json');
+          dog = find(d, { display_id: dog.display_id});
+          storeDogInRedis(dog);
         }
       });
     }
@@ -216,12 +226,22 @@ app.get('/api/dogs', function(req, res) {
   });
 });
 
+app.get('/api/devices', function(req, res) {
+  getAllDevices(function(devices) {
+    if (devices.length) {
+      res.json(devices);
+    } else {
+      res.status(404).json({ status: 404, textStatus: 'Not Found' });
+    }
+  });
+});
+
 app.post('/api/event', function(req, res) {
   var events = req.body.events;
   events.forEach(function(event, index) {
     var device = event.device;
     var location = event.location;
-    var time = Date.now();
+    var time = event.time;
 
     checkinDeviceAtLocationTime(device, location, time, function() {
       if (index === events.length - 1) {
