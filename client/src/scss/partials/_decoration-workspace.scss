@@ -1,0 +1,15 @@
+.workspace__steam {
+    
+}
+
+.workspace__steam--1 {
+    @include moveAndFadeAnimation(10px, 2.5s, .2s);
+}
+
+.workspace__steam--2 {
+    @include moveAndFadeAnimation(20px, 2.5s, 0s);
+}
+
+.workspace__steam--3 {
+    @include moveAndFadeAnimation(15px, 2.5s, .4s);
+}
