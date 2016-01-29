@@ -105,10 +105,10 @@ function getDogById(dogId, callback) {
 }
 
 function storeDogInRedis(dog) {
-  if (d && d.btle_devices && d.btle_devices.length > 0) {
+  if (dog && dog.btle_devices && dog.btle_devices.length > 0) {
     var deviceId = dog.btle_devices[0].device_id;
     client.sadd('dogs', dog.display_id);
-    client.set('dog:' + dog.display_id, JSON.stringify(d));
+    client.set('dog:' + dog.display_id, JSON.stringify(dog));
     client.set('btle_device:' + deviceId + ':dog', dog.display_id);
   }
 }
