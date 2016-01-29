@@ -104,6 +104,15 @@ function getDogById(dogId, callback) {
   });
 }
 
+function storeDogInRedis(dog) {
+  if (d && d.btle_devices && d.btle_devices.length > 0) {
+    var deviceId = dog.btle_devices[0].device_id;
+    client.sadd('dogs', dog.display_id);
+    client.set('dog:' + dog.display_id, JSON.stringify(d));
+    client.set('btle_device:' + deviceId + ':dog', dog.display_id);
+  }
+}
+
 function checkinDeviceAtLocationTime(deviceId, location, time, callback) {
   client.get('btle_device:' + deviceId + ':dog', function(err, dogId) {
     if (!err && dogId) {
@@ -165,22 +174,16 @@ request.get({
           'Authorization': 'Token ' + token
         }
       }, function(error, response, body) {
-        var d;
+        var dog;
 
         if (!error && response.statusCode == 200) {
-          d = JSON.parse(body);
+          dog = JSON.parse(body);
+          storeDogInRedis(dog);
         } else {
           // read dog from fixture
-          d = require('./fixtures/dog.json');
-          d = find(d, { display_id: dog.display_id});
-        }
-
-        if (d.btle_devices.length > 0) {
-          dog = d;
-          var deviceId = dog.btle_devices[0].device_id;
-          client.sadd('dogs', dog.display_id);
-          client.set('dog:' + dog.display_id, JSON.stringify(d));
-          client.set('btle_device:' + deviceId + ':dog', dog.display_id);
+          dog = require('./fixtures/dog.json');
+          dog = find(d, { display_id: dog.display_id});
+          storeDogInRedis(dog);
         }
       });
     }
