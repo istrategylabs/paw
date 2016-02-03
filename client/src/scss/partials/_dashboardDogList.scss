@@ -1,5 +1,5 @@
 $sidebar-borders: 1px solid $mercury;
-$sidebar-width: 270px;
+$sidebar-width: 300px;
 
 .dashboard__sidebar {
     background: $porcelain;
@@ -46,7 +46,7 @@ $sidebar-width: 270px;
 .dog--dashboard {
   background: none;
   border-bottom: $sidebar-borders;
-  opacity: .4;
+  // opacity: .4;
   padding: rem-calc(15px) rem-calc(30px);
   transition: opacity .25s;
 
@@ -88,6 +88,88 @@ $sidebar-width: 270px;
       font-size: rem-calc(11px);
       font-style: italic;
   }
+
+  .dog__dropdown {
+    background: $white;
+    border: 1px solid $mercury;
+    border-radius: 100px;
+    font-family: $header-font-family;
+    font-size: 12px;
+    font-weight: 600;
+    overflow: hidden;
+    padding: 3px 40px 5px 25px;
+    position: relative;
+
+    .dropdown__status {
+      display: inline-block;
+      position: relative;
+
+      &::before {
+        background: $paw-red;
+        border-radius: 100px;
+        content: '';
+        height: 8px;
+        left: -15px;
+        position: absolute;
+        top: 8px;
+        width: 8px;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+
+      .dropdown__arrow-svg {
+        transform: rotate(90deg);
+      }
+    }
+
+    .dropdown__arrow-container {
+      border-left: 1px solid $mercury;
+      height: 100%;
+      position: absolute;
+      right: 0px;
+      top: 0px;
+
+      width:30px;
+      
+      .dropdown__arrow {
+        display: inline-block;
+        height: 6px;
+        position: absolute;
+        right: 12px;
+        top: 4px;
+        transform-origin: center;
+        width: 6px;
+
+        .dropdown__arrow-svg {
+          transition: transform .2s;
+        }
+
+        // &::before, &:after{
+        //   background: $dark-gray;
+        //   border-radius: 100px;
+        //   content: '';
+        //   height: 2px;
+        //   position: absolute;
+        //   width: 8px;
+        // }
+
+        // &:after {
+        //   transform: rotate(45deg) translateY(3px) translateX(1px);
+        // }
+
+        // &::before {
+        //   transform: rotate(-45deg) translateY(4px) translateX(-6px);
+        // }
+
+
+      }
+
+      
+      
+    }
+  }// end dog__check-in-dropdown
 }
 
 .dog--checked-in {
