@@ -3,8 +3,8 @@
         <img class="dog__avatar" src="<%= avatar ? avatar : '/img/dog_stock.jpg' %>">
     </div>
     <div class="dog__info">
-        <p>
-            <a class="dog__name" href="/api/dogs/<%= display_id %>"><%= name %></a>
+        <p class="dog__name">
+            <a class="" href="/api/dogs/<%= display_id %>"><%= name %></a>
         </p>
         <% if (owner) { %>
         <p class="dog__owner">
@@ -13,7 +13,15 @@
         <% } %>
         <label class="dog__dropdown">
             <input class="hide" type="checkbox" name="checked_in" disabled<%= checked_in ? ' checked' : '' %>>
-            <div class="dropdown__status">
+            <div 
+                class="
+                    dropdown__status 
+        
+                    <% if (checked_in) { %> 
+                        status--checked-in 
+                    <% } %>
+                "
+            >
                 Checked <%= checked_in ? 'In' : 'Out' %>
             </div>
             <div class="dropdown__arrow-container">
@@ -21,7 +29,6 @@
                      <object class="dropdown__arrow-svg" type="image/svg+xml" data="/img/arrow.svg"></object>
                 </div>
             </div>
-            
         </label>
         <% if (checked_in) { %>
         <label>
