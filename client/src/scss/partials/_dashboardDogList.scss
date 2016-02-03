@@ -46,7 +46,7 @@ $sidebar-width: 300px;
 .dog--dashboard {
   background: none;
   border-bottom: $sidebar-borders;
-  // opacity: .4;
+  opacity: .4;
   padding: rem-calc(30px);
   transition: opacity .25s;
 
@@ -91,7 +91,7 @@ $sidebar-width: 300px;
       margin-bottom: 10px;
   }
 
-  .dog__dropdown {
+  .button--sidebar, .dog__dropdown {
     background: $white;
     border: 1px solid $mercury;
     border-radius: 100px;
@@ -99,8 +99,12 @@ $sidebar-width: 300px;
     font-size: 12px;
     font-weight: 600;
     overflow: hidden;
-    padding: 3px 40px 5px 25px;
+    padding: 6px 15px 10px 15px;
     position: relative;
+  }
+
+  .dog__dropdown {
+    padding: 3px 40px 5px 25px;
 
     .dropdown__status {
       display: inline-block;
