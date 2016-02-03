@@ -47,7 +47,7 @@ $sidebar-width: 300px;
   background: none;
   border-bottom: $sidebar-borders;
   // opacity: .4;
-  padding: rem-calc(15px) rem-calc(30px);
+  padding: rem-calc(30px);
   transition: opacity .25s;
 
   &:hover {
@@ -70,23 +70,25 @@ $sidebar-width: 300px;
   .dog__info {
       display: inline-block;
       vertical-align: top;
-      p {
-          margin: 0;
-      }
   }
 
   .dog__name {
-      color: $scorpion;
       font-family: $header-font-family;
       font-size: rem-calc(16px);
       font-weight: 600;
       letter-spacing: 1px;
+      margin: 0px;
+
+      a {
+        color: $scorpion;
+      }
   }
 
   .dog__owner {
       font-family: $body-font-family;
       font-size: rem-calc(11px);
       font-style: italic;
+      margin-bottom: 10px;
   }
 
   .dog__dropdown {
@@ -104,7 +106,7 @@ $sidebar-width: 300px;
       display: inline-block;
       position: relative;
 
-      &::before {
+      &:before {
         background: $paw-red;
         border-radius: 100px;
         content: '';
@@ -113,6 +115,12 @@ $sidebar-width: 300px;
         position: absolute;
         top: 8px;
         width: 8px;
+      }
+
+      &.status--checked-in {
+        &:before {
+          background: $paw-green;
+        }
       }
     }
 
