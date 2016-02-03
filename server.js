@@ -173,7 +173,7 @@ request.get({
   // set dog:id to btle_device
   dogs.forEach(function(dog) {
     if (dog.display_id && dog.pet_link) {
-      // TODO move detail view to list view and remove this
+      // TODO move detail view to list view in api and remove this loop
       // haven't requested dog detail view yet
       request.get({
         url: dog.pet_link,
@@ -181,14 +181,12 @@ request.get({
           'Authorization': 'Token ' + token
         }
       }, function(error, response, body) {
-        var dog;
-
         if (!error && response.statusCode == 200) {
           dog = JSON.parse(body);
           storeDogInRedis(dog);
         } else {
           // read dog from fixture
-          dog = require('./fixtures/dog.json');
+          var d = require('./fixtures/dog.json');
           dog = find(d, { display_id: dog.display_id});
           storeDogInRedis(dog);
         }
