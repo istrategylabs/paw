@@ -11,43 +11,48 @@
             <%= _.startCase(owner) %>
         </p>
         <% } %>
+
+
         <% if (checked_in) { %> 
-            <label class="dog__dropdown">
-                <input class="hide" type="checkbox" name="checked_in" disabled<%= checked_in ? ' checked' : '' %>>
-                <div 
-                    class="
-                        dropdown__status 
-            
-                        <% if (checked_in) { %> 
-                            status--checked-in 
-                        <% } %>
-                    "
-                >
-                    In Office
-                </div>
-                <div class="dropdown__arrow-container">
-                    <div class="dropdown__arrow">
-                         <object class="dropdown__arrow-svg" type="image/svg+xml" data="/img/arrow.svg"></object>
+            <div class="button--sidebar dropdown">
+                <div class="dropdown__current-selection">
+                    <div class=" indicator current-selection__indicator <% if (checked_in) { %> indicator--green <% } %>"
+                    >
+                        In Office
+                    </div> <!-- end .dropdown__status -->
+                    <div class="dropdown__arrow-container">
+                        <div class="dropdown__arrow">
+                             <object class="dropdown__arrow-svg" type="image/svg+xml" data="/img/arrow.svg"></object>
+                        </div>
                     </div>
-                </div>
-            </label>
+                </div> <!-- end .dropdown__current-selection -->
+                <div class="dropdown__selections">
+                    
+                    <label class="dropdown__option indicator indicator--green <% if (checked_in) { %> hide <% } %>">
+                        <input type="radio" name="status-<%= display_id %>"<%= checked_in ? ' checked' : '' %>> In Office
+                    </label>
+
+                    <label class="dropdown__option indicator indicator--yellow">
+                        <input type="radio" name="status-<%= display_id %>"> On a walk
+                    </label class="dropdown__option">
+                    <label class="dropdown__option indicator indicator--red">
+                        <input type="radio" name="status-<%= display_id %>"> Missing
+                    </label>
+                    <label class="dropdown__option option--check-out">
+                        <input type="radio" name="status-<%= display_id %>"> Check Out
+                    </label>
+                </div> <!-- end .dropdown__selections -->
+            </div> <!-- end .button- -dropdown -->
+
+            
+
         <% } %>
         
 
-        <button class="button--sidebar">
+        <button class="button--sidebar button--check-in">
             Check In
         </button>
 
-        <% if (checked_in) { %>
-        <label>
-            <input type="radio" name="status-<%= display_id %>"<%= checked_in ? ' checked' : '' %>> In Office
-        </label>
-        <label>
-            <input type="radio" name="status-<%= display_id %>"> On a walk
-        </label>
-        <label>
-            <input type="radio" name="status-<%= display_id %>"> Missing
-        </label>
-        <% } %>
+        
     </div>
 </div>
