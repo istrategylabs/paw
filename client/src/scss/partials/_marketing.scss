@@ -181,6 +181,7 @@
     background: $white;
     border-bottom: 3px solid rgba(mix($secondary-color, $black), 0.15);
     padding: 80px 70px 85px;
+    width: percentage(1/3);
 }
 
 .dog__avatar {
@@ -199,6 +200,12 @@
 .dog__meta {
     font-size: 0.9375rem;
     font-style: italic;
+}
+
+.dog--marketing {
+    margin-right: 30px;
+    text-align: center;
+    width: percentage(1/3);
 }
 
 .contact {

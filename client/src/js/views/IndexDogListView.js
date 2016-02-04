@@ -1,6 +1,7 @@
 var fs = require('fs');
 var _ = require('underscore');
 var Backbone = require('backbone');
+var Flickity = require('flickity');
 var IndexDogListTemplate = fs.readFileSync(__dirname + '/IndexDogListTemplate.html', 'utf8');
 
 var IndexDogListView = Backbone.View.extend({
@@ -8,15 +9,7 @@ var IndexDogListView = Backbone.View.extend({
 
   initialize: function() {
     this.render = _.bind(this.render, this);
-    this.collection.on('update', this.render);
-    var self = this;
-    this.collection.on('add', function(dog) {
-      if (!dog.avatar) {
-        dog.fetch({
-          success: self.render
-        });
-      }
-    });
+    this.collection.on('add update', this.render);
   },
 
   render: function() {
@@ -25,6 +18,13 @@ var IndexDogListView = Backbone.View.extend({
         return dog.attributes;
       })
     }));
+
+    console.log('render');
+
+    this.dogsSlider = new Flickity(this.el, {
+      cellAlign: 'left',
+      contain: true
+    });
   }
 });
 

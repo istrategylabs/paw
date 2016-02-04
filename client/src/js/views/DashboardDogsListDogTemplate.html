@@ -28,7 +28,7 @@
                 </div> <!-- end .dropdown__current-selection -->
                 <div class="dropdown__selections">
                     
-                    <label class="dropdown__option indicator indicator--green">
+                    <label class="dropdown__option indicator indicator--green <% if (checked_in) { %> hide <% } %>">
                         <input type="radio" name="status-<%= display_id %>"<%= checked_in ? ' checked' : '' %>> In Office
                     </label>
 

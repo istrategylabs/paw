@@ -1,4 +1,5 @@
 *.log
+*.rdb
 
 node_modules
 public/

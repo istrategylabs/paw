@@ -1,10 +1,10 @@
 var fs = require('fs');
 var _ = require('underscore');
 var Backbone = require('backbone');
-var DashboardDogsListDogViewTemplate = fs.readFileSync(__dirname + '/DashboardDogsListDogViewTemplate.html', 'utf8');
+var DashboardDogsListDogTemplate = fs.readFileSync(__dirname + '/DashboardDogsListDogTemplate.html', 'utf8');
 
 var DashboardDogsListDogView = Backbone.View.extend({
-  template: _.template(DashboardDogsListDogViewTemplate),
+  template: _.template(DashboardDogsListDogTemplate),
 
   events: {
     'click .button--check-in': 'handleCheckedInChange',
