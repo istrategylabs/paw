@@ -1,10 +1,10 @@
 var fs = require('fs');
 var _ = require('underscore');
 var Backbone = require('backbone');
-var DashboardMapViewTemplate = fs.readFileSync(__dirname + '/DashboardMapViewTemplate.html', 'utf8');
+var DashboardMapTemplate = fs.readFileSync(__dirname + '/DashboardMapTemplate.html', 'utf8');
 
 var DashboardMapView = Backbone.View.extend({
-  template: _.template(DashboardMapViewTemplate),
+  template: _.template(DashboardMapTemplate),
 
   initialize: function() {
     this.render = _.bind(this.render, this);

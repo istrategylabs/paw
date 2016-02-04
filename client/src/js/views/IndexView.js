@@ -20,7 +20,7 @@ var IndexView = Backbone.View.extend({
     this.render();
     this.collection = new DogsCollection();
 
-    new IndexDogListView({
+    this.dogList = new IndexDogListView({
       el: this.$('.dogs__list'),
       collection: this.collection
     });

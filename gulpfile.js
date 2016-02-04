@@ -76,7 +76,10 @@ gulp.task('sass', () => {
   return gulp.src('./client/src/scss/**/*.scss')
     .pipe(sourcemaps.init())
     .pipe(sass({
-      includePaths: [path.join(path.dirname(require.resolve('foundation-sites')), '../scss')]
+      includePaths: [
+        path.join(path.dirname(require.resolve('foundation-sites')), '../scss'),
+        path.join(path.dirname(require.resolve('flickity')), '../css')
+      ]
     }).on('error', sass.logError))
     .pipe(postcss([autoprefixer]))
     .pipe(sourcemaps.write())

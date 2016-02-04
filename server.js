@@ -30,29 +30,6 @@ if (env === 'production') {
   app.use(forceSSL);
 }
 
-// Data storage:
-//
-// on load: request list of dogs from api
-//          push display_id's onto list
-//          set display_id to dog list response
-//
-// on get: if we know about the dog
-//           havent seen detail dog yet?
-//             request detail dog
-//           set detail dog response to display_id
-//
-// on post:
-//
-// on put:
-//
-//
-// States:
-// checked in
-//   in office
-//   out of office
-//   missing
-// checked out
-
 var CHECKIN_EXPIRATION_MS = 60 * 5;
 
 function getAllDogs(callback) {
@@ -71,6 +48,7 @@ function getAllDogs(callback) {
         return {
           display_id: dog.display_id,
           name: dog.name,
+          short_description: dog.short_description,
           owner: dog.owner,
           avatar: dog.avatar,
           checked_in: checkin
@@ -94,6 +72,7 @@ function getDogById(dogId, callback) {
       callback({
         display_id: dog.display_id,
         name: dog.name,
+        short_description: dog.short_description,
         owner: dog.owner,
         avatar: dog.avatar,
         checked_in: checkin
@@ -151,11 +130,11 @@ function checkinDeviceAtLocationTime(deviceId, location, time, callback) {
 
 
 // load data into redis from isl api
-var token = process.env.ISL_API_TOKEN;
+var TOKEN = process.env.ISL_API_TOKEN;
 request.get({
   url: 'https://api.isl.co/api/v1/pets/',
   headers: {
-    'Authorization': 'Token ' + token
+    'Authorization': 'Token ' + TOKEN
   }
 }, function(error, response, body) {
   var dogs;
@@ -178,7 +157,7 @@ request.get({
       request.get({
         url: dog.pet_link,
         headers: {
-          'Authorization': 'Token ' + token
+          'Authorization': 'Token ' + TOKEN
         }
       }, function(error, response, body) {
         if (!error && response.statusCode == 200) {
