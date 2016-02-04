@@ -4,6 +4,7 @@ var Dog = Backbone.Model.extend({
   defaults: {
     display_id: 0,
     name: '',
+    short_description: '',
     checked_in: false,
     avatar: ''
   },

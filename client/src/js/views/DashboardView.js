@@ -1,7 +1,6 @@
 var fs = require('fs');
 var _ = require('underscore');
 var Backbone = require('backbone');
-var app = require('../app');
 var DogsCollection = require('../collections/DogsCollection');
 var DashboardTemplate = fs.readFileSync(__dirname + '/DashboardTemplate.html', 'utf8');
 var DashboardDogsListView = require('../views/DashboardDogsListView');
