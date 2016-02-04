@@ -18,7 +18,7 @@ $sidebar-borders: 1px solid $mercury;
     display: inline-block;
     vertical-align: top;
     left: $sidebar-width;
-}
+} 
 
 .dashboard__date {
     background: $porcelain;
@@ -45,6 +45,7 @@ $sidebar-borders: 1px solid $mercury;
   opacity: .4;
   padding: rem-calc(30px 30px 40px 30px);
   transition: opacity .25s;
+  width: 100%;
 
   &:hover {
     opacity: 1;
