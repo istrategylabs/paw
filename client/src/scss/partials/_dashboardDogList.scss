@@ -11,12 +11,9 @@ $sidebar-borders: 1px solid $mercury;
     vertical-align: top;
     width: $sidebar-width;
     z-index: 0;
-
-    // @include scrollbars(.5em, red);
 }
 
 .dashboard__map {
-    // box-flex: 1;
     position: absolute;
     display: inline-block;
     vertical-align: top;
@@ -117,11 +114,11 @@ $sidebar-borders: 1px solid $mercury;
   } //end button--sidebar, button--dropdown
 
   .dropdown {
-    position: absolute;
-    z-index: 50;
     border-radius: 15px;
     height: 30px;
     padding: 0px;
+    position: absolute;
+    z-index: 50;
 
     &.dropdown--open {
       height: auto;
@@ -142,16 +139,16 @@ $sidebar-borders: 1px solid $mercury;
   }
 
   .dropdown__current-selection {
-    padding: 3px 40px 5px 25px;
-    display: block;
-    margin: 0;
-    line-height: 1.8;
+    border-bottom: 1px solid lighten($mercury, 6%);
     color: #5d5d5d;
+    display: block;
     font-family: $header-font-family;
     font-size: 12px;
     font-weight: 600;
+    line-height: 1.8;
+    margin: 0;
     overflow: hidden;
-    border-bottom: 1px solid lighten($mercury, 6%);
+    padding: 3px 40px 5px 25px;
     position: relative;
 
     &:hover {
