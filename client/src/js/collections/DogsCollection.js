@@ -1,4 +1,22 @@
+var $ = require('jquery');
 var Backbone = require('backbone');
+
+var statusMap = {
+  1: {
+    color: 'green',
+    name: 'in office'
+  },
+
+  2: {
+    color: 'yellow',
+    name: 'on a walk'
+  },
+
+  3: {
+    color: 'red',
+    name: 'missing'
+  }
+};
 
 var Dog = Backbone.Model.extend({
   defaults: {
@@ -6,9 +24,44 @@ var Dog = Backbone.Model.extend({
     name: '',
     short_description: '',
     checked_in: false,
-    avatar: '' 
+    avatar: '',
+    current_status: 1,
+    current_status_verbose: 'in office',
+    current_status_color: 'green'
   },
-  idAttribute: 'display_id'
+  idAttribute: 'display_id',
+
+  initialize: function () {
+    this.setVerboseStatus();
+
+    this.on('change:current_status', this.setVerboseStatus);
+  },
+
+  setVerboseStatus: function () {
+    var statusOptions = statusMap[this.get('current_status')];
+
+    this.set('current_status_verbose', statusOptions.name);
+    this.set('current_status_color', statusOptions.color);
+  },
+
+  checkIn: function (data) {
+    var that = this;
+
+    return $.ajax({
+      url: '/api/event',
+      type: 'POST',
+      dataType: 'json',
+      data: {'events': [{ 
+        'device': 'enim-sit-amet-elit', 
+        'location': 'stellar-wind'}] 
+      },
+    })
+    .done(function() {
+      that.set('checked_in', true);
+      console.log("CHECKED");
+    })
+    
+  }
 });
 
 var Dogs = Backbone.Collection.extend({

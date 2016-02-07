@@ -125,7 +125,7 @@ $sidebar-borders: 1px solid $mercury;
       height: auto;
 
       .dropdown__current-selection {
-        border: none;
+        display: none;
 
         &:hover {
           background: $porcelain;

@@ -16,9 +16,9 @@
         <% if (checked_in) { %> 
             <div class="button--sidebar dropdown">
                 <div class="dropdown__current-selection">
-                    <div class=" indicator current-selection__indicator <% if (checked_in) { %> indicator--green <% } %>"
+                    <div class=" indicator current-selection__indicator indicator--<%= current_status_color %>"
                     >
-                        In Office
+                        <%= current_status_verbose %>
                     </div> <!-- end .dropdown__status -->
                     <div class="dropdown__arrow-container">
                         <div class="dropdown__arrow">
@@ -28,19 +28,21 @@
                 </div> <!-- end .dropdown__current-selection -->
                 <div class="dropdown__selections">
                     
-                    <label class="dropdown__option indicator indicator--green <% if (checked_in) { %> hide <% } %>">
-                        <input type="radio" name="status-<%= display_id %>"<%= checked_in ? ' checked' : '' %>> In Office
-                    </label>
+                    <% if (checked_in) { %>  
+                        <label class="dropdown__option indicator indicator--green">
+                            <input type="radio" value="1" name="status-<%= display_id %>"> In Office
+                        </label>
+                        <label class="dropdown__option indicator indicator--yellow">
+                            <input type="radio" value="2" name="status-<%= display_id %>"> On a walk
+                        </label class="dropdown__option">
+                        <label class="dropdown__option indicator indicator--red">
+                            <input type="radio" value="3" name="status-<%= display_id %>"> Missing
+                        </label>
+                        <label class="dropdown__option option--check-out">
+                            <input type="radio" value="0" name="status-<%= display_id %>"> Check Out
+                        </label>
+                    <% } %>
 
-                    <label class="dropdown__option indicator indicator--yellow">
-                        <input type="radio" name="status-<%= display_id %>"> On a walk
-                    </label class="dropdown__option">
-                    <label class="dropdown__option indicator indicator--red">
-                        <input type="radio" name="status-<%= display_id %>"> Missing
-                    </label>
-                    <label class="dropdown__option option--check-out">
-                        <input type="radio" name="status-<%= display_id %>"> Check Out
-                    </label>
                 </div> <!-- end .dropdown__selections -->
             </div> <!-- end .button- -dropdown -->
 
