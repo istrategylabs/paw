@@ -2,19 +2,19 @@ var $ = require('jquery');
 var Backbone = require('backbone');
 
 var statusMap = {
-  1: {
+  0: {
     color: 'green',
-    name: 'in office'
+    label: 'in office'
+  },
+
+  1: {
+    color: 'yellow',
+    label: 'on a walk'
   },
 
   2: {
-    color: 'yellow',
-    name: 'on a walk'
-  },
-
-  3: {
     color: 'red',
-    name: 'missing'
+    label: 'missing'
   }
 };
 
@@ -25,9 +25,7 @@ var Dog = Backbone.Model.extend({
     short_description: '',
     checked_in: false,
     avatar: '',
-    current_status: 1,
-    current_status_verbose: 'in office',
-    current_status_color: 'green'
+    current_status: 0
   },
   idAttribute: 'display_id',
 
@@ -38,10 +36,12 @@ var Dog = Backbone.Model.extend({
   },
 
   setVerboseStatus: function () {
-    var statusOptions = statusMap[this.get('current_status')];
 
-    this.set('current_status_verbose', statusOptions.name);
-    this.set('current_status_color', statusOptions.color);
+    // This function uses statusMap to get a label and color attribute and then returns those attributes as an array for Dog List View's render function.
+    // There, we extend the dog model to have the added label and color attribute that are fed into our dog list template
+    var statusOptions = statusMap[this.get('current_status')];
+    return [statusOptions.label, statusOptions.color];
+
   },
 
   checkIn: function (data) {

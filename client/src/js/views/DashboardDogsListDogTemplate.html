@@ -17,7 +17,7 @@
                 <div class="dropdown__current-selection">
                     <div class=" indicator current-selection__indicator indicator--<%= current_status_color %>"
                     >
-                        <%= current_status_verbose %>
+                        <%= current_status_label %>
                     </div> <!-- end .dropdown__status -->
                     <div class="dropdown__arrow-container">
                         <div class="dropdown__arrow">
@@ -27,13 +27,13 @@
                 </div> <!-- end .dropdown__current-selection -->
                 <div class="dropdown__selections">
                         <label class="dropdown__option indicator indicator--green">
-                            <input type="radio" value="1" name="status-<%= display_id %>"> In Office
+                            <input type="radio" value="0" name="status-<%= display_id %>"> In Office
                         </label>
                         <label class="dropdown__option indicator indicator--yellow">
-                            <input type="radio" value="2" name="status-<%= display_id %>"> On a walk
+                            <input type="radio" value="1" name="status-<%= display_id %>"> On a walk
                         </label class="dropdown__option">
                         <label class="dropdown__option indicator indicator--red">
-                            <input type="radio" value="3" name="status-<%= display_id %>"> Missing
+                            <input type="radio" value="2" name="status-<%= display_id %>"> Missing
                         </label>
                         <label class="dropdown__option option--check-out">
                             <input type="radio" value="0" name="status-<%= display_id %>"> Check Out

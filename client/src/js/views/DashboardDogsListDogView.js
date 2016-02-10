@@ -19,7 +19,16 @@ var DashboardDogsListDogView = Backbone.View.extend({
   },
  
   render: function() {
-    this.$el.html(this.template(this.model.toJSON()));
+
+    var verbose_status = this.model.setVerboseStatus();
+
+    var rendered_obj =  _.extend({}, this.model.toJSON(), {
+      current_status_label: verbose_status[0],
+      current_status_color: verbose_status[1]
+    });
+
+    this.$el.html(this.template(rendered_obj));
+
     return this;
   },
 
@@ -33,6 +42,7 @@ var DashboardDogsListDogView = Backbone.View.extend({
     var val = $(e.target).val();
     this.model.set('current_status', val);
     this.toggleDropdown();
+    this.render();
     console.log('radio button has been changed');
   },
 
