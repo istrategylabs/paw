@@ -1,9 +1,4 @@
-@mixin moveAndFadeAnimation($distance, $duration, $delay) {
-  
-  animation: move-and-fade $duration linear infinite;
-  animation-delay: $delay;
-  
-  @keyframes move-and-fade {
+@keyframes move-and-fade {
     0% {
       opacity: 0;
       transform: translateY(0);
@@ -15,8 +10,14 @@
       opacity: 0;
     }
     100% {
-      transform: translateY(-$distance);
+      transform: translateY(-20px);
       opacity: 0;
     }
   }
+
+@mixin moveAndFadeAnimation($duration, $delay) {
+  
+  animation: move-and-fade $duration linear infinite;
+  animation-delay: $delay;
+
 }
