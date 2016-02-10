@@ -24,14 +24,10 @@ var Dog = Backbone.Model.extend({
     name: '',
     short_description: '',
     checked_in: false,
-<<<<<<< HEAD
     avatar: '',
     current_status: 1,
     current_status_verbose: 'in office',
     current_status_color: 'green'
-=======
-    avatar: '' 
->>>>>>> 87409b94095d25734a5869ac31db47c902601d15
   },
   idAttribute: 'display_id',
 
