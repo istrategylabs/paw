@@ -12,7 +12,6 @@
         </p>
         <% } %>
 
-
         <% if (checked_in) { %> 
             <div class="button--sidebar dropdown">
                 <div class="dropdown__current-selection">
@@ -27,8 +26,6 @@
                     </div>
                 </div> <!-- end .dropdown__current-selection -->
                 <div class="dropdown__selections">
-                    
-                    <% if (checked_in) { %>  
                         <label class="dropdown__option indicator indicator--green">
                             <input type="radio" value="1" name="status-<%= display_id %>"> In Office
                         </label>
@@ -41,20 +38,8 @@
                         <label class="dropdown__option option--check-out">
                             <input type="radio" value="0" name="status-<%= display_id %>"> Check Out
                         </label>
-                    <% } %>
-
                 </div> <!-- end .dropdown__selections -->
             </div> <!-- end .button- -dropdown -->
-
-            
-
         <% } %>
-        
-
-        <button class="button--sidebar button--check-in">
-            Check In
-        </button>
-
-        
     </div>
 </div>
