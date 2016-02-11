@@ -45,21 +45,9 @@ var Dog = Backbone.Model.extend({
   },
 
   checkIn: function (data) {
-    var that = this;
 
-    return $.ajax({
-      url: '/api/event',
-      type: 'POST',
-      dataType: 'json',
-      data: {'events': [{ 
-        'device': 'enim-sit-amet-elit', 
-        'location': 'stellar-wind'}] 
-      },
-    })
-    .done(function() {
-      that.set('checked_in', true);
-      console.log("CHECKED");
-    })
+    this.set('checked_in', true);
+    this.set('current_status', 0);
     
   }
 });
