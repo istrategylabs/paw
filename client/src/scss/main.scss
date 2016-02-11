@@ -47,9 +47,11 @@ body,
 
 // Import Mixins
 @import 'mixins/mixin-scrollbars';
+@import 'mixins/mixin-move-up-and-fade';
 
 // Import Partials
 @import 'partials/base';
 @import 'partials/header';
 @import 'partials/marketing';
+@import 'partials/decoration-workspace';
 @import 'partials/dashboardDogList';

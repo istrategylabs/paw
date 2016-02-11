@@ -1,0 +1,23 @@
+@keyframes move-and-fade {
+    0% {
+      opacity: 0;
+      transform: translateY(0);
+    }
+    15% {
+       opacity: 1;
+    }
+    30% {
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(-20px);
+      opacity: 0;
+    }
+  }
+
+@mixin moveAndFadeAnimation($duration, $delay) {
+  
+  animation: move-and-fade $duration linear infinite;
+  animation-delay: $delay;
+
+}
