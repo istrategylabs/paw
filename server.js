@@ -132,7 +132,7 @@ function checkinDeviceAtLocationTime(deviceId, location, time, callback) {
 // load data into redis from isl api
 var TOKEN = process.env.ISL_API_TOKEN;
 request.get({
-  url: 'https://api.isl.co/api/v1/pets/',
+  url: 'https://api.isl.co/v1/pets/',
   headers: {
     'Authorization': 'Token ' + TOKEN
   }
