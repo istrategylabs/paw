@@ -30,8 +30,6 @@ var Dog = Backbone.Model.extend({
   idAttribute: 'display_id',
 
   initialize: function () {
-    this.setVerboseStatus();
-
     this.on('change:current_status', this.setVerboseStatus);
   },
 

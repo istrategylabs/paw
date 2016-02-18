@@ -20,14 +20,14 @@ var DashboardDogsListDogView = Backbone.View.extend({
  
   render: function() {
 
-    var verbose_status = this.model.setVerboseStatus();
+    var verboseStatus = this.model.setVerboseStatus();
 
-    var rendered_obj =  _.extend({}, this.model.toJSON(), {
-      current_status_label: verbose_status[0],
-      current_status_color: verbose_status[1]
+    var renderedObj =  _.extend({}, this.model.toJSON(), {
+      current_status_label: verboseStatus[0],
+      current_status_color: verboseStatus[1]
     });
 
-    this.$el.html(this.template(rendered_obj));
+    this.$el.html(this.template(renderedObj));
 
     return this;
   },
