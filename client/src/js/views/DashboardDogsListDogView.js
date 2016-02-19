@@ -17,7 +17,7 @@ var DashboardDogsListDogView = Backbone.View.extend({
     this.render();
     this.listenTo(this.model, 'change:current_status', this.render);
   },
- 
+
   render: function() {
 
     var verboseStatus = this.model.setVerboseStatus();

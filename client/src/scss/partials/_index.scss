@@ -1,4 +1,4 @@
- {
+.icon {
     display: inline-block;
 }
 
@@ -36,11 +36,13 @@
 
 .hero__text {
     line-height: 1.81;
-    margin-bottom: 2rem;
+    margin: 0 auto 2rem;
+    max-width: 540px;
     position: relative;
     z-index: 2;
 
     @media #{$medium-up} {
+	margin: 0 0 2rem;
 	font-size: 26px;
     }
 }
@@ -66,11 +68,11 @@
 }
 
 .decoration__workspace {
-    float: right;
     max-width: 320px;
     transform: translateY(-85%);
 
     @media #{$medium-up} {
+	float: right;
 	margin: 0;
 	max-width: 60%;
 	margin-right: 10%;
