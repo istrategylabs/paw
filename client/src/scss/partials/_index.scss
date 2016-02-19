@@ -1,14 +1,4 @@
-.error {
-    background-color: $alert-color;
-    color: $white;
-}
-
-.error__text {
-    margin: 0;
-    padding: 1em;
-}
-
-.icon {
+ {
     display: inline-block;
 }
 
@@ -21,36 +11,42 @@
     width: 30px;
 }
 
+
 .logo {
-    color: $primary-color;
-    /* font-family: 'Lato'; */
-    font-size: 62px;
     text-transform: lowercase;
-}
+    margin-bottom: 1.5rem;
+    max-width: 104px;
 
-.hero {
-    background: $secondary-color;
-    padding-bottom: 550px;
-    position: relative;
-
-    @media #{$large-up} {
-        padding-bottom: 350px;
+    @media #{$medium-up} {
+	max-width: 207px;
     }
 }
 
-.hero__copy {
-    @media #{$medium-only} {
-        max-width: 600px;
-        margin: 0 auto;
+
+.hero {
+    background: $secondary-color;
+    padding-bottom: 260px;
+    padding-top: 44px;
+    position: relative;
+
+    @media #{$medium-up} {
+	padding-bottom: 350px;
     }
 }
 
 .hero__text {
-    font-size: 22px;
     line-height: 1.81;
-    margin-bottom: 65px;
+    margin-bottom: 2rem;
     position: relative;
     z-index: 2;
+
+    @media #{$medium-up} {
+	font-size: 26px;
+    }
+}
+
+.hero__button {
+    font-size: 1em;
 }
 
 
@@ -58,21 +54,26 @@
     background: url(/img/wood.svg) $white;
     border-top: 5px solid $black;
     bottom: 0;
+    height: 100px;
     position: absolute;
-    height: 190px;
     overflow: visible;
     width: 100%;
     z-index: 1;
+
+    @media #{$medium-up} {
+	height: 190px;
+    }
 }
 
 .decoration__workspace {
-    max-width: 80%;
+    float: right;
+    max-width: 320px;
     transform: translateY(-85%);
-    margin-left: 10%;
 
-    @media #{$large-up}{
-        float: right;
-        margin: 0;
+    @media #{$medium-up} {
+	margin: 0;
+	max-width: 60%;
+	margin-right: 10%;
     }
 }
 
@@ -88,9 +89,13 @@
     background: url('/img/video_stock.jpg');
     background-position: top;
     background-size: cover;
-    height: 700px;
+    height: 440px;
     overflow: hidden;
     position: relative;
+
+    @media #{$medium-up} {
+	height: 700px;
+    }
 }
 
 .video::before {
@@ -109,19 +114,21 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    min-width: 192px;
 }
 
 .video__pause {
     display: none;
     padding-right: 40px;
     padding-left: 65px;
+    min-width: 225px;
 
     &::before {
-        content: '\275A\275A';
-        display: block;
-        left: 34px;
-        top: 12px;
-        position: absolute;
+	content: '\275A\275A';
+	display: block;
+	left: 34px;
+	top: 12px;
+	position: absolute;
     }
 }
 
@@ -136,31 +143,31 @@
     cursor: pointer;
 
     .video__play {
-        display: none;
+	display: none;
     }
 
     &:hover .video__pause {
-        box-shadow: 2px 0 5px $black, inset 0 0 2px $black;
-        text-shadow: 2px 0 5px $black;
-        display: block;
-        z-index: 20;
+	box-shadow: 2px 0 5px $black, inset 0 0 2px $black;
+	text-shadow: 2px 0 5px $black;
+	display: block;
+	z-index: 20;
     }
 
     .video__pause:hover {
-        border-color: $white;
-        color: $white;
+	border-color: $white;
+	color: $white;
     }
 
     .video__media {
-        background-size: cover;
-        top: 50%;
-        left: 50%;
-        min-width: 100%;
-        min-height: 100%;
-        width: auto;
-        height: auto;
-        transform: translateX(-50%) translateY(-50%);
-        z-index: 10;
+	background-size: cover;
+	top: 50%;
+	left: 50%;
+	min-width: 100%;
+	min-height: 100%;
+	width: auto;
+	height: auto;
+	transform: translateX(-50%) translateY(-50%);
+	z-index: 10;
     }
 }
 
@@ -199,18 +206,33 @@
 .dog {
     background: $white;
     border-bottom: 3px solid rgba(mix($secondary-color, $black), 0.15);
-    padding: 80px 70px 85px;
     width: percentage(1/3);
 }
 
 .dog__avatar {
+    background-size: cover;
     border-radius: 50%;
     height: 185px;
+    margin: 0 auto;
     width: 185px;
 }
 
 .dog__name {
     font-size: 2.375rem;
+    margin-bottom: 2rem;
+    position: relative;
+
+    &::after {
+	content: '';
+	bottom: -12px;
+	left: 50%;
+	display: block;
+	background-color: $primary-color;
+	height: 5px;
+	position: absolute;
+	transform: translateX(-50%);
+	width: 50px;
+    }
 }
 
 .dog__text {
@@ -219,12 +241,45 @@
 .dog__meta {
     font-size: 0.9375rem;
     font-style: italic;
+    margin: 0;
 }
 
 .dog--marketing {
     margin-right: 30px;
     text-align: center;
-    width: percentage(1/3);
+    padding: 70px 46px;
+    width: 90%;
+
+    @media #{$medium-up} {
+	padding: 80px 70px 85px;
+	width: percentage(1/3);
+    }
+}
+
+.flickity-page-dots {
+    @media #{$medium-up} {
+	display: none;
+    }
+
+    .dot {
+	background: $white;
+	border: 2px solid $black;
+	height: 15px;
+	opacity: 1;
+	width: 15px;
+
+	&.is-selected {
+	    background: $primary-color;
+	}
+    }
+}
+
+.flickity-prev-next-button {
+    display: none;
+
+    @media #{$medium-up} {
+	display: block;
+    }
 }
 
 .contact {
@@ -234,4 +289,14 @@
 .contact__heading,
 .contact__text {
     color: $white;
+}
+
+.footer {
+    background: darken($primary-color, 10%);
+    height: 46px;
+}
+
+.footer__logo {
+    max-width: 42px;
+    margin-top: 9px;
 }

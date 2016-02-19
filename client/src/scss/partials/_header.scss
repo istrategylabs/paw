@@ -1,9 +1,24 @@
-$sidebar-width: 300px; 
+$sidebar-width: 300px;
 
 .header {
-    background: $secondary-color;
-    padding-bottom: 48px;
-    padding-top: 45px;
+    background: $primary-color;
+    padding-bottom: 14px;
+    padding-top: 13px;
+
+    @media #{$medium-up} {
+	background: $secondary-color;
+	padding-bottom: 48px;
+	padding-top: 45px;
+    }
+}
+
+.header__button,
+.header__link {
+    color: $white;
+
+    @media #{$medium-up} {
+	color: $primary-color;
+    }
 }
 
 .header__button {
