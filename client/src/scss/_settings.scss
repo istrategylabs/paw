@@ -44,17 +44,27 @@
 // 1. Global
 // ---------
 
+$paw-green: #77F68F;
+$paw-yellow: #FFDF00;
+$paw-red: #FF6356;
+$mercury: #E1E1E1;
+$porcelain: #F7F8F9;
+
+$border-gray: $mercury;
+ 
 $global-font-size: 100%;
 $global-width: rem-calc(1200);
 $global-lineheight: 1.5;
 $primary-color: #007cff;
 $secondary-color: #fffce9;
-$success-color: #007cff;
-$warning-color: #ffae00;
-$alert-color: #ec5840;
-$light-gray: #e6e6e6;
+
+$success-color: $paw-green;
+$warning-color: $paw-yellow;
+$alert-color: $paw-red;
+
+$light-gray: $porcelain;
 $medium-gray: #cacaca;
-$dark-gray: #8a8a8a;
+$dark-gray: #5d5d5d;
 $black: #5d5d5d;
 $white: #fefefe;
 $body-background: $white;
@@ -68,9 +78,10 @@ $global-weight-bold: bold;
 $global-radius: 0;
 $global-text-direction: ltr;
 
-$porcelain: #F7F8F9;
-$mercury: #E1E1E1;
-$scorpion: #5e5e5e;
+
+
+
+
 
 // 2. Breakpoints
 // --------------

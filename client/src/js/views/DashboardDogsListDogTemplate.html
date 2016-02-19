@@ -3,28 +3,43 @@
         <img class="dog__avatar" src="<%= avatar ? avatar : '/img/dog_stock.jpg' %>">
     </div>
     <div class="dog__info">
-        <p>
-            <a class="dog__name" href="/api/dogs/<%= display_id %>"><%= name %></a>
+        <p class="dog__name">
+            <a href="/api/dogs/<%= display_id %>"><%= name %></a>
         </p>
         <% if (owner) { %>
         <p class="dog__owner">
             <%= _.startCase(owner) %>
         </p>
         <% } %>
-        <label>
-            <input class="hide" type="checkbox" name="checked_in" disabled<%= checked_in ? ' checked' : '' %>>
-            Checked <%= checked_in ? 'In' : 'Out' %>
-        </label>
-        <% if (checked_in) { %>
-        <label>
-            <input type="radio" name="status-<%= display_id %>"<%= checked_in ? ' checked' : '' %>> In Office
-        </label>
-        <label>
-            <input type="radio" name="status-<%= display_id %>"> On a walk
-        </label>
-        <label>
-            <input type="radio" name="status-<%= display_id %>"> Missing
-        </label>
+
+        <% if (checked_in) { %> 
+            <div class="button--sidebar dropdown">
+                <div class="dropdown__current-selection">
+                    <div class=" indicator current-selection__indicator indicator--<%= current_status_color %>"
+                    >
+                        <%= current_status_label %>
+                    </div> <!-- end .dropdown__status -->
+                    <div class="dropdown__arrow-container">
+                        <div class="dropdown__arrow">
+                             <object class="dropdown__arrow-svg" type="image/svg+xml" data="/img/arrow.svg"></object>
+                        </div>
+                    </div>
+                </div> <!-- end .dropdown__current-selection -->
+                <div class="dropdown__selections">
+                        <label class="dropdown__option indicator indicator--green">
+                            <input type="radio" value="0" name="status-<%= display_id %>"> In Office
+                        </label>
+                        <label class="dropdown__option indicator indicator--yellow">
+                            <input type="radio" value="1" name="status-<%= display_id %>"> On a walk
+                        </label class="dropdown__option">
+                        <label class="dropdown__option indicator indicator--red">
+                            <input type="radio" value="2" name="status-<%= display_id %>"> Missing
+                        </label>
+                        <label class="dropdown__option option--check-out">
+                            <input type="radio" value="0" name="status-<%= display_id %>"> Check Out
+                        </label>
+                </div> <!-- end .dropdown__selections -->
+            </div> <!-- end .button- -dropdown -->
         <% } %>
     </div>
 </div>

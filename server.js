@@ -214,6 +214,7 @@ app.get('/api/devices', function(req, res) {
 });
 
 app.post('/api/event', function(req, res) {
+  console.log(req);
   var events = req.body.events;
   events.forEach(function(event, index) {
     var device = event.device;

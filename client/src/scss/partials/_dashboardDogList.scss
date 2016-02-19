@@ -1,8 +1,7 @@
-$sidebar-borders: 1px solid $mercury;
-$sidebar-width: 270px;
+$sidebar-borders: 1px solid $border-gray;
 
 .dashboard__sidebar {
-    background: $porcelain;
+    background: $light-gray;
     border-right: $sidebar-borders;
     bottom: 0;
     display: inline-block;
@@ -12,20 +11,17 @@ $sidebar-width: 270px;
     vertical-align: top;
     width: $sidebar-width;
     z-index: 0;
-
-    // @include scrollbars(.5em, red);
 }
 
 .dashboard__map {
-    // box-flex: 1;
     position: absolute;
     display: inline-block;
     vertical-align: top;
     left: $sidebar-width;
-}
+} 
 
 .dashboard__date {
-    background: $porcelain;
+    background: $light-gray;
     border-bottom: $sidebar-borders;
     font-family: $header-font-family;
     font-weight: bold;
@@ -47,12 +43,13 @@ $sidebar-width: 270px;
   background: none;
   border-bottom: $sidebar-borders;
   opacity: .4;
-  padding: rem-calc(15px) rem-calc(30px);
+  padding: rem-calc(30px 30px 40px 30px);
   transition: opacity .25s;
+  width: 100%;
 
   &:hover {
     opacity: 1;
-  }
+  } // end dog--dashboard:hover
 
   .dog__avatar-container {
       display: inline-block;
@@ -70,27 +67,201 @@ $sidebar-width: 270px;
   .dog__info {
       display: inline-block;
       vertical-align: top;
-      p {
-          margin: 0;
-      }
   }
 
   .dog__name {
-      color: $scorpion;
       font-family: $header-font-family;
       font-size: rem-calc(16px);
       font-weight: 600;
       letter-spacing: 1px;
-  }
+      margin: 0px;
+
+      a {
+        color: $black;
+      }
+  } // end dog__name
 
   .dog__owner {
       font-family: $body-font-family;
       font-size: rem-calc(11px);
       font-style: italic;
+      margin-bottom: 10px;
   }
-}
+
+  .button--sidebar {
+    background: $white;
+    border: 1px solid $border-gray;
+    border-radius: 100px;
+    overflow: hidden;
+    padding: 6px 15px 10px 15px;
+    position: relative;
+    font-family: $header-font-family;
+    font-size: 12px;
+    font-weight: 600;
+
+    &:hover {
+      background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(250,250,250,1) 99%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    }
+
+    //don't use gradient on hover of open dropdown
+    &.dropdown--open {
+      &:hover {
+        background: $white;
+      }
+    }
+
+  } //end button--sidebar, button--dropdown
+
+  .dropdown {
+    border-radius: 15px;
+    height: 30px;
+    padding: 0px;
+    position: absolute;
+    z-index: 50;
+
+    &.dropdown--open {
+      height: auto;
+
+      .dropdown__current-selection {
+        display: none;
+
+        &:hover {
+          background: $light-gray;
+        }
+      }// end .dropdown--open .dropdown__current-selection
+
+      .dropdown__arrow-container {
+        display: none;
+      }
+
+    }// end .dropdown.dropdown--open
+  }
+
+  .dropdown__current-selection {
+    border-bottom: 1px solid lighten($border-gray, 6%);
+    color: #5d5d5d;
+    display: block;
+    font-family: $header-font-family;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.8;
+    margin: 0;
+    overflow: hidden;
+    padding: 3px 40px 5px 25px;
+    position: relative;
+
+    &:hover {
+      cursor: pointer;
+
+    }
+
+    .dropdown__arrow-container {
+      border-left: 1px solid $border-gray;
+      height: 100%;
+      position: absolute;
+      right: 0px;
+      top: 0px;
+      transition: all .25s;
+      width:30px;
+      
+      .dropdown__arrow {
+        display: inline-block;
+        height: 6px;
+        position: absolute;
+        right: 12px;
+        top: 4px;
+        transform-origin: center;
+        width: 6px;
+
+        .dropdown__arrow-svg {
+          transform: rotate(90deg);
+        }
+      }// end dropdown__arrow
+    }// end dropdown__arrow-container
+  }// end dropdown__current-selection
+
+  .dropdown__option {
+    color: #5d5d5d;
+    cursor: pointer;
+    display: block;
+    font-family: $header-font-family;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.8;
+    margin: 0;
+    padding: 3px 40px 5px 25px;
+
+    &:hover {
+      background: $light-gray;
+    }
+
+    input[type="radio"] {
+      display: none;
+    }
+
+
+  }// end dropdown__option
+
+  .indicator {
+    
+    position: relative;
+
+    &:before {
+      background: $paw-red;
+      border-radius: 100px;
+      content: '';
+      height: 8px;
+      left: 10px;
+      position: absolute;
+      top: 11px;
+      width: 8px;
+    }
+
+    &.indicator--green {
+      &:before {
+        background: $success-color;
+      }
+    }
+
+    &.indicator--yellow {
+      &:before {
+        background: $warning-color;
+      }
+    }
+
+    &.indicator--red {
+      &:before {
+        background: $alert-color;
+      }
+    }
+
+    &.current-selection__indicator {
+      &:before {
+        top: 8px;
+        left: -15px;
+      }
+    }
+  } //end indicator
+
+  
+
+  .option--check-out {
+    border-top: 1px solid $border-gray;
+    opacity: .75;
+    background: lighten($border-gray,10%);
+  }
+
+} // end dog--dashboard
 
 .dog--checked-in {
   opacity: 1;
   transition: opacity .25s;
+
+  .button--check-in {
+    display: none;
+  }
+}
+
+.hide {
+  display: none;
 }
