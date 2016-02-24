@@ -13,33 +13,33 @@
 /*
  * COIN BOUNCE ANIMATION ***
 */
-.animated { 
-    animation-duration: 6s; 
-    animation-fill-mode: both; 
+.animated {
+    animation-duration: 6s;
+    animation-fill-mode: both;
     animation-iteration-count:infinite;
     animation-delay: 10s;
 }
-  
-@keyframes bounce { 
+
+@keyframes bounce {
     0%  {transform: translateY(0);}
-    4% {transform: translateY(-20px);} 
+    4% {transform: translateY(-20px);}
     6% {transform: translateY(0);}
-    8% {transform: translateY(-15px);} 
+    8% {transform: translateY(-15px);}
     12% {transform: translateY(0);}
     100% {transform: translateY(0);}
-} 
+}
 
-@keyframes wag { 
+@keyframes wag {
   0%    {transform: rotate(0deg) translate(0px, 0px);}
   50%   {transform: rotate(-20deg) translate(5px, 0px);}
   100%  {transform: rotate(0deg) translate(0px, 0px);}
-} 
-  
+}
+
 /*
  * Adding the animation to our element
 */
-.bounce { 
-    animation-name: bounce; 
+.bounce {
+    animation-name: bounce;
 }
 
 .watson {
@@ -54,7 +54,7 @@
   transform: rotate(0deg);
   transform-origin: bottom right;
   animation-name: wag;
-  animation-duration: .75s; 
-  animation-fill-mode: both; 
-  animation-iteration-count:infinite; 
+  animation-duration: .75s;
+  animation-fill-mode: both;
+  animation-iteration-count:infinite;
 }

@@ -1,7 +1,7 @@
 var fs = require('fs');
 var _ = require('underscore');
 var Backbone = require('backbone');
-var Flickity = require('flickity');
+var Flickity = require('flickity-imagesloaded');
 var IndexDogListTemplate = fs.readFileSync(__dirname + '/IndexDogListTemplate.html', 'utf8');
 
 var IndexDogListView = Backbone.View.extend({
@@ -19,11 +19,8 @@ var IndexDogListView = Backbone.View.extend({
       })
     }));
 
-    console.log('render');
-
     this.dogsSlider = new Flickity(this.el, {
-      cellAlign: 'left',
-      contain: true
+      imagesLoaded: true
     });
   }
 });

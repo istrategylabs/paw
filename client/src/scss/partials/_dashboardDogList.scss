@@ -18,7 +18,7 @@ $sidebar-borders: 1px solid $border-gray;
     display: inline-block;
     vertical-align: top;
     left: $sidebar-width;
-} 
+}
 
 .dashboard__date {
     background: $light-gray;
@@ -49,18 +49,17 @@ $sidebar-borders: 1px solid $border-gray;
 
   &:hover {
     opacity: 1;
-  } // end dog--dashboard:hover
-
-  .dog__avatar-container {
-      display: inline-block;
-      margin-right: rem-calc(15px);
-      margin-top: rem-calc(10px);
-      vertical-align: top;
   }
 
   .dog__avatar {
+      background-position: 50% 50%;
+      background-size: cover;
+      display: inline-block;
       border-radius: 50%;
       height: 60px;
+      margin-right: rem-calc(15px);
+      margin-top: rem-calc(10px);
+      vertical-align: top;
       width: 60px;
   }
 
@@ -76,10 +75,14 @@ $sidebar-borders: 1px solid $border-gray;
       letter-spacing: 1px;
       margin: 0px;
 
+      &::after {
+	  content: none;
+      }
+
       a {
         color: $black;
       }
-  } // end dog__name
+  }
 
   .dog__owner {
       font-family: $body-font-family;
@@ -163,7 +166,7 @@ $sidebar-borders: 1px solid $border-gray;
       top: 0px;
       transition: all .25s;
       width:30px;
-      
+
       .dropdown__arrow {
         display: inline-block;
         height: 6px;
@@ -198,15 +201,12 @@ $sidebar-borders: 1px solid $border-gray;
     input[type="radio"] {
       display: none;
     }
-
-
   }// end dropdown__option
 
   .indicator {
-    
     position: relative;
 
-    &:before {
+    &::before {
       background: $paw-red;
       border-radius: 100px;
       content: '';
@@ -218,32 +218,32 @@ $sidebar-borders: 1px solid $border-gray;
     }
 
     &.indicator--green {
-      &:before {
+      &::before {
         background: $success-color;
       }
     }
 
     &.indicator--yellow {
-      &:before {
+      &::before {
         background: $warning-color;
       }
     }
 
     &.indicator--red {
-      &:before {
+      &::before {
         background: $alert-color;
       }
     }
 
     &.current-selection__indicator {
-      &:before {
+      &::before {
         top: 8px;
         left: -15px;
       }
     }
   } //end indicator
 
-  
+
 
   .option--check-out {
     border-top: 1px solid $border-gray;

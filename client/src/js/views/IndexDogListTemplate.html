@@ -1,6 +1,6 @@
 <% _.each(dogs, function(dog) { %>
 <div class="dog dog--marketing">
-    <img class="dog__avatar" src="<%= dog.avatar ? dog.avatar : '/img/dog_stock.jpg' %>">
+    <div class="dog__avatar" style="background-image: url(<%= dog.avatar ? dog.avatar : '/img/dog_stock.jpg' %>);"></div>
     <h3 class="dog__name"><%= dog.name %></h3>
     <p class="dog__text"><%= dog.short_description %></p>
     <p class="dog__meta">

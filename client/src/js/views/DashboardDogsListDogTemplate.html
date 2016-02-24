@@ -1,7 +1,5 @@
 <div class="dog dog--dashboard<% if (checked_in) { %> dog--checked-in<% } %>">
-    <div class="dog__avatar-container">
-        <img class="dog__avatar" src="<%= avatar ? avatar : '/img/dog_stock.jpg' %>">
-    </div>
+    <div class="dog__avatar" style="background-image: url(<%= avatar ? avatar : '/img/dog_stock.jpg' %>);"></div>
     <div class="dog__info">
         <p class="dog__name">
             <a href="/api/dogs/<%= display_id %>"><%= name %></a>
@@ -12,7 +10,7 @@
         </p>
         <% } %>
 
-        <% if (checked_in) { %> 
+	<% if (checked_in) { %>
             <div class="button--sidebar dropdown">
                 <div class="dropdown__current-selection">
                     <div class=" indicator current-selection__indicator indicator--<%= current_status_color %>"
