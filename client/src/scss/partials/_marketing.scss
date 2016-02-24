@@ -192,6 +192,8 @@
 }
 
 .dogs__list {
+    max-width: $global-width;
+    margin: 0 auto;
 }
 
 .dog {
