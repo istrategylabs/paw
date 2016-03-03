@@ -25,14 +25,18 @@
 
 .hero {
     background: $secondary-color;
-    height: 100%;
-    padding-bottom: 260px;
-    padding-top: 44px;
+    margin-top: -1px;
+    overflow: hidden;
+    padding-top: 1px;
     position: relative;
 
     @media #{$medium-up} {
-        padding-bottom: 350px;
+        height: 100%;
     }
+}
+
+.hero__title {
+    line-height: .25;
 }
 
 .hero__text {
@@ -52,100 +56,107 @@
     font-size: 1.1em;
 }
 
-// .shbutton {
-//     float: left;
-//     min-width: 150px;
-//     max-width: 250px;
-//     display: block;
-//     margin: 1em;
-//     padding: 1em 2em;
-//     border: none;
-//     background: none;
-//     color: inherit;
-//     vertical-align: middle;
-//     position: relative;
-//     z-index: 1;
-//     -webkit-backface-visibility: hidden;
-//     -moz-osx-font-smoothing: grayscale;
-// }
+.hero__content {
+    padding: 0px 50px;
+}
 
-// .shbutton.button--shikoba {
-//     padding: 1em 30px 1em 50px;
-//     overflow: hidden;
-//     background: #fff;
-//     color: #37474f;
-//     border-color: #37474f;
-//     -webkit-transition: background-color 0.3s, border-color 0.3s, color 0.3s;
-//     transition: background-color 0.3s, border-color 0.3s, color 0.3s;
-// }
+.hero__content-row {
+    max-width: 1260px;
+    margin: 20vh auto 0px auto;
+    position: relative;
+    
+    z-index: 10;
 
-// .button--shikoba.button--inverted {
-//     color: #fff;
-//     background: #7986cb;
-// }
+    @media #{$medium-up} {
+        height: 60vh;
+        margin-top: 10vh;
+    }
+    @media #{$large-up} {
+        height: 70vh;
+        margin-top: 10vh;
+    }
+    @media #{$xlarge-up} {
+        height: 70vh;
+        margin: 10vh auto;
+    }
+    @media #{$xxlarge-up} {
+        height: 60vh;
+        margin: 20vh auto;
+    }
+}
 
-// .button--shikoba .button__icon {
-//     position: absolute;
-//     left: 20px;
-//     font-size: 18px;
-//     -webkit-transform: translate3d(-40px, 2.5em, 0);
-//     transform: translate3d(-40px, 2.5em, 0);
-//     -webkit-transition: -webkit-transform 0.3s;
-//     transition: transform 0.3s;
-//     -webkit-transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
-//     transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
-// }
+.hero__content-container {
+    overflow: hidden;
+}
 
-// .button--shikoba:hover {
-//     background: #3f51b5;
-//     border-color: #3f51b5;
-//     color: #fff;
-// }
+.hero__copy {
+    left: 0px;
+    position: absolute;
+    top: 5vh;
+    z-index: 1;
+}
 
-// .button--shikoba:hover .button__icon, .button--shikoba:hover > span {
-//     -webkit-transform: translate3d(0, 0, 0);
-//     transform: translate3d(0, 0, 0);
-// }
-
-
-
-// .button--shikoba > span {
-//     display: inline-block;
-//     -webkit-transform: translate3d(-10px, 0, 0);
-//     transform: translate3d(-10px, 0, 0);
-//     -webkit-transition: -webkit-transform 0.3s;
-//     transition: transform 0.3s;
-//     -webkit-transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
-//     transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
-// }
-// .shbutton > span {
-//     vertical-align: middle;
-// }
-
-.decoration {
+.decoration__floor {
     background: url(/img/wood.svg) $white;
     border-top: 5px solid $black;
-    bottom: 0;
     height: 100px;
-    position: absolute;
+    position: relative;
     overflow: visible;
     width: 100%;
     z-index: 1;
 
     @media #{$medium-up} {
+        bottom: 0;
         height: 30vh;
+        position: absolute;
+    }
+    @media #{$large-up} {
+        bottom: 0;
+        height: 20vh;
+        position: absolute;
+    }
+}
+
+.decorations {
+    max-width: 1260px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+
+    .hero__intro-copy {
+        @media #{$medium-up} {
+            position: absolute;
+            top: 0px;
+            left:0px;
+        }
+    }
+
+    @media #{$medium-up} {
+        transform: translateY(-85%);
+    }
+}
+
+.decoration__workspace-container {
+    @media #{$medium-up} {
+        bottom:-50px;
+        position: absolute;
+        right:0px;
+        width: 90%;
     }
 }
 
 .decoration__workspace {
     max-width: 320px;
-    transform: translateY(-85%);
+    
+    @media #{$small-only} {
+        transform: translateY(-85%);
+    }
 
     @media #{$medium-up} {
         float: right;
         margin: 0;
         max-width: 75%;
-        margin-right: 10%;
+        // margin-right: 10%;
     }
 
     @media #{$large-up} {

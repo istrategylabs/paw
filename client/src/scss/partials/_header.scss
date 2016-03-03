@@ -21,6 +21,16 @@ $sidebar-width: 300px;
 	position: relative;
 	top: 44px;
     }
+
+    .icon--facebook, .icon--twitter {
+        fill: $primary-color;
+        height:20px;
+        width: 20px;
+
+        &:hover {
+            fill: darken($primary-color, 20%);
+        }
+    }
 }
 
 .header__button,
@@ -47,6 +57,7 @@ $sidebar-width: 300px;
     background: $primary-color;
     height: rem-calc(90px);
     padding: rem-calc(0px);
+    position: absolute;
     width: 100%;
 
     .header__logo-container {
