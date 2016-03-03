@@ -28,6 +28,41 @@ em {
     transition: all 0.25s ease-out;
 }
 
+.button--shikoba {
+    padding: 0.65em 30px 0.9375em 50px;
+    overflow: hidden;
+
+    span {
+        display: inline-block;
+        transform: translate3d(-10px, 0, 0);
+        transition: transform 0.3s;
+        transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+    }
+
+    &:hover, &:hover span, &:hover .button__icon {
+        transform: translate3d(0, 0, 0);
+    }
+
+    .button__icon {
+        position: absolute;
+        left: 27px;
+        height: 16px;
+        top:14px;
+        transform: translate3d(-40px, 2.5em, 0);
+        transition: transform 0.3s;
+        transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+    }
+}
+
+.button--hover-fill-primary {
+    &:hover {
+        background: $primary-color;
+        border-color: $primary-color;
+        color: $white;
+    }
+}
+
+
 .button--alt {
     border-color: $button-color-alt;
     color: $button-color-alt;

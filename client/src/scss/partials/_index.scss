@@ -52,75 +52,75 @@
     font-size: 1.1em;
 }
 
-.shbutton {
-    float: left;
-    min-width: 150px;
-    max-width: 250px;
-    display: block;
-    margin: 1em;
-    padding: 1em 2em;
-    border: none;
-    background: none;
-    color: inherit;
-    vertical-align: middle;
-    position: relative;
-    z-index: 1;
-    -webkit-backface-visibility: hidden;
-    -moz-osx-font-smoothing: grayscale;
-}
+// .shbutton {
+//     float: left;
+//     min-width: 150px;
+//     max-width: 250px;
+//     display: block;
+//     margin: 1em;
+//     padding: 1em 2em;
+//     border: none;
+//     background: none;
+//     color: inherit;
+//     vertical-align: middle;
+//     position: relative;
+//     z-index: 1;
+//     -webkit-backface-visibility: hidden;
+//     -moz-osx-font-smoothing: grayscale;
+// }
 
-.shbutton.button--shikoba {
-    padding: 1em 30px 1em 50px;
-    overflow: hidden;
-    background: #fff;
-    color: #37474f;
-    border-color: #37474f;
-    -webkit-transition: background-color 0.3s, border-color 0.3s, color 0.3s;
-    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
-}
+// .shbutton.button--shikoba {
+//     padding: 1em 30px 1em 50px;
+//     overflow: hidden;
+//     background: #fff;
+//     color: #37474f;
+//     border-color: #37474f;
+//     -webkit-transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+//     transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+// }
 
-.button--shikoba.button--inverted {
-    color: #fff;
-    background: #7986cb;
-}
+// .button--shikoba.button--inverted {
+//     color: #fff;
+//     background: #7986cb;
+// }
 
-.button--shikoba .button__icon {
-    position: absolute;
-    left: 20px;
-    font-size: 18px;
-    -webkit-transform: translate3d(-40px, 2.5em, 0);
-    transform: translate3d(-40px, 2.5em, 0);
-    -webkit-transition: -webkit-transform 0.3s;
-    transition: transform 0.3s;
-    -webkit-transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
-    transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
-}
+// .button--shikoba .button__icon {
+//     position: absolute;
+//     left: 20px;
+//     font-size: 18px;
+//     -webkit-transform: translate3d(-40px, 2.5em, 0);
+//     transform: translate3d(-40px, 2.5em, 0);
+//     -webkit-transition: -webkit-transform 0.3s;
+//     transition: transform 0.3s;
+//     -webkit-transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+//     transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+// }
 
-.button--shikoba:hover {
-    background: #3f51b5;
-    border-color: #3f51b5;
-    color: #fff;
-}
+// .button--shikoba:hover {
+//     background: #3f51b5;
+//     border-color: #3f51b5;
+//     color: #fff;
+// }
 
-.button--shikoba:hover .button__icon, .button--shikoba:hover > span {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-}
+// .button--shikoba:hover .button__icon, .button--shikoba:hover > span {
+//     -webkit-transform: translate3d(0, 0, 0);
+//     transform: translate3d(0, 0, 0);
+// }
 
 
 
-.button--shikoba > span {
-    display: inline-block;
-    -webkit-transform: translate3d(-10px, 0, 0);
-    transform: translate3d(-10px, 0, 0);
-    -webkit-transition: -webkit-transform 0.3s;
-    transition: transform 0.3s;
-    -webkit-transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
-    transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
-}
-.shbutton > span {
-    vertical-align: middle;
-}
+// .button--shikoba > span {
+//     display: inline-block;
+//     -webkit-transform: translate3d(-10px, 0, 0);
+//     transform: translate3d(-10px, 0, 0);
+//     -webkit-transition: -webkit-transform 0.3s;
+//     transition: transform 0.3s;
+//     -webkit-transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+//     transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+// }
+// .shbutton > span {
+//     vertical-align: middle;
+// }
 
 .decoration {
     background: url(/img/wood.svg) $white;
