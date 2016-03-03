@@ -214,12 +214,13 @@ app.get('/api/devices', function(req, res) {
 });
 
 app.post('/api/event', function(req, res) {
-  console.log(req);
   var events = req.body.events;
   events.forEach(function(event, index) {
     var device = event.device;
     var location = event.location;
     var time = event.time;
+
+    console.log('Event received from ' + device + ' at ' + time + ' from ' + location);
 
     checkinDeviceAtLocationTime(device, location, time, function() {
       if (index === events.length - 1) {
