@@ -24,6 +24,7 @@ em {
     border-width: 4px;
     cursor: pointer;
     font-family: $header-font-family;
+    font-size: 1.1em;
     font-weight: 600;
     text-transform: uppercase;
     transition: all 0.25s ease-out;
@@ -31,6 +32,7 @@ em {
 
 .button--shikoba {
     padding: 0.65em 30px 0.9375em 50px;
+    position: relative;
     overflow: hidden;
 
     span {
@@ -40,7 +42,7 @@ em {
         transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
     }
 
-    &:hover, &:hover span, &:hover .button__icon {
+    &:hover span, &:hover .button__icon {
         transform: translate3d(0, 0, 0);
     }
 
@@ -48,7 +50,8 @@ em {
         position: absolute;
         left: 27px;
         height: 16px;
-        top:14px;
+        max-width: 17px;
+        top:15px;
         transform: translate3d(-40px, 2.5em, 0);
         transition: transform 0.3s;
         transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
@@ -67,6 +70,12 @@ em {
 .button--alt {
     border-color: $button-color-alt;
     color: $button-color-alt;
+
+    &:hover {
+        background: $white;
+        border-color: $white;
+        color: $primary-color;
+    }
 }
 
 .button--link {

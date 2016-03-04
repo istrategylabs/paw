@@ -50,11 +50,24 @@
   }
 }
 
+.tail-alignment {
+  transform: translate(77px, 396px);
+}
+
+.tail-correction {
+  transform: translate(-60px,-407px);
+}
+
+.tail-rotate {
+  transform: rotate(10deg);
+}
+
 .animation__tail-wag {
   transform: rotate(0deg);
-  transform-origin: bottom right;
+  -moz-transform-origin: 50px 120px;
+  transform-origin: 50px 120px;
   animation-name: wag;
-  animation-duration: .75s;
-  animation-fill-mode: both;
-  animation-iteration-count:infinite;
+  animation-duration: .6s; 
+  animation-fill-mode: both; 
+  animation-iteration-count:infinite; 
 }
