@@ -1,0 +1,69 @@
+// Text rotator
+//
+// This is a CSS only text rotator for the about page. In order to do this with just CSS,
+// the widths have to be set manually. This means that if the text changes, the animation
+// will have to change to match. This is less than ideal, but is the only pure CSS solution.
+//
+// Markup:
+// <h3 class="gamma hero__title color-white">
+//     A
+//     <span class="text-rotator text-rotator--about js-text-rotator">
+//         <ul class="text-rotator__slide">
+//             <li class="text-rotator__item">digital</li>
+//             <li class="text-rotator__item">#social</li>
+//             <li class="text-rotator__item">hardware</li>
+//             <li class="text-rotator__item">creative</li>
+//         </ul>
+//     </span>
+//     agency.
+// </h3>
+//
+// Styleguide: components.text-rotator
+
+.text-rotator {
+    // overflow: hidden;
+    position: relative;
+    background-color: gray;
+    // border-bottom: 4px solid $white;
+}
+
+.text-rotator__slide {
+    @include isl-ease(0.2s);
+}
+
+.text-rotator--about {
+    width: 200px;
+    height: 1.25em;
+    text-align: center;
+    display: inline-block;
+    vertical-align: top;
+    .text-rotator__item {
+        color: blue;
+        padding-bottom: 0.5em;
+        display: inline-block;
+    }
+    &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: -2px;
+        width: 100%;
+        width: calc( 100% + 4px);
+        height: 0.1em;
+        background-color: $white;
+        z-index: -1;
+        transition: background-color 0.4s;
+    }
+}
+.no-js .text-rotator--about {
+    width: 130px;
+    &:after {
+        // background-color: $color-mint;
+    }
+}
+.js .text-rotator__slide {
+    transform: translateY(-100%);
+}
+.text-rotator--green-underline:after {
+    // background-color: $color-mint;
+}

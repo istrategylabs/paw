@@ -1,0 +1,13 @@
+// isl-ease($duration:300ms, $property:all)
+//
+// Easing mixin for ISL default bezier ease.
+//
+// $duration - (optional) The duration of the transition
+// $property - (optional) The specific property to transition
+//
+// Styleguide mixins.isl-ease
+
+@mixin isl-ease($duration:300ms, $property:all) {
+    transition: unquote($property) $duration cubic-bezier(.54, 1.07, 0.46, 1.19);
+    transition-timing-function: cubic-bezier(.54, 1.07, 0.46, 1.19);
+}
