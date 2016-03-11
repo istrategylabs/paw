@@ -1,3 +1,13 @@
+html, main, #index {
+    height: 100%;
+}
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    height: 100%;
+    overflow-x: hidden;
+}
+
 h2 {
     font-size: 1.875rem;
     font-weight: 600;
@@ -11,17 +21,61 @@ em {
 }
 
 .button {
-    border-width: 3px;
+    border-width: 4px;
     cursor: pointer;
     font-family: $header-font-family;
+    font-size: 1.1em;
     font-weight: 600;
     text-transform: uppercase;
     transition: all 0.25s ease-out;
 }
 
+.button--shikoba {
+    padding: 0.65em 30px 0.9375em 50px;
+    position: relative;
+    overflow: hidden;
+
+    span {
+        display: inline-block;
+        transform: translate3d(-10px, 0, 0);
+        transition: transform 0.3s;
+        transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+    }
+
+    &:hover span, &:hover .button__icon {
+        transform: translate3d(0, 0, 0);
+    }
+
+    .button__icon {
+        position: absolute;
+        left: 27px;
+        height: 16px;
+        max-width: 17px;
+        top:15px;
+        transform: translate3d(-40px, 2.5em, 0);
+        transition: transform 0.3s;
+        transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+    }
+}
+
+.button--hover-fill-primary {
+    &:hover {
+        background: $primary-color;
+        border-color: $primary-color;
+        color: $white;
+    }
+}
+
+
 .button--alt {
     border-color: $button-color-alt;
     color: $button-color-alt;
+
+    &:hover {
+        background: $white;
+        border-color: $white;
+        color: $primary-color;
+    }
 }
 
 .button--link {

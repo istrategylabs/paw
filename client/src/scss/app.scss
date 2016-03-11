@@ -48,6 +48,7 @@ body,
 // Import Mixins
 @import 'mixins/mixin-scrollbars';
 @import 'mixins/mixin-move-up-and-fade';
+@import 'mixins/isl-ease';
 
 // Import Partials
 @import 'partials/base';
@@ -55,3 +56,5 @@ body,
 @import 'partials/index';
 @import 'partials/decoration-workspace';
 @import 'partials/dashboardDogList';
+@import 'partials/svg';
+@import 'partials/text-rotator';
