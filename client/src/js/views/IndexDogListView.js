@@ -20,6 +20,8 @@ var IndexDogListView = Backbone.View.extend({
     }));
 
     this.dogsSlider = new Flickity(this.el, {
+      cellAlign: 'left',
+      contain: true,
       imagesLoaded: true
     });
   }

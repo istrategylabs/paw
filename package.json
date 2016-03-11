@@ -4,7 +4,7 @@
   "description": "ISL dog-tracking api",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js & gulp build-dev",
+    "dev": "gulp build-dev",
     "build": "gulp build",
     "postinstall": "gulp build"
   },
