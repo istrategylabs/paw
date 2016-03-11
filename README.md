@@ -15,4 +15,3 @@ or to build, cachebust, and minify all assets
 ```
 npm run build
 ```
-
