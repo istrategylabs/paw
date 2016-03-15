@@ -3,6 +3,7 @@ var redisURL = process.env.REDIS_URL || 'redis://127.0.0.1:6379';
 var client = redis.createClient(redisURL);
 var request = require('request');
 var find = require('lodash/find');
+var Dogs = require('./models/dogs');
 
 // clear redis data on start
 client.flushall();
@@ -46,12 +47,12 @@ request.get({
       }, function(error, response, body) {
         if (!error && response.statusCode == 200) {
           dog = JSON.parse(body);
-          Dogs.storeDogInRedis(dog);
+          Dogs.save(dog);
         } else {
           // read dog from fixture
           var d = require('./fixtures/dog.json');
           dog = find(d, { display_id: dog.display_id});
-          Dogs.storeDogInRedis(dog);
+          Dogs.save(dog);
         }
       });
     }

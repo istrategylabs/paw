@@ -5,11 +5,11 @@ var port = process.env.PORT || 3000;
 var compression = require('compression');
 var bodyParser = require('body-parser');
 
+require('./api/routes')(app);
 app.use(compression({ level: 9 }));
 app.use(bodyParser.json());
 app.set('port', port);
 app.use(express.static('public'));
-
 
 if (env === 'production') {
   app.use(function (req, res, next) {
@@ -21,7 +21,6 @@ if (env === 'production') {
     return next();
   });
 }
-
 
 var server = app.listen(app.get('port'), function() {
   var host = server.address().address;
