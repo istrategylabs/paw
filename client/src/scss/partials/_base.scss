@@ -25,7 +25,7 @@ em {
 }
 
 .button--shikoba {
-    
+
     //////////////////////////////////////////////////////
     //
     //  Shikoba button inspiration via Codrops/Tympanus
@@ -96,6 +96,19 @@ em {
     font-weight: normal;
     padding: 0px;
     margin: 0px;
+
+    &:hover {
+        background: none;
+        color: darken($primary-color, 10%);
+    }
+}
+
+.link--white {
+    color: $white;
+
+    &:hover {
+        color: darken($primary-color, 30%);
+    }
 }
 
 
