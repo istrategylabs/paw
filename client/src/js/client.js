@@ -79,7 +79,7 @@ global.onGAPILoadCallback = function() {
     app.router = new AppRouter();
 
     gapi.auth2.init({
-      client_id: '205257899023-7td7rf43jc7hj6bs2evdib68m811c2e3.apps.googleusercontent.com',
+      client_id: '1009924890508-fk9a66h0edp83rbqqcvmt1ta4vb3rca1.apps.googleusercontent.com',
       fetch_basic_profile: true
     }).then(function() {
       var auth2 = gapi.auth2.getAuthInstance();

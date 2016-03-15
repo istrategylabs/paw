@@ -1,11 +1,17 @@
 [![Stories in Ready](https://badge.waffle.io/istrategylabs/paw.png?label=ready&title=Ready)](https://waffle.io/istrategylabs/paw)
+
 # PAW-API
 
 ## Up-and-running
 
-- `docker-compose up`
+To start Nodemon +  Browser Sync server
 
-## Hydrant
+```
+npm run dev
+```
 
-- `docker build -t hydrant .`
-- `docker run -D hydrant`
+or to build, cachebust, and minify all assets
+
+```
+npm run build
+```

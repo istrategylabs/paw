@@ -1,5 +1,6 @@
 'use strict';
 
+const fs             = require('fs');
 const path           = require('path');
 const gulp           = require('gulp');
 const gutil          = require('gulp-util');
@@ -22,6 +23,7 @@ const htmlmin        = require('gulp-htmlmin');
 const gulpif         = require('gulp-if');
 const critical       = require('critical').stream;
 const runSequence    = require('run-sequence');
+const nodemon        = require('gulp-nodemon');
 
 
 function bundle(options) {
@@ -98,19 +100,33 @@ gulp.task('extras', () => {
     .pipe(gulp.dest('./public/'));
 });
 
-gulp.task('start', ['nunjucks', 'sass', 'extras', 'watchify'], () => {
+gulp.task('watch', ['nunjucks', 'sass', 'extras', 'watchify'], (done) => {
   browserSync.init({
-    proxy: 'localhost:' + (process.env.PORT ? process.env.PORT : 3000),
-    files: './public/**/*'
-    // serveStatic: ['./public']
+    files: './public/**/*',
+    port: '9000',
+    proxy: 'localhost:' + (process.env.PORT || 3000)
   });
 
   gulp.watch('./client/src/scss/**/*.scss', ['sass']);
   gulp.watch('./client/src/**/*.html', ['nunjucks']);
   gulp.watch('./client/src/**/*.{txt,json,xml,jpeg,jpg,png,gif,svg}', ['extras']);
+  done();
 });
 
-gulp.task('rev', ['default', 'banner'], () => {
+gulp.task('start', ['watch'], () => {
+  return nodemon({
+    script: 'server.js',
+    ext: 'js',
+    watch: 'server.js',
+    env: { 'NODE_ENV': 'development' }
+  }).on('start', function() {
+    setTimeout(function() {
+      browserSync.reload();
+    }, 500);
+  });
+});
+
+gulp.task('rev', ['default'], () => {
   return gulp.src(['./public/**/*', '!**/*.html'], { base: './public' })
     .pipe(rev())
     .pipe(gulp.dest('./public/'))
@@ -125,17 +141,23 @@ gulp.task('rev:replace', ['rev'], () => {
     .pipe(gulp.dest('./public/'));
 });
 
-gulp.task('banner', ['browserify'], () => {
-  return gulp.src(['banner.txt', './public/js/bundle.js'])
-    .pipe(concat('bundle.js'))
-    .pipe(gulp.dest('./public/js/'));
-});
-
 gulp.task('minify', ['rev:replace', 'critical'], () => {
   return gulp.src(['./public/**/*'], { base: './public/' })
     // Only target the versioned files with the hash
     // Those files have a - and a 10 character string
-    .pipe(gulpif(/-\w{10}\.js$/, uglify()))
+    .pipe(gulpif(/-\w{10}\.js$/, uglify({
+      preserveComments: 'license',
+      compressor: {
+        screw_ie8: true
+      },
+      output: {
+        preamble: (function() {
+          var banner = fs.readFileSync('banner.txt', 'utf8');
+          banner = banner.replace('@date', (new Date()));
+          return banner;
+        }())
+      }
+    })))
     .pipe(gulpif(/-\w{10}\.css$/, cssnano()))
     .pipe(gulpif('*.html', htmlmin({
       collapseWhitespace: true,
@@ -161,7 +183,7 @@ gulp.task('clean', () => {
 });
 
 gulp.task('default', ['browserify', 'nunjucks', 'sass', 'extras']);
-gulp.task('prod', ['banner', 'rev:replace', 'minify', 'critical']);
+gulp.task('prod', ['rev:replace', 'minify', 'critical']);
 
 gulp.task('build-dev', (done) => {
   runSequence('clean',

@@ -60,7 +60,7 @@ var IndexView = Backbone.View.extend({
     var $videoEl = this.$('.video');
     var $videoMediaEl = this.$('video');
     if (!$videoMediaEl.attr('src')) {
-      var videoSrc = Backbone.$(e.target).data('media');
+      var videoSrc = Backbone.$(e.currentTarget).data('media');
       $videoMediaEl.attr('src', videoSrc);
     }
 
