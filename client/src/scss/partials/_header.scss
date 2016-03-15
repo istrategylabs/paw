@@ -14,21 +14,39 @@ $sidebar-width: 300px;
     }
 }
 
-.header__links {
+.header__link-container {
     @media #{$medium-up} {
 	float: right;
 	line-height: 1;
 	position: relative;
 	top: 44px;
     }
+}
+
+.header__links--social {
+
+    float: right;
+
+    @media #{$medium-up}{
+        float: none;
+        display: inline-block;
+    }
 
     .icon--facebook, .icon--twitter {
-        fill: $primary-color;
-        height:20px;
-        width: 20px;
+        fill: $white;
+        height:23px;
+        margin-left: 10px;
+        width: 23px;
 
         &:hover {
             fill: darken($primary-color, 20%);
+        }
+        
+        @media #{$medium-up}{
+            fill: $primary-color;
+            height:20px;
+            width: 20px;
+            margin: 0px;
         }
     }
 }
