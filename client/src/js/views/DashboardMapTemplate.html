@@ -1,10 +1,10 @@
 <div>
-  <h1>Map of locations</h1>
-  <ul>
-    <% _.each(dogs, function(dog) { %>
-    <li>
-        <%= dog.name %> checked in with hydrant <%= dog.checked_in.location %> at <%= (new Date(dog.checked_in.time)).toString() %>
-    </li>
-    <% }) %>
-  </ul>
+    <ul class="avatar-circle">
+        <% _.each(dogs, function(dog) { %>
+        <li>
+            <img class="avatar-circle__image" src="<%= dog.avatar ? dog.avatar : '/img/dog_stock.jpg' %>" alt="<%= dog.name %>">
+            <!-- <%= dog.name %> checked in with hydrant <%= dog.checked_in.location %> at <%= (new Date(dog.checked_in.time)).toString() %> -->
+        </li>
+        <% }) %>
+    </ul>
 </div>

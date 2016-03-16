@@ -5,11 +5,11 @@ var port = process.env.PORT || 3000;
 var compression = require('compression');
 var bodyParser = require('body-parser');
 
-require('./api/routes')(app);
 app.use(compression({ level: 9 }));
 app.use(bodyParser.json());
 app.set('port', port);
 app.use(express.static('public'));
+require('./api/routes')(app);
 
 if (env === 'production') {
   app.use(function (req, res, next) {

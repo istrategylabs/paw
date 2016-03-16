@@ -1,0 +1,27 @@
+.dashboard__map {
+    background: url('/img/paw_map.svg') no-repeat 150px center;
+    background-size: 70%;
+    position: absolute;
+    width: 100%;
+    height: calc(100vh - 90px);
+}
+
+.avatar-circle {
+    @include on-circle($item-count: 5, $circle-size: 10em, $item-size: 4em);
+    margin: 5em auto 0;
+    border: solid 5px tomato;
+}
+
+.avatar-circle__image {
+    display: block;
+    max-width: 100%;
+    border-radius: 50%;
+    filter: grayscale(100%);
+    border: solid 5px tomato;
+    transition: .15s;
+
+    &:hover,
+    &:active {
+        filter: grayscale(0);
+    }
+}

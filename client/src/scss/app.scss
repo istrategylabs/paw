@@ -57,11 +57,13 @@ body {
 @import 'mixins/mixin-scrollbars';
 @import 'mixins/mixin-move-up-and-fade';
 @import 'mixins/isl-ease';
+@import 'mixins/on-circle';
 
 // Import Partials
 @import 'partials/base';
 @import 'partials/header';
 @import 'partials/index';
 @import 'partials/decoration-workspace';
-@import 'partials/dashboardDogList';
+@import 'partials/dashboard-dog-list';
+@import 'partials/dashboard-map';
 @import 'partials/text-rotator';
