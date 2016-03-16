@@ -5,7 +5,6 @@ const path           = require('path');
 const gulp           = require('gulp');
 const gutil          = require('gulp-util');
 const del            = require('del');
-const concat         = require('gulp-concat');
 const browserSync    = require('browser-sync').create();
 const autoprefixer   = require('autoprefixer');
 const postcss        = require('gulp-postcss');
@@ -117,7 +116,7 @@ gulp.task('start', ['watch'], () => {
   return nodemon({
     script: 'server.js',
     ext: 'js',
-    watch: 'server.js',
+    watch: ['server.js', 'api/'],
     env: { 'NODE_ENV': 'development' }
   }).on('start', function() {
     setTimeout(function() {
