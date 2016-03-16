@@ -89,22 +89,22 @@ $sidebar-width: 300px;
     .header__logo-container {
         border-right: 1px solid darken($primary-color, 8%);
         height: 100%;
-	transition: background .25s;
+        transition: background .25s;
         overflow: hidden;
         width: $sidebar-width;
 
-	&:hover {
-	    background-color: darken($primary-color, 10%)
-	}
+        &:hover {
+        background-color: darken($primary-color, 10%)
+        }
     }
 
     .header__logo {
-	height: 100%;
-	background: url(/img/dashboard_logo.svg) 50% 50% no-repeat;
-	background-size: 180px;
+        background-size: 180px;
+        background: url(/img/dashboard_logo.svg) 50% 50% no-repeat;
+        height: 100%;
+        margin-left: rem-calc(43px);
         display: block;
-	margin-left: rem-calc(43px);
-    max-width: 207px;
+        max-width: 207px;
     }
 
     .logo__watson,
@@ -123,14 +123,14 @@ $sidebar-width: 300px;
 
     .header__nav-container {
         display: flex;
-        padding: 30px;
         height: 100%;
+        padding: 30px;
     }
 
     .nav-links {
-        height: 100%;
-        display: flex;
         align-items: center;
+        display: flex;
+        height: 100%;
     }
 
     .nav-links--left {
@@ -138,8 +138,8 @@ $sidebar-width: 300px;
     }
 
     .nav-links--right {
-        flex-grow: 1;
         display: flex;
+        flex-grow: 1;
         justify-content: flex-end;
     }
 }

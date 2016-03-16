@@ -54,14 +54,14 @@ em {
     }
 
     .button__icon {
-        position: absolute;
-        left: 27px;
         height: 15px;
+        left: 27px;
         max-width: 17px;
+        position: absolute;
         top:13px;
         transform: translate3d(-40px, 2.5em, 0);
-        transition: transform 0.3s;
         transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+        transition: transform 0.3s;
 
         @media #{$medium-up}{
             height: 16px;
@@ -94,8 +94,8 @@ em {
     border: 0;
     font-size: 16px;
     font-weight: normal;
-    padding: 0px;
     margin: 0px;
+    padding: 0px;
 
     &:hover {
         background: none;
