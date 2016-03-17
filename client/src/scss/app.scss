@@ -1,3 +1,5 @@
+@charset "utf-8";
+
 @import 'settings';
 @import 'flickity';
 @import 'foundation';
@@ -63,5 +65,6 @@ body {
 @import 'partials/header';
 @import 'partials/index';
 @import 'partials/decoration-workspace';
-@import 'partials/dashboardDogList';
+@import 'partials/dashboard-dog-list';
+@import 'partials/dashboard-map';
 @import 'partials/text-rotator';

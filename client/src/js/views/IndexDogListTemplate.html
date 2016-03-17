@@ -1,4 +1,4 @@
-<% _.each(dogs, function(dog) { %>
+<% _.forEach(dogs, function(dog) { %>
 <div class="dog dog--marketing">
     <div class="dog__avatar" style="background-image: url(<%= dog.avatar ? dog.avatar : '/img/dog_stock.jpg' %>);"></div>
     <h3 class="dog__name"><%= dog.name %></h3>

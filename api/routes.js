@@ -35,6 +35,7 @@ module.exports = function(app) {
 
   app.post('/api/event', function(req, res) {
     var events = req.body.events;
+
     events.forEach(function(event, index) {
       var device = event.device;
       var location = event.location;

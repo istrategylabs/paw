@@ -16,7 +16,7 @@ app.error = function(message) {
       $(self).slideUp(function() {
         $(this).remove();
       });
-    }, 5000);
+    }, process.env.ERROR_DISPLAY_TIMEOUT_MS);
   });
 };
 

@@ -1,0 +1,56 @@
+.dashboard {
+    padding-top: 90px;
+}
+
+    .dashboard__main {
+        position: absolute;
+        left: 300px;
+        width: 100%;
+        height: calc(100vh - 90px);
+    }
+
+    .dashboard__map {
+        background: url('/img/paw_map.svg') no-repeat center;
+        background-size: contain;
+        height: 85%;
+        width: 70%;
+        position: absolute;
+        top: 50%;
+        left: calc(50% - 150px);
+        transform: translate(-50%, -50%);
+    }
+
+.hydrant {
+    position: relative;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    height: 120px;
+    width: 120px;
+}
+
+    .hydrant__item {
+        position: absolute;
+        max-width: 80px;
+
+        &:hover {
+            z-index: 1000;
+        }
+    }
+
+    // .hyrdrant__logo {
+    //     background: url('/img/paw_hydrant.svg') no-repeat center;
+    //     background-size: contain;
+    //     width: 32px;
+    //     height: 32px;
+    // }
+
+    .hydrant__dog {
+        display: block;
+        min-width: 50px;
+        max-width: 100%;
+        border-radius: 50%;
+        border: solid 3px $paw-green;
+        transition: .15s;
+
+    }
