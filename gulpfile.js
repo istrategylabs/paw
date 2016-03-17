@@ -1,5 +1,6 @@
 'use strict';
 
+const config         = require('./config').get();
 const fs             = require('fs');
 const path           = require('path');
 const gulp           = require('gulp');
@@ -14,6 +15,7 @@ const nunjucksRender = require('gulp-nunjucks-render');
 const source         = require('vinyl-source-stream');
 const buffer         = require('vinyl-buffer');
 const browserify     = require('browserify');
+const envify         = require('envify/custom');
 const rev            = require('gulp-rev');
 const revReplace     = require('gulp-rev-replace');
 const uglify         = require('gulp-uglify');
@@ -37,6 +39,7 @@ function bundle(options) {
         'underscore': 'lodash'
       }
     })
+    .transform(envify(config))
     .transform('babelify', { presets: ['es2015'] })
     .transform('brfs');
 
@@ -116,7 +119,7 @@ gulp.task('start', ['watch'], () => {
   return nodemon({
     script: 'server.js',
     ext: 'js',
-    watch: ['server.js', 'api/'],
+    watch: ['server.js', 'config.js', 'api/'],
     env: { 'NODE_ENV': 'development' }
   }).on('start', function() {
     setTimeout(function() {

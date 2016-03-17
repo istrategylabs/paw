@@ -32,7 +32,7 @@ var DashboardDogsListDogView = Backbone.View.extend({
     return this;
   },
 
-  handleCheckedInChange: function(e) {
+  handleCheckedInChange: function() {
     this.model.checkIn();
     this.render();
     console.log('dog checked in');
@@ -46,7 +46,7 @@ var DashboardDogsListDogView = Backbone.View.extend({
     console.log('radio button has been changed');
   },
 
-  toggleDropdown: function(e) {
+  toggleDropdown: function() {
     this.$el.find('.dropdown').toggleClass('dropdown--open');
     console.log('dropdown toggled');
   }

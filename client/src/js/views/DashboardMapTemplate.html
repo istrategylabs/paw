@@ -1,10 +1,12 @@
-<div>
-    <ul class="avatar-circle">
-        <% _.each(dogs, function(dog) { %>
-        <li>
-            <img class="avatar-circle__image" src="<%= dog.avatar ? dog.avatar : '/img/dog_stock.jpg' %>" alt="<%= dog.name %>">
-            <!-- <%= dog.name %> checked in with hydrant <%= dog.checked_in.location %> at <%= (new Date(dog.checked_in.time)).toString() %> -->
+<div class="dashboard__map">
+    <% _.forEach(dogsByHydrant, function(dogs, hydrant) { %>
+    <ul class="hydrant" id="hydrant-<%= hydrant %>">
+        <li class="hydrant__item hyrdrant__logo"><span class="show-for-sr">Dogs in <%= hydrant %></span></li>
+        <% _.forEach(dogs, function(dog) { %>
+        <li class="hydrant__item">
+            <img class="hydrant__dog" src="<%= dog.avatar ? dog.avatar : '/img/dog_stock.jpg' %>" alt="<%= dog.name %>">
         </li>
-        <% }) %>
+        <% }); %>
     </ul>
+    <% }); %>
 </div>

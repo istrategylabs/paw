@@ -1,17 +1,16 @@
-var env = process.env.NODE_ENV || 'development';
+var config = require('./config');
 var express = require('express');
 var app = express();
-var port = process.env.PORT || 3000;
 var compression = require('compression');
 var bodyParser = require('body-parser');
 
 app.use(compression({ level: 9 }));
 app.use(bodyParser.json());
-app.set('port', port);
+app.set('port', config.get('PORT'));
 app.use(express.static('public'));
 require('./api/routes')(app);
 
-if (env === 'production') {
+if (config.get('NODE_ENV') === 'production') {
   app.use(function (req, res, next) {
     // force SSL on production
     // use req.headers.referrer !startsWith https

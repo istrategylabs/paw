@@ -13,14 +13,6 @@ $sidebar-borders: 1px solid $border-gray;
     z-index: 0;
 }
 
-.dashboard__map {
-    position: absolute;
-    display: inline-block;
-    margin-top: 90px;
-    vertical-align: top;
-    left: $sidebar-width;
-}
-
 .dashboard__date {
     background: $light-gray;
     border-bottom: $sidebar-borders;

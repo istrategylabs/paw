@@ -61,7 +61,6 @@ var SessionModel = Backbone.Model.extend({
     var googleUser = auth2.currentUser.get();
     var googleUserIsSignedIn = auth2.isSignedIn.get();
     var googleAppsDomain = googleUser.getHostedDomain();
-    var profile = googleUser.getBasicProfile();
 
     console.log('auth2 is signed in: ', auth2.isSignedIn.get());
 

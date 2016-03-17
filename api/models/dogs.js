@@ -1,7 +1,6 @@
 var chunk = require('lodash/chunk');
 var redis = require('../database');
 
-
 exports.save = function(dog) {
   if (dog && dog.btle_devices && dog.btle_devices.length > 0) {
     var deviceId = dog.btle_devices[0].device_id;

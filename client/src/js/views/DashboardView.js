@@ -19,7 +19,7 @@ var DashboardView = Backbone.View.extend({
     });
 
     new DashboardMapView({
-      el: this.$('.dashboard__map'),
+      el: this.$('.dashboard__main'),
       collection: this.collection
     });
   },

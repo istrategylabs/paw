@@ -1,7 +1,6 @@
-var TOKEN = process.env.ISL_API_TOKEN;
+var config = require('../config');
 var redis = require('redis');
-var redisURL = process.env.REDIS_URL || 'redis://127.0.0.1:6379';
-var client = redis.createClient(redisURL);
+var client = redis.createClient(config.get('REDIS_URL'));
 var request = require('request');
 var find = require('lodash/find');
 var Dogs = require('./models/dogs');
@@ -22,7 +21,7 @@ function loadDogFromAPI(dog) {
     request.get({
       url: dog.pet_link,
       headers: {
-        'Authorization': 'Token ' + TOKEN
+        'Authorization': 'Token ' + config.get('ISL_API_TOKEN')
       }
     }, function(error, response, body) {
       if (!error && response.statusCode == 200) {
@@ -44,7 +43,7 @@ function populateDB() {
   request.get({
     url: 'https://api.isl.co/v1/pets/',
     headers: {
-      'Authorization': 'Token ' + TOKEN
+      'Authorization': 'Token ' + config.get('ISL_API_TOKEN')
     }
   }, function(error, response, body) {
     var dogs;

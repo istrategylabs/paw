@@ -1,3 +1,5 @@
+@charset "utf-8";
+
 @import 'settings';
 @import 'flickity';
 @import 'foundation';
@@ -57,7 +59,6 @@ body {
 @import 'mixins/mixin-scrollbars';
 @import 'mixins/mixin-move-up-and-fade';
 @import 'mixins/isl-ease';
-@import 'mixins/on-circle';
 
 // Import Partials
 @import 'partials/base';
