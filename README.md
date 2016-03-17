@@ -1,6 +1,8 @@
 [![Stories in Ready](https://badge.waffle.io/istrategylabs/paw.png?label=ready&title=Ready)](https://waffle.io/istrategylabs/paw)
 
-# PAW-API
+# PAW: Puppies at Work
+
+![PAW preview](paw-preview.png)
 
 ## Up-and-running
 
@@ -40,6 +42,6 @@ In Browserify, we load the nconf configuration with [envify](https://github.com/
 
 ```
 setInterval(function() {
-	fetch();
+  fetch();
 }, process.env.DOG_POLLING_INTERVAL_MS);
 ```
