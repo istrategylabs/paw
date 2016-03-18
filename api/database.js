@@ -29,7 +29,7 @@ function loadDogFromAPI(dog) {
         Dogs.save(dog);
       } else {
         // read dog from fixture
-        var d = require('./fixtures/dog.json');
+        var d = require('../fixtures/dog.json');
         dog = find(d, { display_id: dog.display_id});
         Dogs.save(dog);
       }
@@ -52,7 +52,7 @@ function populateDB() {
       dogs = JSON.parse(body);
     } else {
       // read dogs list from fixture
-      dogs = require('./fixtures/dogs.json');
+      dogs = require('../fixtures/dogs.json');
     }
 
     dogs.forEach(loadDogFromAPI);

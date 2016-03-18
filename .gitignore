@@ -3,6 +3,7 @@
 
 node_modules
 public/*
-!public/favicon*
+!public/favicon.ico
+!public/favicon-152.png
 
 .DS_Store

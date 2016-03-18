@@ -181,7 +181,7 @@ gulp.task('critical', ['rev:replace'], function() {
 });
 
 gulp.task('clean', () => {
-  return del(['public/*', '!public/favicon*']);
+  return del(['public/*', '!public/favicon.ico', '!public/favicon-152.png']);
 });
 
 gulp.task('default', ['browserify', 'nunjucks', 'sass', 'extras']);
