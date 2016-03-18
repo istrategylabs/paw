@@ -3,7 +3,7 @@ var redis = require('../database');
 
 exports.save = function(dog) {
   if (dog && dog.btle_devices && dog.btle_devices.length > 0) {
-    var deviceId = dog.btle_devices[0].device_id;
+    var deviceId = dog.btle_devices[0].device_id.toLowerCase();
     redis.sadd('dogs', dog.display_id);
     redis.sadd('btle_devices', deviceId);
     redis.set('dog:' + dog.display_id, JSON.stringify(dog));
