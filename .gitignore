@@ -2,6 +2,7 @@
 *.rdb
 
 node_modules
-public/
+public/*
+!public/favicon*
 
 .DS_Store
