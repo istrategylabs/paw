@@ -33,6 +33,7 @@
 
     @media #{$medium-up} {
         height: 100%;
+        min-height: 650px;
     }
 }
 
@@ -89,8 +90,6 @@
     }
 }
 
-
-
 .hero__content {
     margin-bottom: 2rem;
 
@@ -102,7 +101,14 @@
     }
 }
 
-.decoration__floor {
+.hero__decoration-row {
+    max-width: 1260px;
+    margin: 50px auto 0px auto;
+    position: relative;
+    z-index: 10;
+}
+
+.decorations {
     background: url(/img/wood.png) $white;
     border-top: 2px solid $paw-gray;
     height: 100px;
@@ -117,6 +123,7 @@
         bottom: 0;
         height: 30vh;
         margin-top: 0px;
+        min-height: 160px;
         position: absolute;
     }
 
@@ -127,28 +134,9 @@
     }
 }
 
-.decorations {
-    margin: 0 auto;
-    max-width: 1260px;
-    overflow: hidden;
-    position: relative;
-
-    .hero__intro-copy {
-        @media #{$medium-up} {
-            left:0px;
-            position: absolute;
-            top: 0px;
-        }
-    }
-
-    @media #{$medium-up} {
-        transform: translateY(-85%);
-    }
-}
-
 .decoration__workspace-container {
     @media #{$medium-up} {
-        bottom:-50px;
+        bottom: 0px;
         position: absolute;
         right:0px;
         width: 90%;
