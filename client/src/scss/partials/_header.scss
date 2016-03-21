@@ -25,10 +25,15 @@ $sidebar-width: 300px;
 
 .header__pipe {
     background: #EDE29F;
-    display: inline-block;
+    display: none;
+    height: 20px;
+    margin: 0px 5px;
     padding-top: 2px;
-    height: 10px;
     width: 2px;
+
+    @media #{$medium-up}{
+        display: inline-block;
+    }
 }
 
 .header__links--social {
@@ -36,7 +41,7 @@ $sidebar-width: 300px;
     float: right;
 
     @media #{$medium-up}{
-        float: none;
+        // float: none;
         display: inline-block;
     }
 
@@ -72,6 +77,10 @@ $sidebar-width: 300px;
     margin-top: -7px;
     padding-top: 0;
     font-weight: 600;
+
+    @media #{$medium-up}{
+        margin-top: -17px;
+    }
 }
 
 .header__button--last {
