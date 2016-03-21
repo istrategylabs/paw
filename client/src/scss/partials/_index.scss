@@ -55,11 +55,9 @@
 }
 
 .hero__content-container {
-
     @media #{$medium-up}{
         padding: 0px 50px;
     }
-    
 }
 
 .hero__content-row {
@@ -94,9 +92,8 @@
 
 
 .hero__content {
-
     margin-bottom: 2rem;
-    
+
     @media #{$medium-up}{
         left: 0px;
         position: absolute;
@@ -122,6 +119,7 @@
         margin-top: 0px;
         position: absolute;
     }
+
     @media #{$large-up} {
         bottom: 0;
         height: 20vh;
@@ -183,9 +181,8 @@
 
 
 .video {
-    background-position: top;
+    background: url('/img/video_stock.jpg') center center;
     background-size: cover;
-    background: url('/img/video_stock.jpg');
     height: 440px;
     overflow: hidden;
     position: relative;
