@@ -11,7 +11,6 @@ var AppRouter = Backbone.Router.extend({
   },
 
   execute: function(callback, args, name) {
-
     // execute will be called before the callback for each specific route
     // get the next route in here
 
@@ -23,20 +22,19 @@ var AppRouter = Backbone.Router.extend({
 
     if (name !== 'index' && !app.session.get('logged')) {
       // authorization needed
-      console.log('requested route change to ' + name + ' but not authed, force to index');
+      console.log('requested route change to "' + name + '" but not authed, force to index');
       app.router.navigate('/', { trigger: true, replace: true });
       return false;
     }
 
-    if(name == 'index' && app.session.get('logged')){
-
-         // if user is logged in, don't allow them to go to the marketing index page
-         // instead, force them to their dashboard
-         console.log('requested route change to "' + name + '" but user is logged in, force to dashboard');
-         app.router.navigate('dashboard', { trigger: true, replace: true });
-         // else continue routing
-         return false;
-     }
+    if (name === 'index' && app.session.get('logged')) {
+      // if user is logged in, don't allow them to go to the marketing index page
+      // instead, force them to their dashboard
+      console.log('requested route change to "' + name + '" but user is logged in, force to dashboard');
+      app.router.navigate('dashboard', { trigger: true, replace: true });
+      // else continue routing
+      return false;
+    }
 
     if (callback) {
       callback.apply(this, args);
