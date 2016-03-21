@@ -62,8 +62,6 @@ var SessionModel = Backbone.Model.extend({
     var googleUserIsSignedIn = auth2.isSignedIn.get();
     var googleAppsDomain = googleUser.getHostedDomain();
 
-    console.log('auth2 is signed in: ', auth2.isSignedIn.get());
-
     // If a User is signed in and their gmail matches a @isl.co gmail,
     // log in this user.
     if (googleUserIsSignedIn && googleAppsDomain && googleAppsDomain.match(/^isl.co$/g)) {
@@ -80,8 +78,8 @@ var SessionModel = Backbone.Model.extend({
       }
     }
 
-    console.log('session: ', this.attributes);
-    console.log('user: ', this.user.attributes);
+    // console.log('session: ', this.attributes);
+    // console.log('user: ', this.user.attributes);
 
     if ('complete' in callback) {
       callback.complete();
