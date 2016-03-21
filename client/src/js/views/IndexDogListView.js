@@ -13,10 +13,14 @@ var IndexDogListView = Backbone.View.extend({
   },
 
   render: function() {
+    var dogs = this.collection.models.filter(function(dog) {
+      return !!(dog.get('avatar'));
+    }).map(function(dog) {
+      return dog.attributes;
+    });
+
     this.$el.html(this.template({
-      dogs: this.collection.models.map(function(dog) {
-        return dog.attributes;
-      })
+      dogs: _.shuffle(dogs)
     }));
 
     this.dogsSlider = new Flickity(this.el, {
