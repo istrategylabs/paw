@@ -7,38 +7,46 @@
         <link rel="apple-touch-icon-precomposed" href="/favicon-152.png">
         <meta name="description" content="PAW is a Slack-integrated tracking system for dogs in the workplace. It allows owners to effortlessly keep tabs of their pets without needing to have them tethered to a desk all day.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- Facebook OG tags -->
-        <meta property="og:url" content="https://paw.isl.co/" />
-        <!-- <meta property="fb:app_id" content=""> -->
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="PAW... unleash your dog." />
-        <meta property="og:description" content="PAW: unleash your dog." />
-        <meta property="og:site_name" content="PAW: Puppies At Work" />
-        <meta property="og:image" content="" />
-        <!-- End Facebook OG tags -->
-        <!-- Twitter Card tags -->
+
+        {# Facebook Open Graph Tags #}
+        <meta property="og:url" content="https://paw.isl.co/">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="PAW... unleash your dog.">
+        <meta property="og:description" content="PAW — puppies at work — is a Slack-integrated tracking system that keeps tabs of dogs in the workplace.">
+        <meta property="og:site_name" content="PAW: Puppies At Work">
+        <meta property="og:image" content="https://paw.isl.co/static/isl-paw-share.jpg">
+
+        {# Twitter Summary Card with Large Image tags #}
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:site" content="@istrategylabs">
         <meta name="twitter:creator" content="@istrategylabs">
         <meta name="twitter:title" content="PAW... unleash your dog.">
         <meta name="twitter:description" content="PAW — puppies at work — is a Slack-integrated tracking system that keeps tabs of dogs in the workplace.">
-        <meta name="twitter:image" content="">
-        <!-- End Twitter Card tags -->
-        <!-- loadCSS /css/app.css -->
+        <meta name="twitter:image" content="https://paw.isl.co/static/isl-paw-share.jpg">
+
+        {# loadCSS #}
+        <link rel="preload" href="/css/app.css" as="style" onload="this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/css/app.css"></noscript>
         <script>
+            /*! loadCSS: load a CSS file asynchronously. [c]2016 @scottjehl, Filament Group, Inc. Licensed MIT */
             !function(e){"use strict"
-            var n=function(n,t,i){function o(e){return r.body?e():void setTimeout(function(){o(e)})}var d,r=e.document,a=r.createElement("link"),l=i||"all"
-            if(t)d=t
-            else{var f=(r.body||r.getElementsByTagName("head")[0]).childNodes
-            d=f[f.length-1]}var s=r.styleSheets
-            a.rel="stylesheet",a.href=n,a.media="only x",o(function(){d.parentNode.insertBefore(a,t?d:d.nextSibling)})
-            var u=function(e){for(var n=a.href,t=s.length;t--;)if(s[t].href===n)return e()
-            setTimeout(function(){u(e)})}
-            return a.addEventListener&&a.addEventListener("load",function(){this.media=l}),a.onloadcssdefined=u,u(function(){a.media!==l&&(a.media=l)}),a}
-            "undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this)
-            loadCSS('/css/app.css')
+            var t=function(t,n,r){function o(e){return i.body?e():void setTimeout(function(){o(e)})}function a(){d.addEventListener&&d.removeEventListener("load",a),d.media=r||"all"}var l,i=e.document,d=i.createElement("link")
+            if(n)l=n
+            else{var s=(i.body||i.getElementsByTagName("head")[0]).childNodes
+            l=s[s.length-1]}var u=i.styleSheets
+            d.rel="stylesheet",d.href=t,d.media="only x",o(function(){l.parentNode.insertBefore(d,n?l:l.nextSibling)})
+            var f=function(e){for(var t=d.href,n=u.length;n--;)if(u[n].href===t)return e()
+            setTimeout(function(){f(e)})}
+            return d.addEventListener&&d.addEventListener("load",a),d.onloadcssdefined=f,f(a),d}
+            "undefined"!=typeof exports?exports.loadCSS=t:e.loadCSS=t}("undefined"!=typeof global?global:this)
+
+            /*! CSS rel=preload polyfill. Depends on loadCSS function. [c]2016 @scottjehl, Filament Group, Inc. Licensed MIT  */
+            !function(t){if(t.loadCSS){var e=loadCSS.relpreload={}
+            if(e.support=function(){try{return t.document.createElement("link").relList.supports("preload")}catch(e){return!1}},e.poly=function(){for(var e=t.document.getElementsByTagName("link"),n=0;n<e.length;n++){var r=e[n]
+            "preload"===r.rel&&"style"===r.getAttribute("as")&&(t.loadCSS(r.href,r),r.rel=null)}},!e.support()){e.poly()
+            var n=t.setInterval(e.poly,300)
+            t.addEventListener&&t.addEventListener("load",function(){t.clearInterval(n)}),t.attachEvent&&t.attachEvent("onload",function(){t.clearInterval(n)})}}}(this)
         </script>
-        <noscript><link href="/css/app.css" rel="stylesheet"></noscript>
         <script src="/js/bundle.js" onload="clientInit()" async defer></script>
         <script src="https://apis.google.com/js/platform.js?onload=onGAPILoadCallback" async defer></script>
     </head>
@@ -50,8 +58,16 @@
             {
                 "@context": "http://schema.org",
                 "@type": "WebApplication",
+                "name": "PAW",
+                "description": "PAW is a Slack-integrated tracking system for dogs in the workplace. It allows owners to effortlessly keep tabs of their pets without needing to have them tethered to a desk all day."
                 "url": "https://paw.isl.co",
-                "logo": ""
+                "image": "https://paw.isl.co/static/isl-paw-logo.png",
+                "sameAs": [
+                    "https://twitter.com/istrategylabs",
+                    "https://www.facebook.com/istrategylabs",
+                    "https://www.instagram.com/istrategylabs/",
+                    "https://www.linkedin.com/company/istrategylabs/"
+                ]
             }
         </script>
     </body>
