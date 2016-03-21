@@ -33,7 +33,7 @@
 
     @media #{$medium-up} {
         height: 100%;
-        min-height: 650px;
+        min-height: 800px;
     }
 }
 
@@ -45,13 +45,15 @@
     font-weight: 300;
     line-height: 2;
     margin: 0 auto 2rem;
-    max-width: 540px;
+    max-width: 600px;
+    padding: 0px 30px;
     position: relative;
     z-index: 2;
 
     @media #{$medium-up} {
         margin: 0 0 3rem;
         font-size: 20px;
+        padding: 0px;
     }
 }
 
@@ -69,7 +71,6 @@
     z-index: 10;
 
     @media #{$medium-up} {
-        margin: 20vh auto 0px auto;
         height: 60vh;
         margin-top: 10vh;
     }
@@ -81,22 +82,19 @@
 
     @media #{$xlarge-up} {
         height: 70vh;
-        margin: 10vh auto;
-    }
-
-    @media #{$xxlarge-up} {
-        height: 60vh;
         margin: 20vh auto;
     }
+
+    
 }
 
 .hero__content {
-    margin-bottom: 2rem;
+    margin-bottom: 16rem;
+    // min-height: 480px;
 
     @media #{$medium-up}{
         left: 0px;
         position: absolute;
-        top: 5vh;
         z-index: 1;
     }
 }
@@ -135,16 +133,21 @@
 }
 
 .decoration__workspace-container {
+        width: 100%;
+        transform: translateY(-104%);
+
     @media #{$medium-up} {
         bottom: 0px;
         position: absolute;
-        right:0px;
+        right: 30px;
         width: 90%;
+        transform: none;
     }
 }
 
 .decoration__workspace {
-    max-width: 520px;
+    max-width: 460px;
+    margin: 0px 20px;
 
     @media #{$medium-up} {
         float: right;
