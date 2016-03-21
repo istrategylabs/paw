@@ -36,7 +36,7 @@ $sidebar-borders: 1px solid $border-gray;
   background: none;
   border-bottom: $sidebar-borders;
   opacity: .4;
-  padding: rem-calc(30px 30px 40px 30px);
+  padding: rem-calc(30px);
   transition: opacity .25s;
   width: 100%;
 
@@ -51,12 +51,14 @@ $sidebar-borders: 1px solid $border-gray;
       border-radius: 50%;
       height: 60px;
       margin-right: rem-calc(15px);
-      margin-top: rem-calc(10px);
+      margin-top: 0px;
+      margin-bottom: 0px;
       vertical-align: top;
       width: 60px;
   }
 
   .dog__info {
+      margin-top: 5px;
       display: inline-block;
       vertical-align: top;
   }
