@@ -22,7 +22,10 @@ nconf.defaults({
   DEVICE_CHECKIN_EXPIRATION_S: 5 * 60,
 
   // how often Backbone fetches dogs from api, in milliseconds
-  DOGS_POLLING_INTERVAL_MS: 10 * 1000
+  DOGS_POLLING_INTERVAL_MS: 10 * 1000,
+
+  // OAuth client id for Google Auth2
+  GAPI_CLIENT_ID: '935134788841-0ur9mf9ffnsj12t4f4b2mq8kh8icjfvp.apps.googleusercontent.com'
 });
 
 module.exports = nconf;
