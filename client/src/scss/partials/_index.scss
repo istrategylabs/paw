@@ -181,11 +181,21 @@
 
 
 .video {
-    background: url('/img/video_stock.jpg') center center;
+    background: url('/img/isl-paw-video-stock.jpg') center center;
     background-size: cover;
     height: 440px;
     overflow: hidden;
     position: relative;
+
+    &::before {
+        background: rgba($primary-color, 0.65);
+        content: '';
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
 
     @media #{$medium-up} {
         height: 700px;
@@ -194,16 +204,6 @@
     @media #{$xlarge-up} {
         height: 850px;
     }
-}
-
-.video::before {
-    background: rgba($primary-color, 0.85);
-    content: '';
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
 }
 
 .video__play,
