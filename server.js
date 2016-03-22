@@ -7,9 +7,9 @@ var bodyParser = require('body-parser');
 app.use(compression({ level: 9 }));
 app.use(bodyParser.json());
 app.set('port', config.get('PORT'));
-app.use(express.static('public'), {
+app.use(express.static('public', {
   maxAge: config.get('CACHE_CONTROL_MAX_AGE')
-});
+}));
 require('./api/routes')(app);
 
 app.use(function redirectAllPaths(req, res, next) {
