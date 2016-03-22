@@ -13,7 +13,7 @@ require('./api/routes')(app);
 app.use(function forceLiveDomain(req, res, next) {
   // Don't allow user to hit Heroku now that we have a domain, see http://is.gd/OmQ9Yp
   if (config.get('NODE_ENV') === 'production') {
-    var host = req.get('Host');
+    var host = req.hostname;
     if (host === 'paw-production.herokuapp.com') {
       return res.redirect(301, 'https://paw.isl.co/' + req.originalUrl);
     }
