@@ -9,12 +9,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         {# Facebook Open Graph Tags #}
-        <meta property="og:url" content="https://paw.isl.co/">
-        <meta property="og:type" content="website">
         <meta property="og:title" content="PAW... unleash your dog.">
-        <meta property="og:description" content="PAW — puppies at work — is a Slack-integrated tracking system that keeps tabs of dogs in the workplace.">
-        <meta property="og:site_name" content="PAW: Puppies At Work">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://paw.isl.co/">
         <meta property="og:image" content="https://paw.isl.co/static/isl-paw-share.jpg">
+        <meta property="og:description" content="PAW — puppies at work — is a Slack-integrated tracking system that keeps tabs of dogs in the workplace.">
 
         {# Twitter Summary Card with Large Image tags #}
         <meta name="twitter:card" content="summary_large_image">
@@ -47,10 +46,21 @@
             var n=t.setInterval(e.poly,300)
             t.addEventListener&&t.addEventListener("load",function(){t.clearInterval(n)}),t.attachEvent&&t.attachEvent("onload",function(){t.clearInterval(n)})}}}(this)
         </script>
+
         <script src="/js/bundle.js" onload="clientInit()" async defer></script>
         <script src="https://apis.google.com/js/platform.js?onload=onGAPILoadCallback" async defer></script>
     </head>
     <body>
+        <!-- Google Tag Manager -->
+        <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-W8T5WP"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-W8T5WP');</script>
+        <!-- End Google Tag Manager -->
+
         {% block content %}
         {% endblock %}
 
@@ -59,7 +69,7 @@
                 "@context": "http://schema.org",
                 "@type": "WebApplication",
                 "name": "PAW",
-                "description": "PAW is a Slack-integrated tracking system for dogs in the workplace. It allows owners to effortlessly keep tabs of their pets without needing to have them tethered to a desk all day."
+                "description": "PAW is a Slack-integrated tracking system for dogs in the workplace. It allows owners to effortlessly keep tabs of their pets without needing to have them tethered to a desk all day.",
                 "url": "https://paw.isl.co",
                 "image": "https://paw.isl.co/favicon-152.png",
                 "sameAs": [

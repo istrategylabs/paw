@@ -3,11 +3,11 @@ var nconf = require('nconf');
 nconf.env().argv();
 
 nconf.defaults({
-  // node environment
-  NODE_ENV: 'development',
-
   // api server port for client connections
   PORT: 3000,
+
+  // cache duration for static files served by express
+  CACHE_CONTROL_MAX_AGE: nconf.get('NODE_ENV') === 'production' ? 604800 : 0,
 
   // auth token for requests to api.isl.co
   ISL_API_TOKEN: '',
@@ -19,7 +19,7 @@ nconf.defaults({
   ERROR_DISPLAY_TIMEOUT_MS: 5 * 1000,
 
   // when to delete seen device checkin from redis, in seconds
-  DEVICE_CHECKIN_EXPIRATION_S: 5 * 60,
+  DEVICE_CHECKIN_EXPIRATION_S: 20,
 
   // how often Backbone fetches dogs from api, in milliseconds
   DOGS_POLLING_INTERVAL_MS: 10 * 1000,

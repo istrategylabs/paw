@@ -7,19 +7,20 @@ var bodyParser = require('body-parser');
 app.use(compression({ level: 9 }));
 app.use(bodyParser.json());
 app.set('port', config.get('PORT'));
-app.use(express.static('public'));
+app.use(express.static('public', {
+  maxAge: config.get('CACHE_CONTROL_MAX_AGE')
+}));
 require('./api/routes')(app);
 
-if (config.get('NODE_ENV') === 'production') {
-  app.use(function (req, res, next) {
-    // force SSL on production
-    // use req.headers.referrer !startsWith https
-    if (req.headers['x-forwarded-proto'] !== 'https') {
-      return res.redirect(['https://', req.get('Host'), req.url].join(''));
-    }
-    return next();
-  });
-}
+app.use(function redirectAllPaths(req, res, next) {
+  // Redirect all paths to / to avoid 404's
+  var originalUrl = req.originalUrl;
+  if (originalUrl) {
+    return res.redirect(301, '/');
+  }
+  return next();
+});
+
 
 var server = app.listen(app.get('port'), function() {
   var host = server.address().address;
