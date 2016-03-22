@@ -1,5 +1,5 @@
 <?xml-stylesheet href="../css/app.css" type="text/css"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="503" height="334" viewBox="0 0 503 334">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 503 334">
   <title>isl-logo</title>
   <path class="footer__logo-path" d="M345,0.05L0,0V256l82.23,78H503V153.37ZM121,276.13l-61-61V59h61V276.13Zm183-59.46c0,39.23-17.75,59.33-56.8,59.33H128V215H304v1.67Zm0-8.67H246V196H188.21C148.89,196,128,177.25,128,137.92V127h58v9h61.2c39.32,0,56.8,21.58,56.8,60.91V208Zm0-88H128v-1.74C128,78.94,148.61,59,187.94,59H304v61ZM443,276H310V59.07l61,60.15V215h72v61Z"/>
 </svg>
