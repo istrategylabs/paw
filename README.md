@@ -4,15 +4,19 @@
 
 ![PAW preview](paw-preview.png)
 
+PAW is a [Slack](https://slack.com/)-integrated tracking system for dogs in the workplace. It allows owners to effortlessly keep tabs of their pets without needing to have them tethered to a desk all day.
+
 ## Up-and-running
 
-To start the API server:
+First, start a [Redis](http://redis.io/) server for storing data.
+
+Then, to start the API server:
 
 ```
 npm run start
 ```
 
-To start the API server with [Nodemon](https://github.com/remy/nodemon) + [Browsersync](https://github.com/Browsersync/browser-sync) server:
+or to start the API server with [Nodemon](https://github.com/remy/nodemon) + a client with [Browsersync](https://github.com/Browsersync/browser-sync) server:
 
 ```
 npm run dev
@@ -24,7 +28,7 @@ or to build, cachebust, and minify all assets for production:
 npm run build
 ```
 
-Send external events to the `/api/event` endpoint. Payload should be formatted as:
+Finally, send external events to the `/api/event` endpoint. The payload should be formatted as:
 
 ```
 {
