@@ -53,6 +53,7 @@ var IndexView = Backbone.View.extend({
     e.preventDefault();
     var jump = new Jump();
     jump.jump('#watch', { duration: 250 });
+    $('.video__play').click();
   },
 
   handleVideoPlay: function(e) {
