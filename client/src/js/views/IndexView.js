@@ -3,8 +3,8 @@ var _ = require('underscore');
 var Backbone = require('backbone');
 var IndexTemplate = fs.readFileSync(__dirname + '/IndexTemplate.html', 'utf8');
 var IndexDogListView = require('../views/IndexDogListView');
+var IndexDogMapView = require('../views/IndexDogMapView');
 var DogsCollection = require('../collections/DogsCollection');
-var TextRotator = require('../lib/text-rotator');
 var Jump = require('jump.js');
 var $ = require('jquery');
 
@@ -19,33 +19,22 @@ var IndexView = Backbone.View.extend({
 
   initialize: function() {
     this.handleVideoMousemove = _.throttle(this.handleVideoMousemove, 100);
-    this.render();
     this.collection = new DogsCollection();
+    this.render();
 
     this.dogList = new IndexDogListView({
       el: this.$('.dogs__list'),
+      collection: this.collection
+    });
+
+    this.dogMap = new IndexDogMapView({
+      el: this.$('.dogs__map'),
       collection: this.collection
     });
   },
 
   render: function() {
     this.$el.html(this.template());
-
-    $('.js-text-rotator').each(function() {
-      var r = new TextRotator(this, {
-        variableWidth: true,
-        onComplete: function(){
-          var self = this;
-          var t = setTimeout(function() {
-            self.$el.addClass('text-rotator--green-underline');
-            clearTimeout(t);
-          }, self.speed);
-        }
-      });
-      r.init();
-    });
-
-
     return this;
   },
 

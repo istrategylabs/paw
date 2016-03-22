@@ -6,7 +6,7 @@ nconf.defaults({
   // api server port for client connections
   PORT: 3000,
 
-  // cache duration for static files served by express
+  // cache duration for static files served by express, in seconds
   CACHE_CONTROL_MAX_AGE: nconf.get('NODE_ENV') === 'production' ? 604800 : 0,
 
   // auth token for requests to api.isl.co

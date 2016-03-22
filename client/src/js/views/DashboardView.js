@@ -13,6 +13,11 @@ var DashboardView = Backbone.View.extend({
     this.render();
     this.collection = new DogsCollection();
 
+    var fetch = DogsCollection.prototype.fetch.bind(this.collection);
+    setInterval(function() {
+      fetch();
+    }, process.env.DOGS_POLLING_INTERVAL_MS);
+
     new DashboardDogsListView({
       el: this.$('.dashboard__dog-list'),
       collection: this.collection

@@ -81,8 +81,6 @@
     @media #{$xxlarge-up} {
         margin: 20vh auto;
     }
-
-
 }
 
 .hero__content {
@@ -299,7 +297,6 @@
 }
 
 .feature__text {
-
     font-weight: 300;
     line-height: 2;
     margin: 0 auto 2rem;
@@ -313,7 +310,6 @@
         line-height: 1.8;
         margin-bottom: 80px;
     }
-    
 }
 
 
@@ -328,10 +324,71 @@
 
 }
 
+.map__image-wrap {
+    height: 0;
+    padding-bottom: percentage(115/300);
+    position: relative;
+}
 
-.map-container {
-    object {
-        width: 100%;
+.map__image {
+    background: url('/img/paw_map.svg') no-repeat center center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale3d(.3, .3, .3);
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.map__dog {
+    animation-duration: 1.2s;
+    animation-fill-mode: both;
+    border: solid 3px $paw-green;
+    border-radius: 50%;
+    max-width: 40px;
+    max-height: 40px;
+    position: absolute;
+    visibility: hidden;
+
+    @media #{$large-up} {
+        max-width: 64px;
+        max-height: 64px;
+    }
+
+    @media #{$large-up} {
+        max-width: 80px;
+        max-height: 80px;
+    }
+
+    &:nth-child(1) {
+        top: 15%;
+        left: 5%;
+    }
+    &:nth-child(2) {
+        animation-delay: .5s;
+        right: 17%;
+        top: 50%;
+    }
+    &:nth-child(3) {
+        animation-delay: .8s;
+        right: 57%;
+        top: 68%;
+    }
+
+    .map__image.is-active & {
+        animation-name: zoomIn;
+        visibility: visible;
     }
 }
 
@@ -339,12 +396,12 @@
     width: 100%;
 }
 
-.map-feature__content {
+.map__content {
     position: relative;
     z-index: 5;
 }
 
-.map-feature__bg-overlay {
+.map__bg-overlay {
     background: $white;
     bottom:0;
     height: 60%;
@@ -467,7 +524,7 @@
     color: $paw-gray;
     font-weight: 300;
     font-size: .875em;
-    
+
     @media #{$medium-up}{
         font-size: 1em;
         min-height:110px;
@@ -550,8 +607,6 @@
             background: $paw-gray;
         }
     }
-
-    
 
     @media #{$medium-up} {
         display: block;
