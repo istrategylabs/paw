@@ -24,10 +24,25 @@ or to build, cachebust, and minify all assets for production:
 npm run build
 ```
 
+Send external events to the `/api/event` endpoint. Payload should be formatted as:
+
+```
+{
+	events: [
+		{
+			device: String,
+			location: String,
+			time: Date
+		},
+		...
+	]
+}
+```
+
 ## Configuration
 
 Application config lives in `config.js` and uses [nconf](https://github.com/indexzero/nconf).
-The same configuration is shipped with node and the browser.
+The same configuration is shipped with Node and the browser.
 
 ### Node
 
@@ -37,6 +52,8 @@ In Node, require the file then use nconf to get a config value by name:
 var config = require('./config');
 var TOKEN = config.get('ISL_API_TOKEN');
 ```
+
+### Browserify
 
 In Browserify, we load the nconf configuration with [envify](https://github.com/hughsk/envify/). Refer to your config value through `process.env`:
 

@@ -10,16 +10,27 @@ app.set('port', config.get('PORT'));
 app.use(express.static('public'));
 require('./api/routes')(app);
 
-if (config.get('NODE_ENV') === 'production') {
-  app.use(function (req, res, next) {
-    // force SSL on production
-    // use req.headers.referrer !startsWith https
-    if (req.headers['x-forwarded-proto'] !== 'https') {
-      return res.redirect(['https://', req.get('Host'), req.url].join(''));
+app.use(function forceLiveDomain(req, res, next) {
+  // Don't allow user to hit Heroku now that we have a domain, see http://is.gd/OmQ9Yp
+  if (config.get('NODE_ENV') === 'production') {
+    var host = req.get('Host');
+    if (host === 'paw-production.herokuapp.com') {
+      return res.redirect(301, 'https://paw.isl.co/' + req.originalUrl);
     }
-    return next();
-  });
-}
+  }
+
+  return next();
+});
+
+app.use(function redirectAllPaths(req, res, next) {
+  // Redirect all paths to / to avoid 404's
+  var originalUrl = req.originalUrl;
+  if (originalUrl) {
+    return res.redirect(301, '/');
+  }
+  return next();
+});
+
 
 var server = app.listen(app.get('port'), function() {
   var host = server.address().address;
