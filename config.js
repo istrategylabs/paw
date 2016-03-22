@@ -3,9 +3,6 @@ var nconf = require('nconf');
 nconf.env().argv();
 
 nconf.defaults({
-  // node environment
-  NODE_ENV: 'development',
-
   // api server port for client connections
   PORT: 3000,
 
