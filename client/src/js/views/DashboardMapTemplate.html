@@ -1,12 +1,14 @@
 <div class="dashboard__map">
-    <% _.forEach(dogsByHydrant, function(dogs, hydrant) { %>
-    <ul class="hydrant" id="hydrant-<%= hydrant %>">
-        <li class="hydrant__item hyrdrant__logo">Dogs in <%= hydrant %></li>
-        <% _.forEach(dogs, function(dog) { %>
-        <li class="hydrant__item">
-            <img class="hydrant__dog" src="<%= dog.avatar ? dog.avatar : '/img/paw_avatar_stock.png' %>" alt="<%= dog.name %>">
-        </li>
+    <div class="dashboard__map-image">
+        <% _.forEach(dogsByHydrant, function(dogs, hydrant) { %>
+        <ul class="hydrant" id="hydrant-<%= hydrant %>">
+            <li class="hydrant__item hyrdrant__logo">Dogs in <%= hydrant %></li>
+            <% _.forEach(dogs, function(dog) { %>
+            <li class="hydrant__item">
+                <img class="hydrant__dog" src="<%= dog.avatar ? dog.avatar : '/img/paw_avatar_stock.png' %>" alt="<%= dog.name %>">
+            </li>
+            <% }); %>
+        </ul>
         <% }); %>
-    </ul>
-    <% }); %>
+    </div>
 </div>

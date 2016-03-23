@@ -5,23 +5,27 @@
     .dashboard__main {
         position: absolute;
         left: 300px;
-        width: calc(100% - 300px);
         height: calc(100vh - 90px);
+        width: calc(100% - 300px);
+        overflow-y: scroll;
     }
 
     .dashboard__map {
-        background: url('/img/paw_map.svg') no-repeat center;
-        background-size: contain;
+        height: 0;
+        max-width: 90%;
         position: relative;
-        height: 65%;
-        width: 90%;
+        padding-bottom: percentage(115/300);
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+    }
 
-        @media #{$large-up} {
-            height: 85%;
-        }
+    .dashboard__map-image {
+        background: url('/img/paw_map.svg') no-repeat center;
+        background-size: contain;
+        position: absolute;
+        width: 100%;
+        height: 100%;
     }
 
 .hydrant {
@@ -59,13 +63,16 @@
     }
 
 #hydrant-design {
-    transform: translate(546%, 50%);
+    right: 20%;
+    top: 20%;
 }
 
 #hydrant-test {
-    
+    right: 8%;
+    bottom: 20%;
 }
 
 #hydrant-kitchen {
-    transform: translate(318%, 200%);
+    right: 52%;
+    bottom: 0;
 }
