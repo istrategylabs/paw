@@ -1,0 +1,7 @@
+<div class="map__image-wrap">
+    <div class="map__image">
+        <% _.forEach(dogs, function(dog) { %>
+        <img class="map__dog" src="<%= dog.avatar %>" alt="<%= dog.name %>">
+        <% }); %>
+    </div>
+</div>

@@ -14,7 +14,6 @@
                         system that keeps tabs of dogs in the workplace.
                         PAW&hellip; unleash your dog.
                     </p>
-
                     <a class="jump-to-watch hero__button button button--shikoba button--hover-fill-primary" href="#watch">
                         <object class="button__icon" type="image/svg+xml" data="/img/isl-paw-play-button--white.svg"></object>
                         <span>Watch Video</span>
@@ -37,15 +36,19 @@
         </div>
     </section>
     <section class="video" id="watch">
-        <a class="video__play button button--shikoba button--alt" href="https://vimeo.com/134892537" data-media="https://player.vimeo.com/external/134892537.hd.mp4?s=10bfa368f8bffb4a4a09f6abec6c96e770aa2e02&profile_id=113" target="_blank">
-            <object class="button__icon" type="image/svg+xml" data="/img/isl-paw-play-button--blue.svg"></object>
-            <span>See How It Works</span>
-        </a>
-        <button class="video__pause button button--alt">Click to pawse</button>
-        <video class="video__media" src="" autoplay></video>
+        <!--- http://embedresponsively.com/ -->
+        <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>
+        <div class="embed-container">
+            <iframe id="vimeo-player" src="https://player.vimeo.com/video/160030363?api=1&player_id=vimeo-player" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+            <div class="embed-poster"></div>
+            <a class="video__play button button--shikoba button--alt" href="https://vimeo.com/160030363" data-video-src="" target="_blank">
+                <object class="button__icon" type="image/svg+xml" data="/img/isl-paw-play-button--blue.svg"></object>
+                <span>See How It Works</span>
+            </a>
+        </div>
     </section>
     <section class="map feature">
-        <div class="map-feature__content">
+        <div class="map__content">
             <div class="row align-center">
                 <div class="columns large-8">
                     <h2 class="map__heading feature__heading text-center">Where&rsquo;s <u>Watson</u>?</h2>
@@ -55,12 +58,12 @@
                 </div>
             </div>
             <div class="row align-center">
-                <div class="small-12 medium-10 columns map-container">
-                    <object type="image/svg+xml" data="/img/paw_map.svg"></object>
+                <div class="small-12 medium-10 columns">
+                    <div class="dogs__map"></div>
                 </div>
             </div>
         </div>
-        <div class="map-feature__bg-overlay"></div>
+        <div class="map__bg-overlay"></div>
     </section>
     <section class="dogs feature">
         <div class="row align-center text-center">
@@ -89,8 +92,9 @@
     <footer class="footer" role="contentinfo">
         <div class="row">
             <div class="columns text-center">
-                <a href="http://www.isl.co/" target="_blank" class="footer__content-inline svg-link">
-                     <object class="footer__logo" type="image/svg+xml" data="/img/isl-logo.svg"></object>
+                <a class="footer__link" href="http://www.isl.co/" target="_blank">
+                    <object class="footer__logo" type="image/svg+xml" data="/img/isl-logo.svg"></object>
+                    <span class="show-for-sr">ISL.co</span>
                 </a>
             </div>
         </div>

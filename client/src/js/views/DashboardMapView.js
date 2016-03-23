@@ -1,5 +1,5 @@
 var fs = require('fs');
-var _ = require('underscore');
+var _ = require('lodash');
 var $ = require('jquery');
 var Backbone = require('backbone');
 var DashboardMapTemplate = fs.readFileSync(__dirname + '/DashboardMapTemplate.html', 'utf8');
@@ -18,13 +18,11 @@ var DashboardMapView = Backbone.View.extend({
     $circles.each(function() {
       // http://codepen.io/dbpas/pen/LGudb
       var type = 1; //circle type - 1 whole, 0.5 half, 0.25 quarter
-      var radius = '3em'; //distance from center
+      var radius = '1.5em'; //distance from center
       var start = -180; //shift start from 0
       var $elements = $(this).find('li:not(:first-child)');
       var numberOfElements = (type === 1) ?  $elements.length : $elements.length - 1; //adj for even distro of elements when not full circle
       var slice = 360 * type / numberOfElements;
-
-      // console.log($elements);
 
       $elements.each(function(index, elem) {
         var rotate = slice * index + start;

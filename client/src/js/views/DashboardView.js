@@ -1,5 +1,5 @@
 var fs = require('fs');
-var _ = require('underscore');
+var _ = require('lodash');
 var Backbone = require('backbone');
 var DogsCollection = require('../collections/DogsCollection');
 var DashboardTemplate = fs.readFileSync(__dirname + '/DashboardTemplate.html', 'utf8');
@@ -12,6 +12,11 @@ var DashboardView = Backbone.View.extend({
   initialize: function() {
     this.render();
     this.collection = new DogsCollection();
+
+    var fetch = DogsCollection.prototype.fetch.bind(this.collection);
+    setInterval(function() {
+      fetch();
+    }, process.env.DOGS_POLLING_INTERVAL_MS);
 
     new DashboardDogsListView({
       el: this.$('.dashboard__dog-list'),

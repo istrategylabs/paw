@@ -1,5 +1,4 @@
 var Backbone = require('backbone');
-var dogsPollingTimer;
 
 var statusMap = {
   0: {
@@ -51,15 +50,6 @@ var Dogs = Backbone.Collection.extend({
   initialize: function() {
     this.on('add remove change', this.sort);
     this.fetch();
-
-    if (dogsPollingTimer) {
-      clearInterval(dogsPollingTimer);
-    }
-
-    var fetch = this.fetch.bind(this);
-    dogsPollingTimer = setInterval(function() {
-      fetch();
-    }, process.env.DOGS_POLLING_INTERVAL_MS);
   },
 
   model: Dog,

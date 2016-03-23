@@ -42,18 +42,6 @@
 @include foundation-float-classes;
 @include foundation-flex-classes;
 
-html,
-body,
-main,
-#index,
-#paw-app {
-    height: 100%;
-}
-
-body {
-    overflow-x: hidden;
-}
-
 
 // Import Mixins
 @import 'mixins/mixin-scrollbars';
@@ -67,4 +55,3 @@ body {
 @import 'partials/decoration-workspace';
 @import 'partials/dashboard-dog-list';
 @import 'partials/dashboard-map';
-@import 'partials/text-rotator';

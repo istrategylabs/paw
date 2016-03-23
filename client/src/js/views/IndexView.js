@@ -1,10 +1,10 @@
 var fs = require('fs');
-var _ = require('underscore');
+var _ = require('lodash');
 var Backbone = require('backbone');
 var IndexTemplate = fs.readFileSync(__dirname + '/IndexTemplate.html', 'utf8');
 var IndexDogListView = require('../views/IndexDogListView');
+var IndexDogMapView = require('../views/IndexDogMapView');
 var DogsCollection = require('../collections/DogsCollection');
-var TextRotator = require('../lib/text-rotator');
 var Jump = require('jump.js');
 var $ = require('jquery');
 
@@ -12,95 +12,71 @@ var IndexView = Backbone.View.extend({
   template: _.template(IndexTemplate),
 
   events: {
-    'click .jump-to-watch': 'handleJumpToWatch',
-    'click .video__play': 'handleVideoPlay',
-    'mousemove .video': 'handleVideoMousemove'
+    'click .jump-to-watch': 'onJumpToWatch',
+    'click .video__play': 'onClickPlay'
   },
 
   initialize: function() {
-    this.handleVideoMousemove = _.throttle(this.handleVideoMousemove, 100);
-    this.render();
+    this.onVideoPlay = _.bind(this.onVideoPlay, this);
+    this.onVideoPause = _.bind(this.onVideoPause, this);
     this.collection = new DogsCollection();
+    this.render();
 
     this.dogList = new IndexDogListView({
       el: this.$('.dogs__list'),
       collection: this.collection
     });
+
+    this.dogMap = new IndexDogMapView({
+      el: this.$('.dogs__map'),
+      collection: this.collection
+    });
+
+    // Vimeo video
+    var self = this;
+    $.getScript('https://f.vimeocdn.com/js/froogaloop2.min.js').done(function() {
+      var iframeEl = self.$el.find('#vimeo-player')[0];
+      var player = $f(iframeEl);
+      player.addEvent('ready', function() {
+        player.addEvent('pause', self.onVideoPause);
+        player.addEvent('play', self.onVideoPlay);
+      });
+
+      self.player = player;
+    });
   },
 
   render: function() {
     this.$el.html(this.template());
-
-    $('.js-text-rotator').each(function() {
-      var r = new TextRotator(this, {
-        variableWidth: true,
-        onComplete: function(){
-          var self = this;
-          var t = setTimeout(function() {
-            self.$el.addClass('text-rotator--green-underline');
-            clearTimeout(t);
-          }, self.speed);
-        }
-      });
-      r.init();
-    });
-
-
     return this;
   },
 
-  handleJumpToWatch: function(e) {
+  onJumpToWatch: function(e) {
     e.preventDefault();
     var jump = new Jump();
-    jump.jump('#watch', { duration: 250 });
-    $('.video__play').click();
-  },
-
-  handleVideoPlay: function(e) {
-    e.preventDefault();
-    var $videoEl = this.$('.video');
-    var $videoMediaEl = this.$('video');
-    if (!$videoMediaEl.attr('src')) {
-      var videoSrc = Backbone.$(e.currentTarget).data('media');
-      $videoMediaEl.attr('src', videoSrc);
-    }
-
-    $videoMediaEl[0].play();
-
-    var self = this;
-    $videoMediaEl[0].addEventListener('playing', function() {
-      $videoEl.addClass('is-playing');
-      $videoMediaEl.fadeIn();
-      $videoEl.one('click', _.bind(self.handleVideoPause, self));
+    // calculate offset to always center video horizontally
+    var videoEl = this.$el.find('.video')[0];
+    var rect = videoEl.getBoundingClientRect();
+    var difference = rect.height - window.innerHeight;
+    var offset = parseInt(difference / 2, 10);
+    jump.jump('#watch', {
+      duration: 250,
+      offset: offset
     });
-
-    $videoMediaEl[0].addEventListener('pause', function() {
-      $videoEl.removeClass('is-playing');
-      $videoMediaEl.fadeOut();
-    });
+    this.player.api('play');
   },
 
-  handleVideoPause: function(e) {
+  onClickPlay: function(e) {
     e.preventDefault();
-    var $videoPauseEl = this.$('.video__pause');
-    var $videoMediaEl = this.$('video');
-    $videoMediaEl[0].pause();
-    $videoPauseEl.hide();
+    this.player.api('play');
   },
 
-  handleVideoMousemove: function() {
-    var $videoPauseEl = this.$('.video__pause');
-    var $videoMediaEl = this.$('video');
-    if (this.mousemoveTimer) {
-      clearTimeout(this.mousemoveTimer);
-    }
-    if (!$videoMediaEl[0].paused) {
-      $videoPauseEl.fadeIn();
-    }
+  onVideoPlay: function() {
+    this.$el.find('.embed-poster, .video__play').fadeOut('fast');
+  },
 
-    this.mousemoveTimer = setTimeout(function() {
-      $videoPauseEl.fadeOut();
-    }, 3000);
+  onVideoPause: function() {
+    this.$el.find('.embed-poster, .video__play').fadeIn('fast');
   }
 });
 
