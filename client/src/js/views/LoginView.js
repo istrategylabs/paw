@@ -1,7 +1,7 @@
 /* global gapi */
 
 var fs = require('fs');
-var _ = require('underscore');
+var _ = require('lodash');
 var Backbone = require('backbone');
 var app = require('../app');
 var LoginTemplate = fs.readFileSync(__dirname + '/LoginTemplate.html', 'utf8');

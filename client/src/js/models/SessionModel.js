@@ -1,6 +1,6 @@
 /* global gapi */
 
-var _ = require('underscore');
+var _ = require('lodash');
 var Backbone = require('backbone');
 var UserModel = require('./UserModel.js');
 

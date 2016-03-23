@@ -1,5 +1,5 @@
 var fs = require('fs');
-var _ = require('underscore');
+var _ = require('lodash');
 var Backbone = require('backbone');
 var Flickity = require('flickity-imagesloaded');
 var IndexDogListTemplate = fs.readFileSync(__dirname + '/IndexDogListTemplate.html', 'utf8');

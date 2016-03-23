@@ -14,7 +14,6 @@
                         system that keeps tabs of dogs in the workplace.
                         PAW&hellip; unleash your dog.
                     </p>
-
                     <a class="jump-to-watch hero__button button button--shikoba button--hover-fill-primary" href="#watch">
                         <object class="button__icon" type="image/svg+xml" data="/img/isl-paw-play-button--white.svg"></object>
                         <span>Watch Video</span>
@@ -38,12 +37,16 @@
         </div>
     </section>
     <section class="video" id="watch">
-        <a class="video__play button button--shikoba button--alt" href="https://vimeo.com/134892537" data-media="https://player.vimeo.com/external/134892537.hd.mp4?s=10bfa368f8bffb4a4a09f6abec6c96e770aa2e02&profile_id=113" target="_blank">
-            <object class="button__icon" type="image/svg+xml" data="/img/isl-paw-play-button--blue.svg"></object>
-            <span>See How It Works</span>
-        </a>
-        <button class="video__pause button button--alt">Click to pawse</button>
-        <video class="video__media" src="" autoplay></video>
+        <!--- http://embedresponsively.com/ -->
+        <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>
+        <div class="embed-container">
+            <iframe id="vimeo-player" src="https://player.vimeo.com/video/160030363?api=1&player_id=vimeo-player" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+            <div class="embed-poster"></div>
+            <a class="video__play button button--shikoba button--alt" href="https://vimeo.com/160030363" data-video-src="" target="_blank">
+                <object class="button__icon" type="image/svg+xml" data="/img/isl-paw-play-button--blue.svg"></object>
+                <span>See How It Works</span>
+            </a>
+        </div>
     </section>
     <section class="map feature">
         <div class="map__content">

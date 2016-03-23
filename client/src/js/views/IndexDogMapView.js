@@ -1,5 +1,5 @@
 var fs = require('fs');
-var _ = require('underscore');
+var _ = require('lodash');
 var Backbone = require('backbone');
 var $ = require('jquery');
 var IndexDogMapTemplate = fs.readFileSync(__dirname + '/IndexDogMapTemplate.html', 'utf8');

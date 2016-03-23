@@ -1,4 +1,4 @@
-var _ = require('underscore');
+var _ = require('lodash');
 var Backbone = require('backbone');
 var DashboardDogsListDogView = require('./DashboardDogsListDogView');
 

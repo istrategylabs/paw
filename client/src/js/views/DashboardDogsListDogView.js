@@ -1,5 +1,5 @@
 var fs = require('fs');
-var _ = require('underscore');
+var _ = require('lodash');
 var $ = require('jquery');
 var Backbone = require('backbone');
 var DashboardDogsListDogTemplate = fs.readFileSync(__dirname + '/DashboardDogsListDogTemplate.html', 'utf8');

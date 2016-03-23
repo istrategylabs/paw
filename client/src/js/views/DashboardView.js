@@ -1,5 +1,5 @@
 var fs = require('fs');
-var _ = require('underscore');
+var _ = require('lodash');
 var Backbone = require('backbone');
 var DogsCollection = require('../collections/DogsCollection');
 var DashboardTemplate = fs.readFileSync(__dirname + '/DashboardTemplate.html', 'utf8');

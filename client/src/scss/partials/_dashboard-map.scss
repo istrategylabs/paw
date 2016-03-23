@@ -14,14 +14,14 @@
         background-size: contain;
         height: 85%;
         width: 70%;
-        position: absolute;
+        position: relative;
         top: 50%;
         left: calc(50% - 150px);
         transform: translate(-50%, -50%);
     }
 
 .hydrant {
-    position: relative;
+    position: absolute;
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -53,3 +53,15 @@
         border: solid 3px $paw-green;
         transition: .15s;
     }
+
+#hydrant-design {
+    transform: translate(546%, 50%);
+}
+
+#hydrant-test {
+    
+}
+
+#hydrant-kitchen {
+    transform: translate(318%, 200%);
+}

@@ -1,5 +1,5 @@
 var fs = require('fs');
-var _ = require('underscore');
+var _ = require('lodash');
 var $ = require('jquery');
 var ErrorTemplate = fs.readFileSync(__dirname + '/views/ErrorTemplate.html', 'utf8');
 
