@@ -84,5 +84,9 @@ global.onGAPILoadCallback = function() {
   initialized = true;
   console.log('Google API platform.js loaded');
 
-  gapi.load('auth2', initSigninV2);
+  try {
+    gapi.load('auth2', initSigninV2);
+  } catch (e) {
+    auth2Failure();
+  }
 };
