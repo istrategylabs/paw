@@ -637,31 +637,18 @@
     transform: translateY(-58%);
 }
 
-.footer__logo {
-    margin-top: 18px;
-    max-width: 85px;
-}
-
-.footer__content-inline {
+.footer__link {
     display: inline-block;
+    width: 85px;
+    height: 56px;
+    margin-top: 18px;
 }
 
+.footer__logo {
+    pointer-events: none;
+    width: 100%;
+}
 
 .footer__logo-path {
     fill: #0078FF;
-}
-
-
-.svg-link {
-    display: inline-block;
-    position: relative;
-
-    &::after {
-        bottom: 0;
-        content: "";
-        left: 0;
-        position: absolute;
-        right: 0;
-        top: 0;
-    }
 }
