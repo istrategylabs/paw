@@ -128,8 +128,8 @@
 }
 
 .decoration__workspace-container {
-        width: 100%;
-        transform: translateY(-104%);
+    width: 100%;
+    transform: translateY(-104%);
 
     @media #{$medium-up} {
         bottom: 0px;
@@ -141,6 +141,7 @@
 }
 
 .decoration__workspace {
+    height: 100%;
     max-width: 460px;
     margin: 0px 20px;
 
