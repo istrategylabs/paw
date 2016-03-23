@@ -38,8 +38,9 @@ var IndexView = Backbone.View.extend({
       var iframeEl = self.$el.find('#vimeo-player')[0];
       var player = $f(iframeEl);
       player.addEvent('ready', function() {
-        player.addEvent('pause', self.onVideoPause);
         player.addEvent('play', self.onVideoPlay);
+        player.addEvent('pause', self.onVideoPause);
+        player.addEvent('finish', self.onVideoPause);
       });
 
       self.player = player;
@@ -54,7 +55,7 @@ var IndexView = Backbone.View.extend({
   onJumpToWatch: function(e) {
     e.preventDefault();
     var jump = new Jump();
-    // calculate offset to always center video horizontally
+    // calculate offset to always scroll to center video horizontally
     var videoEl = this.$el.find('.video')[0];
     var rect = videoEl.getBoundingClientRect();
     var difference = rect.height - window.innerHeight;
